@@ -1,0 +1,63 @@
+[
+{
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Karachi",
+    "lat": "26.89709",
+    "lng": "68.40643"
+  },
+  {
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Mir PUR",
+    "lat": "26.89709",
+    "lng": "68.40643"
+  },
+  {
+    "country": "PK",
+    "name": "Kanganpur",
+    "lat": "30.76468",
+    "lng": "74.12286"
+  },
+  {
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Kandiaro",
+    "lat": "27.05918",
+    "lng": "68.21022"
+  },
+  {
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Kandiari",
+    "lat": "26.9155",
+    "lng": "68.52193"
+  },
+  {
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Kandhkot",
+    "lat": "28.24574",
+    "lng": "69.17974"
+  },
+  {
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Kamra",
+    "lat": "33.74698",
+    "lng": "73.51229"
+  },
+  {
+    "country": "PK",
+    "state_id":"3175",
+    "name": "Kamoke",
+    "lat": "31.97526",
+    "lng": "74.22304"
+  },
+  {
+    "country": "PK",
+    "name": "Chak One Hundred Twenty Nine Left",
+    "lat": "30.42919",
+    "lng": "73.04522"
+  }
+]
