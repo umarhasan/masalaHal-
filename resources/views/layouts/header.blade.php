@@ -48,10 +48,10 @@
 				<div class="col-lg-2">
 					<div class="logo">
 						<a class="logo_img" href="/" title="Problem Solving">
-							<img src="assets/images/maslyhal.png" alt="logo">
+							<img src="assets/images/logo.png" alt="logo">
 						</a>
 						<a class="main_sticky" href="/" title="Problem Solving">
-							<img src="assets/images/maslyhal.png" alt="logo">
+							<img src="assets/images/logo.png" alt="logo">
 						</a>
 					</div>
 				</div>
