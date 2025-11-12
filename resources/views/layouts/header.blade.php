@@ -23,7 +23,7 @@
 							<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 							<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-							<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>	
+							<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
 						</ul>
 					</div>
 					<div class="phone-number">
@@ -73,8 +73,8 @@
 							</div>
 							<!-- header button -->
 							<div class="header-button">
-								<a href="contact.html">Get a Free Quote</a>
-							</div>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get a Free Quote</a>
+                            </div>
 						</div>
 					</nav>
 				</div>
@@ -102,4 +102,3 @@
 	<!-- End Hendre Main Menu  -->
 	<!--==================================================-->
 
-	

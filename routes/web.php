@@ -20,6 +20,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\QuoteController;
 
 
 // users Dashboard
@@ -43,17 +44,17 @@ use App\Http\Controllers\company\VendorController;
         $path = base_path('countries.json');
         return response()->file($path);
     });
-    
+
     Route::get('/json/states', function () {
         $path = base_path('states.json');
         return response()->file($path);
     });
-    
+
     Route::get('/json/cities', function () {
         $path = base_path('cities.json');
         return response()->file($path);
     });
-    
+
     Route::get('/signup', [RegisterController::class, 'register_form'])->name('signup');
     Route::get('logout', [LoginController::class, 'logout']);
     Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('users.verify');
@@ -77,10 +78,11 @@ use App\Http\Controllers\company\VendorController;
     // Employee Register
     Route::get('/employee/register', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employee/register', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::post('/get-free-quote', [QuoteController::class, 'store'])->name('quotes.store');
     // End Employee
     // Socailite End
     // Auth::routes();
-    Auth::routes(['verify' => true]); 
+    Auth::routes(['verify' => true]);
     //Admin
     Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
         Route::get('/change/password', [DashboardController::class, 'change_password'])->name('change_password');
