@@ -1,174 +1,219 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html
-  lang="en"
-  class="light-style customizer-hide"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
->
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login | Quick Solutions</title>
+    <title>Login | Problem Solving</title>
+    <link rel="icon" href="{{ asset('assets/images/maslyhal.png') }}" type="image/x-icon">
 
-    <meta name="description" content="" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./assets/images/q.png" />
+    <style>
+        body {
+            /* background: linear-gradient(135deg, #062462, #208bee); */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+        }
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+        .auth-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+        .auth-card {
+            background: #fff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 30px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+        .auth-card img {
+            height: 55px;
+            margin-bottom: 15px;
+        }
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+        .auth-card h4 {
+            color: #fff;
+            font-weight: 600;
+        }
 
-    <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+        .auth-card p {
+            color: #fff;
+            margin-bottom: 25px;
+        }
 
-  </head>
+        .form-label {
+            font-weight: 500;
+            color: #fff;
+            text-align: left;
+            display: block;
+        }
 
-  <body>
-    <!-- Content -->
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
 
-    <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <span class="app-brand-text  fw-bolder">
-                    <center><img src="{{ asset('assets/images/logo.png') }}" class="logo1" style="width:50%;"/></center>
-                </span>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Quick Solutions! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
-              <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
+        .input-group button {
+            background: transparent;
+            border: none;
+            color: #062462;
+        }
+
+        .input-group button:hover {
+            color: #062462;
+        }
+
+         .btn-primary {
+              background-color: #fff;
+            color: #062462;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            color: #062462;
+        }
+
+        .social-login a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 18px;
+            color: #062462;
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-login a:hover {
+            background: #062462;
+            color: #fff;
+        }
+
+        .divider {
+            margin: 25px 0;
+            color: #aaa;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #ccc;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card" style="background:#062462;">
+            <a href="/"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo"></a>
+            <p>Sign in to continue to your account</p>
+
+            {{-- Login Form --}}
+            <form action="{{ route('login') }}" method="POST">
                 @csrf
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email or username"
-                    autofocus
-                  />
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="{{ route('password.request') }}">
-                      <small>Forgot Password?</small>
-                    </a>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> Remember Me </label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
-                </div>
-              </form>
-              <p class="text-center">
-                <a href="{{ route('register') }}" class="btn btn-warning">
-                  <i class="fas fa-user-plus"></i>
-                </a>
-                <a href="{{ url('auth/google') }}" class="btn btn-danger">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="{{ url('auth/facebook') }}" class="btn btn-primary">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
 
-              </p>
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email or Username</label>
+                    <input type="text" name="email" class="form-control" id="email"
+                        placeholder="Enter your email or username" required autofocus>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="••••••••" required>
+                        <button type="button" id="togglePassword" style="background:#fff;">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                        <label class="form-check-label" for="remember" style="color:#fff"> Remember Me </label>
+                    </div>
+                    <a href="{{ route('password.request') }}" class="small text-primary" style="color:#fff">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+            </form>
+
+            <div class="divider">Or continue with</div>
+
+            {{-- Social Login --}}
+            <div class="social-login">
+                <a href="{{ route('register') }}" title="Register"><i class="fas fa-user-plus"></i></a>
+                <a href="{{ url('auth/google') }}" title="Login with Google"><i class="fab fa-google"></i></a>
+                <a href="{{ url('auth/facebook') }}" title="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
-          </div>
-          <!-- /Register -->
         </div>
-      </div>
     </div>
 
-    <!-- / Content -->
-
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="../assets/vendor/js/menu.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{{ asset('assets/js/vendor/jquery-3.6.2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script>
-        $(document).ready(function () {
-            @if (session('success'))
-                toastr.success("{{ session('success') }}");
-            @endif
-
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    toastr.error("{{ $error }}");
-                @endforeach
-            @endif
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.innerHTML = type === 'password' ?
+                '<i class="fas fa-eye"></i>' :
+                '<i class="fas fa-eye-slash"></i>';
         });
     </script>
-  </body>
-</html>
+</body>
 
+</html>

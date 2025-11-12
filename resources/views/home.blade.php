@@ -900,7 +900,42 @@
    <!-- Get a Free Quote Section -->
     <section id="get-free-quote" class="quote-section">
         <!-- Modal -->
-        <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+       <!-- Quote Modal -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="quoteModalLabel">Get a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        @auth
+        <form action="{{ route('quotes.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" placeholder="Enter Title" required>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit Quote</button>
+        </form>
+        @else
+            <div class="text-center">
+                <p class="mb-3">Please login to submit a free quote.</p>
+                <a href="{{ route('login') }}" class="btn btn-warning">Login Now</a>
+            </div>
+        @endauth
+      </div>
+    </div>
+  </div>
+</div>
+
+		<!-- <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -925,6 +960,6 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
 @endsection

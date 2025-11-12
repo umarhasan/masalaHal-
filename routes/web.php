@@ -78,7 +78,8 @@ use App\Http\Controllers\company\VendorController;
     // Employee Register
     Route::get('/employee/register', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employee/register', [EmployeeController::class, 'store'])->name('employees.store');
-    Route::post('/get-free-quote', [QuoteController::class, 'store'])->name('quotes.store');
+    Route::get('/quote-form', [QuoteController::class, 'create'])->name('quotes.create')->middleware('auth');
+    Route::post('/quotes', [QuoteController::class, 'store'])->name('quotes.store')->middleware('auth');
     // End Employee
     // Socailite End
     // Auth::routes();

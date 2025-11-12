@@ -1,356 +1,229 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
+    <title>Register | Problem Solving</title>
+    <link rel="icon" href="{{ asset('assets/images/maslyhal.png') }}" type="image/x-icon">
 
-=========================================================
- -->
-<!-- beautify ignore:start -->
-<html
-  lang="en"
-  class="light-style customizer-hide"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
->
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 
-    <title>Register | Quick Solutions</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+        }
 
-    <meta name="description" content="" />
+        .auth-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./assets/images/q.png" />
+        .auth-card {
+            background: #fff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 30px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+        .auth-card img {
+            height: 55px;
+            margin-bottom: 15px;
+        }
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+        .auth-card h4,
+        .auth-card p {
+            color: #fff;
+        }
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+        .form-label {
+            font-weight: 500;
+            color: #fff;
+            text-align: left;
+            display: block;
+        }
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
 
-    <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
-    <?php $roles = DB::table('roles')->get(); ?>
+        .input-group button {
+            background: transparent;
+            border: none;
+            color: #fff;
+        }
 
+        .btn-primary {
+              background-color: #fff;
+            color: #062462;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            color: #062462;
+        }
+
+        .social-login a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 18px;
+            color: #062462;
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-login a:hover {
+            background: #062462;
+            color: #fff;
+        }
+
+        .divider {
+            margin: 25px 0;
+            color: #aaa;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #ccc;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
-  <body>
-    <!-- Content -->
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card" style="background:#062462;">
+            <a href="/"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo"></a>
+            <p>Create your account to get started</p>
 
-    <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        {{-- <div class="authentication-inner"> --}}
-          <!-- Register Card -->
-          <div class="card" style="min-width:40%">
-            <div class="card-body">
-                <a href="javascript:history.back()" class="btn btn-primary" style="position: absolute;right: 20px;">
-                    <i class="fas fa-arrow-left"></i> Back
-                </a></br></br>
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <span class="app-brand-text  fw-bolder">
-                    <center><img src="{{ asset('assets/images/logo.png') }}" class="logo1" style="width:100%;"/></center>
-                  </span>
-              </div>
-              <!-- /Logo -->
-             <center><h4 class="mb-2">Quick Solutions Register 🚀</h4></center>
-              <p class="mb-4">Make your app management easy and fun!</p>
-
-              <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
+            {{-- Register Form --}}
+            <form action="{{ route('register') }}" method="POST">
                 @csrf
-                <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-control"
-                    id="username" name="name" value="{{ old('name') }}" placeholder="Enter your username" autofocus
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="text" class="form-control" @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" />
-                </div>
-                <div class="field-div">
-                    <label class="form-label" for="Country">Country</label>
-                    <select class="input-text form-control" name="country" id="country" onchange="loadStates(this.value)">
-                        <option value="">Select Your Country</option>
-                        <option value="Pakistan">Pakistan</option>
-                        <option value="India">India</option>
-                        <option value="United States">United States</option>
-                        <option value="Canada">Canada</option>
-                        <!-- Add more countries as needed -->
-                    </select>
+
+                <div class="mb-3 text-start">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
                 </div>
 
-                <div class="field-div">
-                    <label class="form-label" for="State">State</label>
-                    <select class="input-text form-control" name="state" id="state" onchange="loadCities(this.value)">
-                        <option value="">Select Your State</option>
-                        <!-- States will be dynamically loaded based on selected country -->
-                    </select>
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
                 </div>
 
-                <div class="field-div">
-                    <label class="form-label" for="Cite">City</label>
-                    <select class="input-text form-control" name="city" id="city">
-                        <option value="">Select Your City</option>
-                        <!-- Cities will be dynamically loaded based on selected state -->
-                    </select>
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <label class="form-label" for="password">Password</label>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      @error('password') is-invalid @enderror" type="password" name="password"
-                      required
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
+                <div class="mb-3 text-start">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Choose a username" required>
                 </div>
 
-                <div class="mb-3 form-password-toggle">
-                    <label class="form-label" for="password">Confirm Password</label>
-                    <div class="input-group input-group-merge">
-                      <input
-                        type="password"
-                        id="confirm-password"
-                        class="form-control"
-                        @error('confirm-password') is-invalid @enderror" type="password" name="confirm-password"
-                        required
-                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                        aria-describedby="password"
-                      />
-                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <label class="form-label" for="password">Role</label>
-                        <select name="roles" class="form-control" required="required">
-                            <option disabled selected valüe="">select role</option>
-                            @foreach($roles as $role)
-
-                            <option value="{{$role->name}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
+                <div class="mb-3 text-start">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+                        <button type="button" id="togglePassword" style="background:#fff;">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
                 </div>
 
-
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                    <label class="form-check-label" for="terms-conditions">
-                      I agree to
-                      <a href="javascript:void(0);">privacy policy & terms</a>
-                    </label>
-                  </div>
+                <div class="mb-3 text-start">
+                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
+                            placeholder="••••••••" required>
+                        <button type="button" id="togglePassword2" style="background:#fff;">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">Sign up</button>
 
-              </form>
+                <button type="submit" class="btn btn-primary w-100">Create Account</button>
+            </form>
 
-              <p class="text-center">
-                <span>Already have an account?</span>
-                <a href="{{ route('login') }}">
-                  <span>Sign in instead</span>
-                </a>
-              </p>
+            <div class="divider">Or continue with</div>
+
+            {{-- Social Login --}}
+            <div class="social-login">
+                <a href="{{ route('login') }}" title="Already have account"><i class="fas fa-sign-in-alt"></i></a>
+                <a href="{{ url('auth/google') }}" title="Register with Google"><i class="fab fa-google"></i></a>
+                <a href="{{ url('auth/facebook') }}" title="Register with Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
-          </div>
-          <!-- Register Card -->
-        {{-- </div> --}}
-      </div>
+        </div>
     </div>
 
-    <!-- / Content -->
+    <script src="{{ asset('assets/js/vendor/jquery-3.6.2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.innerHTML = type === 'password'
+                ? '<i class="fas fa-eye"></i>'
+                : '<i class="fas fa-eye-slash"></i>';
+        });
 
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-    <!-- Vendors JS -->
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
-    <!-- Page JS -->
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    {{-- <script>
-        $(document).ready(function () {
-            // Load countries
-            $.getJSON('/json/countries', function (countries) {
-                countries.forEach(country => {
-                    $('#country').append(`<option value="${country.id}" data-name="${country.name}">${country.name}</option>`);
-                });
-            });
-
-            // Load states based on selected country
-            $('#country').change(function () {
-                const countryId = $(this).val();
-                const countryName = $('#country option:selected').data('name');
-
-                // Set country name in hidden input
-                $('#country_name').val(countryName);
-
-                $.getJSON('/json/states', function (states) {
-                    const filteredStates = states.filter(state => state.country_id == countryId);
-                    $('#state').html('<option value="" disabled selected>Select State</option>');
-                    filteredStates.forEach(state => {
-                        $('#state').append(`<option value="${state.id}" data-name="${state.name}">${state.name}</option>`);
-                    });
-                });
-
-                // Clear state and city selections when country changes
-                $('#state_name').val('');
-                $('#city_name').val('');
-                $('#state').html('<option value="" disabled selected>Select State</option>');
-                $('#city').html('<option value="" disabled selected>Select City</option>');
-            });
-
-            // Load cities based on selected state
-            $('#state').change(function () {
-                const stateId = $(this).val();
-                const stateName = $('#state option:selected').data('name');
-
-                // Set state name in hidden input
-                $('#state_name').val(stateName);
-
-                $.getJSON('/json/cities', function (cities) {
-                    const filteredCities = cities.filter(city => city.state_id == stateId);
-                    $('#city').html('<option value="" disabled selected>Select City</option>');
-                    filteredCities.forEach(city => {
-                        $('#city').append(`<option value="${city.id}" data-name="${city.name}">${city.name}</option>`);
-                    });
-                });
-
-                // Clear city selection when state changes
-                $('#city_name').val('');
-            });
-
-            // Set city name in hidden input on change
-            $('#city').change(function () {
-                const cityName = $('#city option:selected').data('name');
-                $('#city_name').val(cityName);
-            });
+        document.getElementById('togglePassword2').addEventListener('click', function() {
+            const password = document.getElementById('password_confirmation');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.innerHTML = type === 'password'
+                ? '<i class="fas fa-eye"></i>'
+                : '<i class="fas fa-eye-slash"></i>';
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            @if (session('success'))
-                toastr.success("{{ session('success') }}");
-            @endif
+</body>
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    toastr.error("{{ $error }}");
-                @endforeach
-            @endif
-        });
-    </script> --}}
-    <script>
-        // Example: States and Cities data
-const data = {
-    Pakistan: {
-        Punjab: ["Lahore", "Faisalabad", "Multan"],
-        Sindh: ["Karachi", "Hyderabad", "Sukkur"],
-        Balochistan: ["Quetta", "Gwadar"],
-    },
-    India: {
-        Maharashtra: ["Mumbai", "Pune", "Nagpur"],
-        Delhi: ["New Delhi", "South Delhi"],
-        Gujarat: ["Ahmedabad", "Surat"],
-    },
-    "United States": {
-        California: ["Los Angeles", "San Francisco", "San Diego"],
-        Texas: ["Houston", "Dallas", "Austin"],
-        Florida: ["Miami", "Orlando", "Tampa"],
-    },
-    Canada: {
-        Ontario: ["Toronto", "Ottawa"],
-        Quebec: ["Montreal", "Quebec City"],
-    },
-};
-
-// Load states based on selected country
-function loadStates(country) {
-    const stateSelect = document.getElementById("state");
-    const citySelect = document.getElementById("city");
-
-    // Clear existing options
-    stateSelect.innerHTML = '<option value="">Select Your State</option>';
-    citySelect.innerHTML = '<option value="">Select Your City</option>';
-
-    if (country && data[country]) {
-        const states = Object.keys(data[country]);
-        states.forEach((state) => {
-            const option = document.createElement("option");
-            option.value = state;
-            option.textContent = state;
-            stateSelect.appendChild(option);
-        });
-    }
-}
-
-// Load cities based on selected state
-function loadCities(state) {
-    const country = document.getElementById("country").value;
-    const citySelect = document.getElementById("city");
-
-    // Clear existing options
-    citySelect.innerHTML = '<option value="">Select Your City</option>';
-
-    if (country && data[country] && data[country][state]) {
-        const cities = data[country][state];
-        cities.forEach((city) => {
-            const option = document.createElement("option");
-            option.value = city;
-            option.textContent = city;
-            citySelect.appendChild(option);
-        });
-    }
-}
-    </script>
-  </body>
 </html>
-
