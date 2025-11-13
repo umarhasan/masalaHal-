@@ -5,7 +5,7 @@
 	<!-- Start Hendre Hero Section  -->
 	<!--==================================================-->
 
-	<div class="hero-list owl-carousel">
+	{{-- <div class="hero-list owl-carousel">
 		<div id="Home" class="hero-section d-flex align-items-center">
 			<div class="container">
 				<div class="row align-items-center">
@@ -86,7 +86,64 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
+    <div class="hero-list owl-carousel">
+        @foreach($sliders as $slider)
+            <div class="hero-section d-flex align-items-center">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        {{-- ===== Left Side (Text) ===== --}}
+                        <div class="col-lg-6 col-md-6">
+                            {{-- 🔽 Always-visible Static Block --}}
+                                <div class="sero-content mt-4">
+                                    <h4>100% Satisfaction Gaurenty</h4>
+                                    <h1>Heighst Quality</h1>
+                                    <h1>Home Services</h1>
+                                    <h1>With <span>MasalaHal</span></h1>
+                                </div>
+                                <div class="">
+                                    {{-- Dynamic Content from Slider --}}
+                                    @if($slider->tagline)
+                                        <h1>{{ $slider->tagline }}</h1>
+                                    @endif
+                                    <h3>{{ $slider->title }}</h3>
+                                    @if($slider->subtitle)
+                                        <h1>{{ $slider->subtitle }}</h1>
+                                    @endif
+                                    @if($slider->highlight_text)
+                                        <h1>With <span>{{ $slider->highlight_text }}</span></h1>
+                                    @endif
+                                    @if($slider->button_text)
+                                    <div class="hero-button">
+                                        <a href="{{ $slider->button_link ?? '#' }}">
+                                            {{ $slider->button_text }} <i class="bi bi-plus"></i>
+                                        </a>
+                                    </div>
+                                    @endif
+                                    <div class="hero-button">
+                                            <a href="#">
+                                                Get An Estimate <i class="bi bi-plus"></i>
+                                            </a>
+                                        </div>
+
+                                    <div class="hero-shape">
+                                        <img src="{{ asset('assets/images/slider/hero-shape.png') }}" alt="">
+                                    </div>
+                                </div>
+                        </div>
+
+                        {{-- ===== Right Side (Image) ===== --}}
+                        <div class="col-lg-6 col-md-6">
+                            <div class="hero-thumb">
+                                <img src="{{ asset('storage/'.$slider->image) }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
     <div class="feature-section">
 		<div class="container-fluid">
 			<div class="row feature-bg align-items-center">
