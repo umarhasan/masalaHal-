@@ -36,7 +36,7 @@ class HomeController extends Controller
         $service_types =LeadService::get();
         return view('about_us',compact('sliders','service_types'));
     }
-        // Contact us    
+        // Contact us
     public function contact_us()
     {
         $sliders =Slider::get();
@@ -57,26 +57,26 @@ class HomeController extends Controller
         $service_types =LeadService::get();
         return view('service',compact('sliders','service_types'));
     }
-    
-    
+
+
     public function search(Request $request)
     {
         $query = $request->input('service');
-    
+
         // Fetch services matching the query with their relationships
         $services = LeadService::with('services')
             ->where('name', 'LIKE', '%' . $query . '%')
             ->get();
-    
+
         // Add the image URL dynamically
         $services->transform(function ($service) {
             $service->image_url = $service->image ? asset('storage/' . $service->image) : asset('images/default.jpg');
             return $service;
         });
-    
+
         return response()->json($services);
     }
-    
+
     // Lead Genrate
     public function lead_genrate(Request $request)
     {
@@ -138,13 +138,13 @@ class HomeController extends Controller
         // Return success message to the user
         return redirect()->back()->with('success', 'Lead generated successfully and email sent!');
     }
-    
+
     // onclick Service Type
     public function getServiceFormData($serviceType)
     {
         // Retrieve the service type from the database based on the service name
         $service = LeadService::where('name', $serviceType)->first();
-        
+
         if ($service) {
             // Generate the dynamic content (HTML) based on the data
             $dynamicContent = '';
@@ -179,7 +179,7 @@ class HomeController extends Controller
         // Return an error message if the service is not found
         return response()->json(['html' => 'No form data available.'], 404);
     }
-    
+
     public function login(){
         // $this->middleware('auth')->except('logout');
         return view('auth.login');

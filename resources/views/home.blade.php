@@ -156,7 +156,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="feature-contact-info">
 						<div class="feature-ctn-icon">
-							<img src="assets/images/resource/icon.png" alt="">
+							<img src="assets/images/slider/icon.png" alt="">
 						</div>
 						<div class="feature-contact">
 							<span class="feature-ask">For Enquery :</span>
@@ -167,9 +167,9 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="feature-single-box wow fadeInLeft "data wow daley="3.5s">
 						<div class="feature-thumb">
-							<img src="assets/images/resource/feature.jpg" alt="">
+							<img src="assets/images/slider/feature.jpg" alt="">
 							<div class="feature-icon">
-								<img src="assets/images/resource/feature1.png" alt="">
+								<img src="assets/images/slider/feature1.png" alt="">
 								<a class="feature-icon2" href="service-details.html"><i class="bi bi-arrow-right"></i></a>
 							</div>
 							<div class="feature-content">
@@ -181,9 +181,9 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="feature-single-box wow fadeInDown "data wow daley="3.6s">
 						<div class="feature-thumb">
-							<img src="assets/images/resource/feature2.jpg" alt="">
+							<img src="assets/images/slider/feature2.jpg" alt="">
 							<div class="feature-icon">
-								<img src="assets/images/resource/feature1.png" alt="">
+								<img src="assets/images/slider/feature1.png" alt="">
 								<a class="feature-icon2" href="service-details.html"><i class="bi bi-arrow-right"></i></a>
 							</div>
 							<div class="feature-content">
@@ -195,9 +195,9 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="feature-single-box wow fadeInRight "data wow daley="3.7s">
 						<div class="feature-thumb">
-							<img src="assets/images/resource/feature3.jpg" alt="">
+							<img src="assets/images/slider/feature3.jpg" alt="">
 							<div class="feature-icon">
-								<img src="assets/images/resource/feature2.png" alt="">
+								<img src="assets/images/slider/feature2.png" alt="">
 								<a class="feature-icon2" href="service-details.html"><i class="bi bi-arrow-right"></i></a>
 							</div>
 							<div class="feature-content">
@@ -207,7 +207,7 @@
 					</div>
 				</div>
 				<div class="feature-shape">
-					<img src="assets/images/resource/feature-shape.jpg" alt="">
+					<img src="assets/images/slider/feature-shape.jpg" alt="">
 				</div>
 			</div>
 		</div>
@@ -226,7 +226,7 @@
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-12">
 					<div class="about-right-thumb wow fadeInLeft "data wow daley="3.6s">
-						<img src="assets/images/resource/about.png" alt="">
+						<img src="assets/images/slider/about.png" alt="">
 						<div class="about-counter">
 							<h2 class="counter">795</h2>
 							<h2 class="counter1">+</h2>
@@ -243,7 +243,7 @@
 					</div>
 					<div class="about-items">
 						<div class="about-icon">
-							<img src="assets/images/resource/about-icn.png" alt="">
+							<img src="assets/images/slider/about-icn.png" alt="">
 						</div>
 						<div class="about-item-content">
 							<h2 class="about-item-title">Smart Repair System</h2>
@@ -305,11 +305,11 @@
 					<div class="col-lg-12">
 						<div class="single-service-box wow fadeInLeft "data wow daley="3.7s">
 							<div class="service-thumb">
-								<img src="assets/images/resource/service1.jpg" alt="">
+								<img src="assets/images/slider/service1.jpg" alt="">
 							</div>
 							<div class="service-content">
 								<div class="service-icon">
-									<img src="assets/images/resource/service-icn1.png" alt="">
+									<img src="assets/images/slider/service-icn1.png" alt="">
 								</div>
 								<h3 class="service-title">Commercial Reparing</h3>
 								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
@@ -321,11 +321,11 @@
 					<div class="col-lg-12">
 						<div class="single-service-box wow fadeInDown "data wow daley="3.8s">
 							<div class="service-thumb">
-								<img src="assets/images/resource/service2.jpg" alt="">
+								<img src="assets/images/slider/service2.jpg" alt="">
 							</div>
 							<div class="service-content">
 								<div class="service-icon">
-									<img src="assets/images/resource/service-icn3.png" alt="">
+									<img src="assets/images/slider/service-icn3.png" alt="">
 								</div>
 								<h3 class="service-title">Home Floor Reparing</h3>
 								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
@@ -337,11 +337,11 @@
 					<div class="col-lg-12">
 						<div class="single-service-box wow fadeInRight "data wow daley="3.9s">
 							<div class="service-thumb">
-								<img src="assets/images/resource/service3.jpg" alt="">
+								<img src="assets/images/slider/service3.jpg" alt="">
 							</div>
 							<div class="service-content">
 								<div class="service-icon">
-									<img src="assets/images/resource/service-icn2.png" alt="">
+									<img src="assets/images/slider/service-icn2.png" alt="">
 								</div>
 								<h3 class="service-title">Door Window Reparing</h3>
 								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
@@ -353,11 +353,11 @@
 					<div class="col-lg-12">
 						<div class="single-service-box wow fadeInLeft "data wow daley="4s">
 							<div class="service-thumb">
-								<img src="assets/images/resource/service1.jpg" alt="">
+								<img src="assets/images/slider/service1.jpg" alt="">
 							</div>
 							<div class="service-content">
 								<div class="service-icon">
-									<img src="assets/images/resource/service-icn1.png" alt="">
+									<img src="assets/images/slider/service-icn1.png" alt="">
 								</div>
 								<h3 class="service-title">Commercial Reparing</h3>
 								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
@@ -402,7 +402,7 @@
 
 						<ul class="tabs">
 							<li><a href="#"> <span>01.</span> Why Choose Us ? </a></li>
-							<li><a href="#"> <span>02.</span> Problem Solving Missions </a></li>
+							<li><a href="#"> <span>02.</span> MasalaHal </a></li>
 							<li><a href="#"> <span>03.</span> Mission & Vission </a></li>
 						</ul> <!-- / tabs -->
 
@@ -414,7 +414,7 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
 										<div class="tab-thumb">
-											<img src="assets/images/resource/tab_1.jpg" alt="">
+											<img src="assets/images/slider/tab_1.jpg" alt="">
 										</div>
 									</div>
 
@@ -458,7 +458,7 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
 										<div class="tab-thumb">
-											<img src="assets/images/resource/tab_2.jpg" alt="">
+											<img src="assets/images/slider/tab_2.jpg" alt="">
 										</div>
 									</div>
 
@@ -502,7 +502,7 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6">
 										<div class="tab-thumb">
-											<img src="assets/images/resource/tab_3.jpg" alt="">
+											<img src="assets/images/slider/tab_3.jpg" alt="">
 										</div>
 									</div>
 
@@ -573,7 +573,7 @@
 							<div class="col-lg-12">
 								<div class="single-team-box wow fadeInDown "data wow daley="3.7s">
 									<div class="team-thumb">
-										<img src="assets/images/resource/team1.png" alt="">
+										<img src="assets/images/slider/team1.png" alt="">
 
 										<ul class="team-social-list">
 											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -591,7 +591,7 @@
 							<div class="col-lg-12">
 								<div class="single-team-box wow fadeInUp"data wow daley="3.8s">
 									<div class="team-thumb">
-										<img src="assets/images/resource/team2.png" alt="">
+										<img src="assets/images/slider/team2.png" alt="">
 
 										<ul class="team-social-list">
 											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -609,7 +609,7 @@
 							<div class="col-lg-12">
 								<div class="single-team-box wow fadeInRight "data wow daley="3.9s">
 									<div class="team-thumb">
-										<img src="assets/images/resource/team3.png" alt="">
+										<img src="assets/images/slider/team3.png" alt="">
 
 										<ul class="team-social-list">
 											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -627,7 +627,7 @@
 							<div class="col-lg-12">
 								<div class="single-team-box wow fadeInRight "data wow daley="3.9s">
 									<div class="team-thumb">
-										<img src="assets/images/resource/team2.png" alt="">
+										<img src="assets/images/slider/team2.png" alt="">
 
 										<ul class="team-social-list">
 											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -669,7 +669,7 @@
 											<div class="testi-icon">
 												<i class="bi bi-quote"></i>
 											</div>
-											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toresource sucking infrastructures wire services authoritatively</p>
+											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toslider sucking infrastructures wire services authoritatively</p>
 											<div class="testi-rating">
 												<i class="bi bi-star-fill"></i>
 												<i class="bi bi-star-fill"></i>
@@ -678,7 +678,7 @@
 												<i class="bi bi-star-fill"></i>
 											</div>
 											<div class="user-pic">
-												<img src="assets/images/resource/testi.png" alt="">
+												<img src="assets/images/slider/testi.png" alt="">
 											</div>
 											<div class="user-name">
 												<h4>David M. Alexon</h4>
@@ -694,7 +694,7 @@
 											<div class="testi-icon">
 												<i class="bi bi-quote"></i>
 											</div>
-											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toresource sucking infrastructures wire services authoritatively</p>
+											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toslider sucking infrastructures wire services authoritatively</p>
 											<div class="testi-rating">
 												<i class="bi bi-star-fill"></i>
 												<i class="bi bi-star-fill"></i>
@@ -703,7 +703,7 @@
 												<i class="bi bi-star-fill"></i>
 											</div>
 											<div class="user-pic">
-												<img src="assets/images/resource/testi.png" alt="">
+												<img src="assets/images/slider/testi.png" alt="">
 											</div>
 											<div class="user-name">
 												<h4>David M. Alexon</h4>
@@ -719,7 +719,7 @@
 											<div class="testi-icon">
 												<i class="bi bi-quote"></i>
 											</div>
-											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toresource sucking infrastructures wire services authoritatively</p>
+											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toslider sucking infrastructures wire services authoritatively</p>
 											<div class="testi-rating">
 												<i class="bi bi-star-fill"></i>
 												<i class="bi bi-star-fill"></i>
@@ -728,7 +728,7 @@
 												<i class="bi bi-star-fill"></i>
 											</div>
 											<div class="user-pic">
-												<img src="assets/images/resource/testi.png" alt="">
+												<img src="assets/images/slider/testi.png" alt="">
 											</div>
 											<div class="user-name">
 												<h4>David M. Alexon</h4>
@@ -818,7 +818,7 @@
 				<div class="col-lg-3 col-md-6">
 					<div class="single-process-box wow fadeInLeft "data wow daley="3.5s">
 						<div class="process-thumb">
-							<img src="assets/images/resource/process1.png" alt="">
+							<img src="assets/images/slider/process1.png" alt="">
 							<div class="process-number">
 								<span>01</span>
 							</div>
@@ -833,7 +833,7 @@
 				<div class="col-lg-3 col-md-6">
 					<div class="single-process-box wow fadeInDown "data wow daley="3.6s">
 						<div class="process-thumb">
-							<img src="assets/images/resource/process2.png" alt="">
+							<img src="assets/images/slider/process2.png" alt="">
 							<div class="process-number">
 								<span>02</span>
 							</div>
@@ -848,7 +848,7 @@
 				<div class="col-lg-3 col-md-6">
 					<div class="single-process-box wow fadeInUp "data wow daley="3.7s">
 						<div class="process-thumb">
-							<img src="assets/images/resource/process3.png" alt="">
+							<img src="assets/images/slider/process3.png" alt="">
 							<div class="process-number">
 								<span>03</span>
 							</div>
@@ -863,7 +863,7 @@
 				<div class="col-lg-3 col-md-6">
 					<div class="single-process-box wow fadeInRight "data wow daley="3.9s">
 						<div class="process-thumb">
-							<img src="assets/images/resource/process4.png" alt="">
+							<img src="assets/images/slider/process4.png" alt="">
 							<div class="process-number">
 								<span>04</span>
 							</div>
@@ -900,7 +900,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-blog-box wow fadeInLeft "data wow daley="3.7s">
 						<div class="blog-thumb">
-							<img src="assets/images/resource/blog1.jpg" alt="">
+							<img src="assets/images/slider/blog1.jpg" alt="">
 							<div class="meta-blog">
 								<a href="#"> By Admin</a>
 							</div>
@@ -917,7 +917,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-blog-box wow fadeInUp "data wow daley="3.8s">
 						<div class="blog-thumb">
-							<img src="assets/images/resource/blog2.jpg" alt="">
+							<img src="assets/images/slider/blog2.jpg" alt="">
 							<div class="meta-blog">
 								<a href="#"> By Admin</a>
 							</div>
@@ -934,7 +934,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-blog-box wow fadeInRight "data wow daley="3.9s">
 						<div class="blog-thumb">
-							<img src="assets/images/resource/blog3.jpg" alt="">
+							<img src="assets/images/slider/blog3.jpg" alt="">
 							<div class="meta-blog">
 								<a href="#"> By Admin</a>
 							</div>

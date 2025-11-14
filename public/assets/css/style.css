@@ -10,7 +10,7 @@ Tags: air con, air conditioning, contractor, cooling, electrician, handyman, hea
 /*TABLE OF CONTENTS*/
 /*=====================
 01. Hendre Header Top Menu Area Css
-02. Hendre Nav Menu Area Css 
+02. Hendre Nav Menu Area Css
 03. Hendre Slider Section Css
 04. Hendre Feature Section
 05. Hendre About Section Css
@@ -31,7 +31,7 @@ Tags: air con, air conditioning, contractor, cooling, electrician, handyman, hea
 20. Hendre Shop Details  Css
 21. Hendre Call To Action  Css
 22. Hendre project Section Css
-23. Hendre Start Blogs Section 
+23. Hendre Start Blogs Section
 24. Hendre Start Cart Section
 25. Hendre Scrollup Section
 26. Hendre Animation Dance
@@ -270,7 +270,7 @@ nav.hendre_menu span {
     transform: scale(1);
 }
 
-/*** Sub Menu Style 
+/*** Sub Menu Style
 ==========================***/
 
 .hendre_menu ul .sub-menu {
@@ -324,7 +324,7 @@ nav.hendre_menu span {
     color: #fff !important;
 }
 
-/* sub menu 2 
+/* sub menu 2
 =================*/
 
 .hendre_menu ul .sub-menu .sub-menu {
@@ -340,7 +340,7 @@ nav.hendre_menu span {
     top: 0%;
 }
 
-/* sub menu 3 
+/* sub menu 3
 ==================*/
 
 .hendre_menu ul .sub-menu .sub-menu li {
@@ -376,7 +376,7 @@ ul.sub-menu li:hover a span{
     background: rgba(255,255,255, 0.20);
 }
 
-/* sub menu 4 
+/* sub menu 4
 ====================*/
 
 .hendre_menu ul .sub-menu .sub-menu .sub-menu li {
@@ -696,7 +696,7 @@ h2.feature-phone-number {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: url(../images/resource/feature-ct.png);
+    background: url(../images/slider/feature-ct.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -759,7 +759,7 @@ a.feature-icon2 i {
 
 .feature-single-box:hover a.feature-icon2 i {
     opacity: 1;
-    visibility: visible; 
+    visibility: visible;
 }
 
 .feature-single-box:hover a.feature-icon2 {
@@ -924,7 +924,7 @@ span.counter-text {
 ======================================================**/
 
 .service-top-section {
-    background: url(../images/resource/service-bg.jpg);
+    background: url(../images/slider/service-bg.jpg);
     padding: 88px 0 0px;
     height: 545px;
 }
@@ -1233,7 +1233,7 @@ h3.choose-title {
 
 .tabs li a {
     font-size: 20px;
-    background: url(../images/resource/tab1.jpg);
+    background: url(../images/slider/tab1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -1294,7 +1294,7 @@ h3.choose-title {
 }
 
 li.current a {
-    background: url(../images/resource/active-tab.jpg);
+    background: url(../images/slider/active-tab.jpg);
     color: #fff;
 }
 
@@ -1339,7 +1339,7 @@ li.current a span {
 ======================================================**/
 
 .team-section {
-    background: url(../images/resource/team-bg.jpg);
+    background: url(../images/slider/team-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -1524,7 +1524,7 @@ ul.team-social-list2 li a:hover {
 }
 
 .testmn-bg {
-    background: url(../images/resource/testi-bg.png);
+    background: url(../images/slider/testi-bg.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -1705,7 +1705,7 @@ h4.people-name {
 img.dots {
     transition: .5s;
     position: absolute;
-    opacity: 0; 
+    opacity: 0;
     bottom: -27px;
 }
 
@@ -1897,7 +1897,7 @@ img.dots {
 ======================================================**/
 
 .process-section {
-    background: url(../images/resource/process-bg.jpg);
+    background: url(../images/slider/process-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -2220,7 +2220,7 @@ ul.footer-menu li a:hover {
     color: #da242b;
 }
 
-.follow-company-icon a:hover { 
+.follow-company-icon a:hover {
     color: #da242b;
 }
 
@@ -2272,7 +2272,7 @@ ul.footer-menu li a:hover {
 /*Subscribe*/
 
 .row.subscribe-section {
-    background: url(../images/resource/subcribe-bg.png);
+    background: url(../images/slider/subcribe-bg.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -2407,7 +2407,7 @@ h2.widget-title {
 /* Breatcam style two
 =========================*/
 .breatcam-section {
-    background: url(../images/resource/breatcam-bg2.jpg);
+    background: url(../images/slider/breatcam-bg2.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -2556,7 +2556,7 @@ span.counter-text2:before {
 <!-- ============================================================== -->*/
 
 .progress-section {
-    background: url(../images/resource/skill-bg.jpg);
+    background: url(../images/slider/skill-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -2574,7 +2574,7 @@ span.counter-text2:before {
 
 .progress-single-box {
     display: inline-block;
-    background: url(../images/resource/progress-bg.jpg);
+    background: url(../images/slider/progress-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -2715,7 +2715,7 @@ span.fill.my-class2 {
 
 
 /*
-    Video  Css  
+    Video  Css
  ==========================================*/
 .rs-video {
     display: inline-block;
@@ -2830,7 +2830,7 @@ span.fill.my-class2 {
     z-index: -1;
     width: 36%;
     height: 100%;
-    background: url(../images/resource/serv-dtls-bg.jpg);
+    background: url(../images/slider/serv-dtls-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: center;
@@ -2950,7 +2950,7 @@ img.sidbr-icn {
 /*sidebar quick contact*/
 
 .widget-sidebar-quick-contact {
-    background: url(../images/resource/sidebar-bg.jpg);
+    background: url(../images/slider/sidebar-bg.jpg);
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -3034,7 +3034,7 @@ h5.sidebar-title2 {
 }
 
 .widget-button a:hover:before {
-    width: 100%; 
+    width: 100%;
     left: 0;
 }
 
@@ -3448,7 +3448,7 @@ h3.boody-title:before {
     z-index: -1;
     width: 36%;
     height: 100%;
-    background: url(../images/resource/serv-dtls-bg.jpg);
+    background: url(../images/slider/serv-dtls-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: center;
@@ -3800,7 +3800,7 @@ span#slider-range-value1, span#slider-range-value2 {
   cursor: not-allowed;
 }
 
-/*Product 
+/*Product
 ======================*/
 
 .product-categories-box {
@@ -3845,7 +3845,7 @@ span#slider-range-value1, span#slider-range-value2 {
 }
 
 
-/*Shop Right 
+/*Shop Right
 ======================*/
 
 .row.products {
@@ -4156,13 +4156,13 @@ li.category-text {
     top: -3px;
 }
 
-/* --- Quantity button 
+/* --- Quantity button
 ================================*/
 
 .category-count-button {
     display: inline-flex;
     padding: 8px 0 30px;
-} 
+}
 
 .quantity-with_btn {
     display: flex;
@@ -4389,7 +4389,7 @@ table.tab-items-table td.table-text i {
 
 
 /*post comment box
-===================*/ 
+===================*/
 
 .post-comment-thumb {
     float: left;
@@ -4730,7 +4730,7 @@ p.description {
 <!-- ============================================================== -->*/
 
 .call-to-action {
-    background: url(../images/resource/call-bg.jpg);
+    background: url(../images/slider/call-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -5074,7 +5074,7 @@ li.prt-mb {
     z-index: -1;
     width: 35%;
     height: 100%;
-    background: url(../images/resource/serv-dtls-bg.jpg);
+    background: url(../images/slider/serv-dtls-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: center;
@@ -5256,11 +5256,11 @@ li.item1 {
 }
 
 .tag-item a:hover:before {
-   transform: scale(1); 
+   transform: scale(1);
 }
 
 .tag-item a:hover {
-   color: #fff; 
+   color: #fff;
 }
 
 /*Blog Details
@@ -5929,7 +5929,7 @@ h3.blog-comment-title {
     -o-transition: all 1s ease-out 1.2s;
     transition: all 1s ease-out 1.2s;
     -webkit-backface-visibility: hidden;
-  
+
     backface-visibility: hidden;
 }
 
@@ -5963,7 +5963,7 @@ h3.blog-comment-title {
 
 .sidebar-info-contents .widget {
     display: block;
-} 
+}
 
 .sidebar-info-contents h3.widget-title {
     font-size: 25px;
@@ -6100,7 +6100,7 @@ ul.list-style-one li a:hover span {
     background: #da242b;
     border-radius: 30px;
     color: #fff;
-} 
+}
 
 ul.list-style-one li a:hover {
     color: #da242b;
@@ -6267,7 +6267,7 @@ ul.list-style-one li a:hover {
 
 
 
-/*** 
+/***
 ====================================================================
    Hendre Search Popup
 ====================================================================
@@ -6362,8 +6362,8 @@ ul.list-style-one li a:hover {
 
 .search-popup .form-group{
     position:relative;
-    margin:0px; 
-  
+    margin:0px;
+
     overflow: hidden;
 }
 .search-popup .form-group input[type="text"],
@@ -6542,7 +6542,7 @@ span.flaticon-multiply i {
     visibility: hidden;
     -webkit-transition: all 0.9s ease-out 0s;
     -moz-transition: all 0.9s ease-out 0s;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 .scroll-area .go-top i {
@@ -6561,7 +6561,7 @@ span.flaticon-multiply i {
 .scroll-area .go-top i:last-child {
     opacity: 0;
     visibility: hidden;
-    top: 60%; 
+    top: 60%;
 }
 
 .scroll-area .go-top::before {
@@ -6582,12 +6582,12 @@ span.flaticon-multiply i {
 }
 
 .scroll-area .go-top:focus, .scroll-area .go-top:hover {
-      color: #fff; 
+      color: #fff;
   }
 
 .scroll-area .go-top:focus::before, .scroll-area .go-top:hover::before {
         opacity: 1;
-        visibility: visible; 
+        visibility: visible;
 }
 
 .scroll-area .go-top:focus i:first-child, .scroll-area .go-top:hover i:first-child {
@@ -6599,7 +6599,7 @@ span.flaticon-multiply i {
 .scroll-area .go-top:focus i:last-child, .scroll-area .go-top:hover i:last-child {
         opacity: 1;
         visibility: visible;
-        top: 50%; 
+        top: 50%;
 }
 
 .scroll-area .go-top.active {
@@ -6614,7 +6614,7 @@ span.flaticon-multiply i {
 }
 
 .top-wrap {
-  position: relative; 
+  position: relative;
 }
 
 .top-wrap .go-top-button {
@@ -6654,7 +6654,7 @@ span.flaticon-multiply i {
 
 .top-wrap .go-top-button:hover {
       background-color: #222;
-      color: #fff; 
+      color: #fff;
   }
 
 @keyframes ripple {
