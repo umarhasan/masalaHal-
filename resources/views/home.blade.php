@@ -15,7 +15,7 @@
 	<!-- Start Hendre Hero Section  -->
 	<!--==================================================-->
 
-	
+
     <div class="hero-list owl-carousel">
         @foreach($sliders as $slider)
             <div class="hero-section d-flex align-items-center">
@@ -122,7 +122,7 @@
 					</div>
     			</div>
 			</div>
-		</div>	
+		</div>
     <!--==================================================-->
 	<!-- End Hendre Feature Section  -->
 	<!--==================================================-->
@@ -130,7 +130,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre About Section  -->
 	<!--==================================================-->
-
 	<div id="about" class="about-section">
 		<div class="container">
 			<div class="row align-items-center">
@@ -147,7 +146,7 @@
 				<div class="col-lg-6 col-md-12 wow fadeInDown "data wow daley="3.7s">
 					<div class="hendre-section-title">
 						<h4>ABOUT US</h4>
-						<h1>Problem Solving Every Home</h1>
+						<h1>Problem Solving Every</h1>
 						<p>At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.</p>
 					</div>
 					<div class="about-items">
@@ -160,22 +159,17 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-6 col-md-6">
-							<div class="about-item-list">
-								<ul>
-									<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-									<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6">
-							<div class="about-item-list">
-								<ul>
-									<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-									<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-								</ul>
-							</div>
-						</div>
+                        @if(isset($service_types) && count($service_types) > 0)
+                            @foreach($service_types as $service)
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="about-item-list">
+                                        <ul>
+                                            <li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
 					</div>
 					<div class="hendre-button">
 						<a href="about.html">Get An Estimate <i class="bi bi-plus"></i></a>
@@ -184,7 +178,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre About Section  -->
 	<!--==================================================-->
@@ -192,7 +185,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre Service Section  -->
 	<!--==================================================-->
-
 	<div class="service-top-section">
 		<div class="container">
 			<div class="row align-items-center wow fadeInUp "data wow daley="3.6s">
@@ -211,49 +203,43 @@
 		<div class="container">
 			<div class="row service-bg">
 				<div class="service-list owl-carousel">
-				
-				
-@foreach($service_types as $service)
-    <div class="col-lg-12">
-        <div class="single-service-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 3 }}s">
-            
-            {{-- Service Image --}}
-            <div class="service-thumb">
-                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
-            </div>
+                    @foreach($service_types as $service)
+                        <div class="col-lg-12">
+                            <div class="single-service-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 3 }}s">
 
-            {{-- Service Content --}}
-            <div class="service-content">
-                <h3 class="service-title">{{ $service->name }}</h3>
-				
-                {{-- Description as list points --}}
-                @if($service->description)
-                    @php
-                        // Split description by new lines or commas
-                        $points = preg_split("/[\r\n,]+/", $service->description);
-                    @endphp
-                    <ul class="abc">
-                        @foreach($points as $point)
-                            <li>{{ trim($point) }}</li>
-                        @endforeach
-                    </ul>
-                @endif
+                                {{-- Service Image --}}
+                                <div class="service-thumb">
+                                    <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+                                </div>
 
-                <a class="hendre-button" href="{{ url('service-details/'.$service->id) }}">
-                    Read More <i class="bi bi-plus"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-@endforeach
+                                {{-- Service Content --}}
+                                <div class="service-content">
+                                    <h3 class="service-title">{{ $service->name }}</h3>
 
+                                    {{-- Description as list points --}}
+                                    @if($service->description)
+                                        @php
+                                            // Split description by new lines or commas
+                                            $points = preg_split("/[\r\n,]+/", $service->description);
+                                        @endphp
+                                        <ul class="abc">
+                                            @foreach($points as $point)
+                                                <li>{{ trim($point) }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
 
-					
+                                    <a class="hendre-button" href="{{ url('service-details/'.$service->id) }}">
+                                        Read More <i class="bi bi-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre Service Section  -->
 	<!--==================================================-->
@@ -261,7 +247,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre Why Choose  Section  -->
 	<!--==================================================-->
-
 	<div id="choose" class="why-choose-section">
 		<div class="container">
 			<div class="row align-items-center wow fadeInDown "data wow daley="3.9s">
@@ -283,7 +268,6 @@
 				<div class="col-lg-12">
 					<!-- Tab  -->
 					<div class="tab wow fadeInRight "data wow daley="3.9s">
-
 						<ul class="tabs">
 							<li><a href="#"> <span>01.</span> Why Choose Us ? </a></li>
 							<li><a href="#"> <span>02.</span> MasalaHal </a></li>
@@ -291,138 +275,134 @@
 						</ul> <!-- / tabs -->
 
 						<div class="tab_content">
+                        <!-- / tabs_item -->
+                        <div class="tabs_item">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="tab-thumb">
+                                        <img src="assets/images/slider/tab_1.jpg" alt="">
+                                    </div>
+                                </div>
 
-							<!-- / tabs_item -->
+                                <div class="col-lg-6 col-md-6 tab-right">
+                                    <div class="hendre-section-title">
+                                        <h4> Why Choose Us ? </h4>
+                                        <h1> Repairing Your <span> House for </span> </h1>
+                                        <h1 class="sections">Looks as a New Home</h1>
+                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
+                                    </div>
 
-							<div class="tabs_item">
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<div class="tab-thumb">
-											<img src="assets/images/slider/tab_1.jpg" alt="">
-										</div>
-									</div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="about-item-list">
+                                                <ul>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                </ul>
+                                            </div>
+                                        </div>
 
-									<div class="col-lg-6 col-md-6 tab-right">
-										<div class="hendre-section-title">
-											<h4> Why Choose Us ? </h4>
-											<h1> Repairing Your <span> House for </span> </h1>
-											<h1 class="sections">Looks as a New Home</h1>
-											<p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-										</div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="about-item-list">
+                                                <ul>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hendre-button">
+                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / tabs_item -->
+                        <div class="tabs_item">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="tab-thumb">
+                                        <img src="assets/images/slider/tab_2.jpg" alt="">
+                                    </div>
+                                </div>
 
-										<div class="row">
-											<div class="col-lg-6 col-md-6">
-												<div class="about-item-list">
-													<ul>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-													</ul>
-												</div>
-											</div>
+                                <div class="col-lg-6 col-md-6 tab-right">
+                                    <div class="hendre-section-title">
+                                        <h4> Problem Solving missions </h4>
+                                        <h1> Repairing Your <span> House for </span> </h1>
+                                        <h1 class="sections">Looks as a New Home</h1>
+                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
+                                    </div>
 
-											<div class="col-lg-6 col-md-6">
-												<div class="about-item-list">
-													<ul>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="hendre-button">
-											<a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="about-item-list">
+                                                <ul>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                </ul>
+                                            </div>
+                                        </div>
 
-							<!-- / tabs_item -->
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="about-item-list">
+                                                <ul>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hendre-button">
+                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-							<div class="tabs_item">
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<div class="tab-thumb">
-											<img src="assets/images/slider/tab_2.jpg" alt="">
-										</div>
-									</div>
+                        <!-- / tabs_item -->
 
-									<div class="col-lg-6 col-md-6 tab-right">
-										<div class="hendre-section-title">
-											<h4> Problem Solving missions </h4>
-											<h1> Repairing Your <span> House for </span> </h1>
-											<h1 class="sections">Looks as a New Home</h1>
-											<p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-										</div>
+                        <div class="tabs_item">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="tab-thumb">
+                                        <img src="assets/images/slider/tab_3.jpg" alt="">
+                                    </div>
+                                </div>
 
-										<div class="row">
-											<div class="col-lg-6 col-md-6">
-												<div class="about-item-list">
-													<ul>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-													</ul>
-												</div>
-											</div>
+                                <div class="col-lg-6 col-md-6 tab-right">
+                                    <div class="hendre-section-title">
+                                        <h4> Mission & Vission </h4>
+                                        <h1> Repairing Your <span> House for </span> </h1>
+                                        <h1 class="sections">Looks as a New Home</h1>
+                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
+                                    </div>
 
-											<div class="col-lg-6 col-md-6">
-												<div class="about-item-list">
-													<ul>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="hendre-button">
-											<a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="about-item-list">
+                                                <ul>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                </ul>
+                                            </div>
+                                        </div>
 
-							<!-- / tabs_item -->
-
-							<div class="tabs_item">
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<div class="tab-thumb">
-											<img src="assets/images/slider/tab_3.jpg" alt="">
-										</div>
-									</div>
-
-									<div class="col-lg-6 col-md-6 tab-right">
-										<div class="hendre-section-title">
-											<h4> Mission & Vission </h4>
-											<h1> Repairing Your <span> House for </span> </h1>
-											<h1 class="sections">Looks as a New Home</h1>
-											<p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-										</div>
-
-										<div class="row">
-											<div class="col-lg-6 col-md-6">
-												<div class="about-item-list">
-													<ul>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-													</ul>
-												</div>
-											</div>
-
-											<div class="col-lg-6 col-md-6">
-												<div class="about-item-list">
-													<ul>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-														<li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="hendre-button">
-											<a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="about-item-list">
+                                                <ul>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hendre-button">
+                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 						</div>
 					</div>
@@ -431,7 +411,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre Why Choose Section  -->
 	<!--==================================================-->
@@ -439,7 +418,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre Team Section  -->
 	<!--==================================================-->
-
 	<div id="team" class="team-section">
 		<div class="container">
 			<div class="row">
@@ -458,7 +436,6 @@
 								<div class="single-team-box wow fadeInDown "data wow daley="3.7s">
 									<div class="team-thumb">
 										<img src="assets/images/slider/team1.png" alt="">
-
 										<ul class="team-social-list">
 											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 											<li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -531,7 +508,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre Team Section  -->
 	<!--==================================================-->
@@ -539,7 +515,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre Teastimonial Section  -->
 	<!--==================================================-->
-
 	<div id="testi" class="testimonial-section">
 		<div class="container">
 			<div class="row testi-bg">
@@ -679,7 +654,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre Testimonial Section  -->
 	<!--==================================================-->
@@ -687,7 +661,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre Process Section  -->
 	<!--==================================================-->
-
 	<div class="process-section">
 		<div class="container">
 			<div class="row align-items-center">
@@ -761,7 +734,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre Process Section  -->
 	<!--==================================================-->
@@ -769,7 +741,6 @@
 	<!--==================================================-->
 	<!-- Start Hendre Blog Section  -->
 	<!--==================================================-->
-
 	<div id="blog" class="blog-section">
 		<div class="container">
 			<div class="row align-items-center">
@@ -834,73 +805,46 @@
 			</div>
 		</div>
 	</div>
-
 	<!--==================================================-->
 	<!-- End Hendre Blog Section  -->
 	<!--==================================================-->
+
    <!-- Get a Free Quote Section -->
     <section id="get-free-quote" class="quote-section">
         <!-- Modal -->
        <!-- Quote Modal -->
-<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="quoteModalLabel">Get a Free Quote</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        @auth
-        <form action="{{ route('quotes.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title" class="form-control" placeholder="Enter Title" required>
+        <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="quoteModalLabel">Get a Free Quote</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+            <div class="modal-body">
+                @auth
+                <form action="{{ route('quotes.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="Enter Title" required>
+                    </div>
 
-            <div class="form-group mt-2">
-                <label for="description">Description</label>
-                <textarea name="description" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
+                    <div class="form-group mt-2">
+                        <label for="description">Description</label>
+                        <textarea name="description" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Submit Quote</button>
+                </form>
+                @else
+                    <div class="text-center">
+                        <p class="mb-3">Please login to submit a free quote.</p>
+                        <a href="{{ route('login') }}" class="btn btn-warning">Login Now</a>
+                    </div>
+                @endauth
             </div>
-
-            <button type="submit" class="btn btn-primary mt-3">Submit Quote</button>
-        </form>
-        @else
-            <div class="text-center">
-                <p class="mb-3">Please login to submit a free quote.</p>
-                <a href="{{ route('login') }}" class="btn btn-warning">Login Now</a>
             </div>
-        @endauth
-      </div>
-    </div>
-  </div>
-</div>
-
-		<!-- <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="quoteModalLabel">Get a Free Quote</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('quotes.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control" placeholder="Enter Title" required>
-                        </div>
-
-                        <div class="form-group mt-2">
-                            <label for="description">Description</label>
-                            <textarea name="description" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary mt-3">Submit Quote</button>
-                    </form>
-                </div>
-                </div>
-            </div>
-        </div> -->
+        </div>
+        </div>
     </section>
 @endsection

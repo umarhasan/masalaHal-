@@ -16,6 +16,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\LocationSearchController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\WhyChooseController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ProcessController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\SocialiteController;
@@ -101,6 +108,14 @@ use App\Http\Controllers\company\VendorController;
         Route::resource('services', ServiceController::class);
         Route::resource('sliders', SliderController::class);
         Route::resource('services', ServiceController::class);
+
+        Route::resource('abouts', AboutController::class);
+        Route::resource('why-chooses', WhyChooseController::class);
+        Route::resource('teams', TeamController::class);
+        Route::resource('testimonials', TestimonialController::class);
+        Route::resource('blogs', BlogController::class);
+        Route::resource('processes', ProcessController::class);
+
         Route::post('bulk-update-page', [ServiceController::class, 'bulkUpdatePage'])->name('services.bulkUpdatePage');
         Route::get('service/delete/{id}', [ServiceController::class,'destroy'])->name('services.destroy');
         Route::put('sbulk-update', [ServiceController::class, 'bulkUpdate'])->name('admin.services.bulkUpdate');
