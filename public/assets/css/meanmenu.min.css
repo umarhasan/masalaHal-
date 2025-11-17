@@ -1,6 +1,6 @@
 a.meanmenu-reveal{display:none}
 .mean-container .mean-bar {
-  background: #da242b;
+  background: #062462;
   float: left;
   min-height: 60px;
   padding: 4px 0 0;
@@ -120,12 +120,16 @@ a.meanmenu-reveal{display:none}
   background: #fff;
 }
 .mean-container .mean-bar::before {
-    color: #fff;
-    content: "Hendre";
-    font-size: 28px;
-    font-weight: 600;
-    left: 10px;
+    content: ""; /* text remove */
     position: absolute;
-    top: 18px;
+    top: 10px;
+    left: 10px;
+    width: 120px; /* adjust size */
+    height: 40px; /* adjust height */
+    background-image: url('/assets/images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
 }
 

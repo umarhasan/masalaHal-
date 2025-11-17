@@ -27,6 +27,7 @@ class HomeController extends Controller
     {
         $sliders =Slider::get();
         $service_types =LeadService::get();
+        
         return view('home',compact('sliders','service_types'));
     }
     // About us

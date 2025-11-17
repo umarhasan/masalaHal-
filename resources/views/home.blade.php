@@ -1,92 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <!--==================================================-->
+<style>
+	.abc{
+		list-style-type: disc; /* default bullets */
+    margin: 10px 0;
+    padding-left: 20px;
+    font-size: 9px; /* smaller size */
+    line-height: 1.5; /* spacing between points */
+    color: #555;
+	}
+</style>
+<!--==================================================-->
 	<!-- Start Hendre Hero Section  -->
 	<!--==================================================-->
 
-	{{-- <div class="hero-list owl-carousel">
-		<div id="Home" class="hero-section d-flex align-items-center">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-6 col-md-6">
-						<div class="sero-content">
-							<h4>100% Satisfaction Gaurenty</h4>
-							<h1> Heighst Quality </h1>
-							<h1> Home Services </h1>
-							<h1> With <span>MasalaHal</span> </h1>
-
-							<div class="hero-button">
-								<a href="about.html"> Get An Estimate <i class="bi bi-plus"></i></a>
-							</div>
-							<div class="hero-shape">
-								<img src="assets/images/slider/hero-shape.png" alt="">
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6">
-						<div class="hero-thumb">
-							<img src="assets/images/slider/img.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="home" class="hero-section slider2 d-flex align-items-center">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-6 col-md-6">
-						<div class="sero-content">
-							<h4>100% Satisfaction Gaurenty</h4>
-							<h1> Heighst Quality </h1>
-							<h1> Home Services </h1>
-							<h1> With <span>Problem Solving</span> </h1>
-
-							<div class="hero-button">
-								<a href="about.html"> Get An Estimate <i class="bi bi-plus"></i></a>
-							</div>
-							<div class="hero-shape">
-								<img src="assets/images/slider/hero-shape.png" alt="">
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6">
-						<div class="hero-thumb">
-							<img src="assets/images/slider/img2.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="home" class="hero-section d-flex align-items-center">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-6 col-md-6">
-						<div class="sero-content">
-							<h4>100% Satisfaction Gaurenty</h4>
-							<h1> Heighst Quality </h1>
-							<h1> Home Services </h1>
-							<h1> With <span>Hendre</span> </h1>
-
-							<div class="hero-button">
-								<a href="about.html"> Get An Estimate <i class="bi bi-plus"></i></a>
-							</div>
-							<div class="hero-shape">
-								<img src="assets/images/slider/hero-shape.png" alt="">
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6">
-						<div class="hero-thumb">
-							<img src="assets/images/slider/img.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> --}}
+	
     <div class="hero-list owl-carousel">
         @foreach($sliders as $slider)
             <div class="hero-section d-flex align-items-center">
@@ -144,76 +73,57 @@
             </div>
         @endforeach
     </div>
-    <div class="feature-section">
-		<div class="container-fluid">
-			<div class="row feature-bg align-items-center">
-				<div class="col-lg-8 col-md-6">
-					<div class="hendre-section-title padding-lg">
-						<h4>features</h4>
-						<h1>Fixing What We <span>Improves</span></h1>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="feature-contact-info">
-						<div class="feature-ctn-icon">
-							<img src="assets/images/slider/icon.png" alt="">
-						</div>
-						<div class="feature-contact">
-							<span class="feature-ask">For Enquery :</span>
-							<h2 class="feature-phone-number">+980 987 (0986) 030</h2>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="feature-single-box wow fadeInLeft "data wow daley="3.5s">
-						<div class="feature-thumb">
-							<img src="assets/images/slider/feature.jpg" alt="">
-							<div class="feature-icon">
-								<img src="assets/images/slider/feature1.png" alt="">
-								<a class="feature-icon2" href="service-details.html"><i class="bi bi-arrow-right"></i></a>
-							</div>
-							<div class="feature-content">
-								<h2>Home Repairing</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="feature-single-box wow fadeInDown "data wow daley="3.6s">
-						<div class="feature-thumb">
-							<img src="assets/images/slider/feature2.jpg" alt="">
-							<div class="feature-icon">
-								<img src="assets/images/slider/feature1.png" alt="">
-								<a class="feature-icon2" href="service-details.html"><i class="bi bi-arrow-right"></i></a>
-							</div>
-							<div class="feature-content">
-								<h2>Home Repairing</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="feature-single-box wow fadeInRight "data wow daley="3.7s">
-						<div class="feature-thumb">
-							<img src="assets/images/slider/feature3.jpg" alt="">
-							<div class="feature-icon">
-								<img src="assets/images/slider/feature2.png" alt="">
-								<a class="feature-icon2" href="service-details.html"><i class="bi bi-arrow-right"></i></a>
-							</div>
-							<div class="feature-content">
-								<h2>Home Maintaince</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="feature-shape">
-					<img src="assets/images/slider/feature-shape.jpg" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
-
+		<!--==================================================-->
+	<!-- Dynamic Service Slider Section -->
 	<!--==================================================-->
+
+        <div class="feature-section">
+			<div class="container-fluid">
+				<div class="row feature-bg align-items-center">
+
+					<div class="col-lg-8 col-md-6">
+						<div class="hendre-section-title padding-lg">
+							<h4>features</h4>
+							<h1>Fixing What We <span>Improves</span></h1>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-md-6">
+						<div class="feature-contact-info">
+							<div class="feature-ctn-icon">
+								<img src="{{ asset('assets/images/slider/icon.png') }}" alt="">
+							</div>
+							<div class="feature-contact">
+								<span class="feature-ask">For Enquiry :</span>
+								<h2 class="feature-phone-number">+92 317 211 299 5</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="service-list owl-carousel">
+							@foreach($service_types as $service)
+								<div class="col-lg-12">
+									<div class="feature-single-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 5 }}s">
+								<div class="feature-thumb">
+									<img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+									<div class="feature-icon">
+										<img src="{{ asset('assets/images/slider/feature1.png') }}" alt="">
+										<a class="feature-icon2" href="{{ url('service-details/'.$service->id) }}"><i class="bi bi-arrow-right"></i></a>
+									</div>
+									<div class="feature-content">
+										<h2>{{ $service->name }}</h2>
+									</div>
+								</div>
+							</div>
+								</div>
+							@endforeach
+						</div>
+					</div>
+    			</div>
+			</div>
+		</div>	
+    <!--==================================================-->
 	<!-- End Hendre Feature Section  -->
 	<!--==================================================-->
 
@@ -237,9 +147,8 @@
 				<div class="col-lg-6 col-md-12 wow fadeInDown "data wow daley="3.7s">
 					<div class="hendre-section-title">
 						<h4>ABOUT US</h4>
-						<h1>Repairing Your <span>House for</span></h1>
-						<h1 class="sections">Looks as a New Home</h1>
-						<p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
+						<h1>Problem Solving Every Home</h1>
+						<p>At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.</p>
 					</div>
 					<div class="about-items">
 						<div class="about-icon">
@@ -302,69 +211,44 @@
 		<div class="container">
 			<div class="row service-bg">
 				<div class="service-list owl-carousel">
-					<div class="col-lg-12">
-						<div class="single-service-box wow fadeInLeft "data wow daley="3.7s">
-							<div class="service-thumb">
-								<img src="assets/images/slider/service1.jpg" alt="">
-							</div>
-							<div class="service-content">
-								<div class="service-icon">
-									<img src="assets/images/slider/service-icn1.png" alt="">
-								</div>
-								<h3 class="service-title">Commercial Reparing</h3>
-								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
-								<a class="hendre-button" href="service-details.html">Read More <i class="bi bi-plus"></i></a>
-							</div>
-						</div>
-					</div>
+				
+				
+@foreach($service_types as $service)
+    <div class="col-lg-12">
+        <div class="single-service-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 3 }}s">
+            
+            {{-- Service Image --}}
+            <div class="service-thumb">
+                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+            </div>
 
-					<div class="col-lg-12">
-						<div class="single-service-box wow fadeInDown "data wow daley="3.8s">
-							<div class="service-thumb">
-								<img src="assets/images/slider/service2.jpg" alt="">
-							</div>
-							<div class="service-content">
-								<div class="service-icon">
-									<img src="assets/images/slider/service-icn3.png" alt="">
-								</div>
-								<h3 class="service-title">Home Floor Reparing</h3>
-								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
-								<a class="hendre-button" href="service-details.html">Read More <i class="bi bi-plus"></i></a>
-							</div>
-						</div>
-					</div>
+            {{-- Service Content --}}
+            <div class="service-content">
+                <h3 class="service-title">{{ $service->name }}</h3>
+				
+                {{-- Description as list points --}}
+                @if($service->description)
+                    @php
+                        // Split description by new lines or commas
+                        $points = preg_split("/[\r\n,]+/", $service->description);
+                    @endphp
+                    <ul class="abc">
+                        @foreach($points as $point)
+                            <li>{{ trim($point) }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
-					<div class="col-lg-12">
-						<div class="single-service-box wow fadeInRight "data wow daley="3.9s">
-							<div class="service-thumb">
-								<img src="assets/images/slider/service3.jpg" alt="">
-							</div>
-							<div class="service-content">
-								<div class="service-icon">
-									<img src="assets/images/slider/service-icn2.png" alt="">
-								</div>
-								<h3 class="service-title">Door Window Reparing</h3>
-								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
-								<a class="hendre-button" href="service-details.html">Read More <i class="bi bi-plus"></i></a>
-							</div>
-						</div>
-					</div>
+                <a class="hendre-button" href="{{ url('service-details/'.$service->id) }}">
+                    Read More <i class="bi bi-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+@endforeach
 
-					<div class="col-lg-12">
-						<div class="single-service-box wow fadeInLeft "data wow daley="4s">
-							<div class="service-thumb">
-								<img src="assets/images/slider/service1.jpg" alt="">
-							</div>
-							<div class="service-content">
-								<div class="service-icon">
-									<img src="assets/images/slider/service-icn1.png" alt="">
-								</div>
-								<h3 class="service-title">Commercial Reparing</h3>
-								<p class="service-desc">Repurpose go forward benefits without goal conveniently targeted to business</p>
-								<a class="hendre-button" href="service-details.html">Read More <i class="bi bi-plus"></i></a>
-							</div>
-						</div>
-					</div>
+
+					
 				</div>
 			</div>
 		</div>
