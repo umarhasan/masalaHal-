@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -11,112 +10,140 @@ use App\Models\User;
 
 class PermissionTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        // ============================
+        //  ALL PERMISSIONS
+        // ============================
         $permissions = [
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
-            'permission-list',
-            'permission-create',
-            'permission-edit',
-            'permission-delete',
+
+            // SYSTEM
+            'dashboard',
             'change-password',
-            'package-list',
-            'package-create',
-            'package-edit',
-            'package-delete',
-            'category-list',
-            'category-create',
-            'category-edit',
-            'category-delete',
-            'subcategory-list',
-            'subcategory-create',
-            'subcategory-edit',
-            'subcategory-delete',
-            'product-list',
-            'product-create',
-            'product-edit',
-            'product-delete',
-            'pages-list',
-            'pages-create',
-            'pages-edit',
-            'pages-delete',
+
+            // USERS & ROLES
+            'role-list', 'role-create', 'role-edit', 'role-delete',
+            'user-list', 'user-create', 'user-edit', 'user-delete',
+            'permission-list', 'permission-create', 'permission-edit', 'permission-delete',
+
+            // GENERAL SETTINGS
             'general_setting',
-         ];
-      
+
+            // LOCATIONS
+            'locations-list', 'locations-create', 'locations-edit', 'locations-delete',
+
+            // SLIDERS
+            'sliders-list', 'sliders-create', 'sliders-edit', 'sliders-delete',
+
+            // SERVICE TYPE
+            'service-type-list', 'service-type-create', 'service-type-edit', 'service-type-delete',
+
+            // SERVICE
+            'service-list', 'service-create', 'service-edit', 'service-delete',
+
+            // PACKAGES
+            'package-list', 'package-create', 'package-edit', 'package-delete',
+
+            // COMPANY
+            'company-list', 'company-create', 'company-edit', 'company-delete',
+
+            // LEADS
+            'leads-list', 'leads-create', 'leads-edit', 'leads-delete',
+
+            // EMPLOYEES
+            'employees-list', 'employees-create', 'employees-edit', 'employees-delete',
+
+            // ACCOUNT
+            'account-setting',
+
+            // CMS CONTENT
+            'about-list', 'about-create', 'about-edit', 'about-delete',
+            'whychoose-list', 'whychoose-create', 'whychoose-edit', 'whychoose-delete',
+            'teams-list', 'teams-create', 'teams-edit', 'teams-delete',
+            'testimonials-list', 'testimonials-create', 'testimonials-edit', 'testimonials-delete',
+            'blogs-list', 'blogs-create', 'blogs-edit', 'blogs-delete',
+            'processes-list', 'processes-create', 'processes-edit', 'processes-delete',
+        ];
+
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
-        $roles =[
-            'Admin',
-            'User',
-            'Shopper',
+
+        // ============================
+        // ROLES
+        // ============================
+        $roles = [
+            'admin',
+            'customer',
+            'company',
+            'vendor',
         ];
 
         foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+            Role::firstOrCreate(['name' => $role]);
         }
 
 
-        $user =[
-            'name'=>'Admin',
-            'email'=>'admin@gmail.com',
-            'password' => Hash::make('12345678'),
-            'email_verified_at' => date('Y-m-d h:i:s'),
+        // ============================
+        // ASSIGN PERMISSIONS TO ROLES
+        // ============================
+
+        // 1️⃣ ADMIN → Has ALL Permissions
+        $adminRole = Role::where('name', 'admin')->first();
+        $adminRole->syncPermissions(Permission::all());
+
+
+        // 2️⃣ CUSTOMER ROLE — LIMITED PERMISSIONS
+        $customerPermissions = [
+            'dashboard',
+            'leads-list',
+            'leads-create',
+            'account-setting',
         ];
 
-        $userd = User::create($user);
-        $userd->assignRole('Admin');
+        Role::where('name', 'customer')
+            ->first()
+            ->syncPermissions($customerPermissions);
 
 
-        // permission assig
-        $rolepermission = 
-        [
-            ['permission_id' => 1, 'role_id' => 1],
-            ['permission_id' => 2, 'role_id' => 1],
-            ['permission_id' => 3, 'role_id' => 1],
-            ['permission_id' => 4, 'role_id' => 1],
-            ['permission_id' => 5, 'role_id' => 1],
-            ['permission_id' => 6, 'role_id' => 1],
-            ['permission_id' => 7, 'role_id' => 1],
-            ['permission_id' => 8, 'role_id' => 1],
-            ['permission_id' => 9, 'role_id' => 1],
-            ['permission_id' => 10, 'role_id' => 1],
-            ['permission_id' => 11, 'role_id' => 1],
-            ['permission_id' => 12, 'role_id' => 1],
-            ['permission_id' => 13, 'role_id' => 1],
-            ['permission_id' => 14, 'role_id' => 1],
-            ['permission_id' => 15, 'role_id' => 1],
-            ['permission_id' => 16, 'role_id' => 1],
-            ['permission_id' => 17, 'role_id' => 1],
-            ['permission_id' => 18, 'role_id' => 1],
-            ['permission_id' => 19, 'role_id' => 1],
-            ['permission_id' => 20, 'role_id' => 1],
-            ['permission_id' => 21, 'role_id' => 1],
-            ['permission_id' => 22, 'role_id' => 1],
-            ['permission_id' => 23, 'role_id' => 1],
-            ['permission_id' => 24, 'role_id' => 1],
-            ['permission_id' => 25, 'role_id' => 1],
-            ['permission_id' => 26, 'role_id' => 1],
-            ['permission_id' => 27, 'role_id' => 1],
-            ['permission_id' => 28, 'role_id' => 1],
-            ['permission_id' => 29, 'role_id' => 1],
+        // 3️⃣ COMPANY ROLE — MANAGE LEADS + EMPLOYEES
+        $companyPermissions = [
+            'dashboard',
+            'employees-list', 'employees-create', 'employees-edit',
+            'leads-list', 'leads-edit',
+            'account-setting',
         ];
-        foreach($rolepermission as $role)
-        {
-            \DB::table('role_has_permissions')->insert($role);
+
+        Role::where('name', 'company')
+            ->first()
+            ->syncPermissions($companyPermissions);
+
+
+        // 4️⃣ VENDOR ROLE — ONLY SERVICES RELATED
+        $vendorPermissions = [
+            'dashboard',
+            'service-list', 'service-edit',
+            'package-list',
+            'account-setting',
+        ];
+
+        Role::where('name', 'vendor')
+            ->first()
+            ->syncPermissions($vendorPermissions);
+
+
+        // ============================
+        // CREATE DEFAULT ADMIN USER
+        // ============================
+        if (!User::where('email', 'admin@gmail.com')->exists()) {
+            $admin = User::create([
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('12345678'),
+                'email_verified_at' => now(),
+            ]);
+            $admin->assignRole('admin');
         }
     }
 }

@@ -1,42 +1,49 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="content-wrapper">
-  <section class="content-header">
-    <div class="container-fluid">
-      <h1>Create New Team Member</h1>
-    </div>
-  </section>
+<div class="container">
+    <h1>{{ isset($team) ? 'Edit' : 'Add' }} Team Member</h1>
 
-  <section class="content">
-    <div class="container-fluid">
-      @if($errors->any())
-        <div class="alert alert-danger">
-          <ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
-        </div>
-      @endif
+    <form action="{{ isset($team) ? route('teams.update', $team->id) : route('teams.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @if(isset($team))
+            @method('PUT')
+        @endif
 
-      <div class="card">
-        <div class="card-body">
-          <form method="POST" action="{{ route('teams.store') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-              <label>Name</label>
-              <input type="text" name="name" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label>Designation</label>
-              <input type="text" name="designation" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label>Image</label>
-              <input type="file" name="image" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" value="{{ $team->name ?? old('name') }}" required>
         </div>
-      </div>
-    </div>
-  </section>
+
+        <div class="mb-3">
+            <label>Role</label>
+            <input type="text" name="role" class="form-control" value="{{ $team->role ?? old('role') }}">
+        </div>
+
+        <div class="mb-3">
+            <label>Image</label>
+            <input type="file" name="image" class="form-control">
+            @if(isset($team) && $team->image)
+                <img src="{{ asset($team->image) }}" width="50" class="mt-2">
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label>Facebook</label>
+            <input type="url" name="facebook" class="form-control" value="{{ $team->facebook ?? old('facebook') }}">
+        </div>
+
+        <div class="mb-3">
+            <label>Twitter</label>
+            <input type="url" name="twitter" class="form-control" value="{{ $team->twitter ?? old('twitter') }}">
+        </div>
+
+        <div class="mb-3">
+            <label>LinkedIn</label>
+            <input type="url" name="linkedin" class="form-control" value="{{ $team->linkedin ?? old('linkedin') }}">
+        </div>
+
+        <button type="submit" class="btn btn-success">{{ isset($team) ? 'Update' : 'Save' }}</button>
+    </form>
 </div>
 @endsection

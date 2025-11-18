@@ -29,12 +29,17 @@
 
             <div class="mb-3">
               <label>Designation</label>
-              <input type="text" name="designation" class="form-control" value="{{ old('designation', $testimonial->designation) }}" required>
+              <input type="text" name="designation" class="form-control" value="{{ old('designation', $testimonial->designation) }}">
             </div>
 
             <div class="mb-3">
               <label>Content</label>
               <textarea name="content" class="form-control" rows="4" required>{{ old('content', $testimonial->content) }}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label>Rating</label>
+              <input type="number" name="rating" class="form-control" value="{{ old('rating', $testimonial->rating) }}" min="1" max="5">
             </div>
 
             <div class="mb-3">

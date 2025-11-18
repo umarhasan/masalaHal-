@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Process;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProcessController extends Controller
 {
     public function index()
     {
-        $items = Process::orderBy('step_order')->get();
-        return view('admin.processes.index', compact('items'));
+        $processes = Process::orderBy('step_number')->get();
+        return view('admin.processes.index', compact('processes'));
     }
 
     public function create()
@@ -22,12 +23,19 @@ class ProcessController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'step_title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'step_order' => 'nullable|integer',
+            'step_number' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        Process::create($request->only(['step_title','description','step_order']));
+        $data = $request->only(['step_number','title','description']);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('processes','public');
+        }
+
+        Process::create($data);
 
         return redirect()->route('processes.index')->with('success','Process step created successfully.');
     }
@@ -45,18 +53,31 @@ class ProcessController extends Controller
     public function update(Request $request, Process $process)
     {
         $request->validate([
-            'step_title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'step_order' => 'nullable|integer',
+            'step_number' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $process->update($request->only(['step_title','description','step_order']));
+        $data = $request->only(['step_number','title','description']);
+
+        if ($request->hasFile('image')) {
+            if ($process->image) {
+                Storage::disk('public')->delete($process->image);
+            }
+            $data['image'] = $request->file('image')->store('processes','public');
+        }
+
+        $process->update($data);
 
         return redirect()->route('processes.index')->with('success','Process step updated successfully.');
     }
 
     public function destroy(Process $process)
     {
+        if ($process->image) {
+            Storage::disk('public')->delete($process->image);
+        }
         $process->delete();
         return redirect()->route('processes.index')->with('success','Process step deleted successfully.');
     }

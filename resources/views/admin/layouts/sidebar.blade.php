@@ -1,4 +1,4 @@
- <!-- Menu -->
+<!-- Menu -->
  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="/admin/dashboard" class="app-brand-link">
@@ -16,99 +16,160 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
+        @can('dashboard')
         <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
             <a href="/admin/dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-tachometer"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+        @endcan
 
-        <!-- Page Layouts -->
-        @can('pages-list')
-        <li class="menu-item {{ request()->is('pages*') ? 'active' : '' }}">
-            <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Layouts">Manage Pages</div>
+        <!-- Website Sections -->
+        @can('about-list')
+        <li class="menu-item {{ request()->is('abouts*') ? 'active' : '' }}">
+            <a href="{{ route('abouts.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                <div data-i18n="About">About Section</div>
             </a>
-            <ul class="menu-sub">
-                @can('pages-list')
-                <li class="menu-item {{ request()->is('pages') ? 'active' : '' }}">
-                    <a href="{{ route('pages.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">List Pages</div>
-                    </a>
-                </li>
-                @endcan
-                <li class="menu-item {{ request()->is('sections*') ? 'active' : '' }}">
-                    <a href="{{ route('sections.index') }}" class="menu-link">
-                        <div data-i18n="Without navbar">List Section</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         @endcan
-        <!--Location-->
+
+        @can('whychoose-list')
+        <li class="menu-item {{ request()->is('why-chooses*') ? 'active' : '' }}">
+            <a href="{{ route('why-chooses.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <div data-i18n="Why Choose Us">Why Choose Us</div>
+            </a>
+        </li>
+        @endcan
+
+        @can('teams-list')
+        <li class="menu-item {{ request()->is('teams*') ? 'active' : '' }}">
+            <a href="{{ route('teams.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-group"></i>
+                <div data-i18n="Teams">Team Members</div>
+            </a>
+        </li>
+        @endcan
+
+        @can('testimonials-list')
+        <li class="menu-item {{ request()->is('testimonials*') ? 'active' : '' }}">
+            <a href="{{ route('testimonials.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-message-rounded-dots"></i>
+                <div data-i18n="Testimonials">Testimonials</div>
+            </a>
+        </li>
+        @endcan
+
+        @can('blogs-list')
+        <li class="menu-item {{ request()->is('blogs*') ? 'active' : '' }}">
+            <a href="{{ route('blogs.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-news"></i>
+                <div data-i18n="Blogs">Blogs</div>
+            </a>
+        </li>
+        @endcan
+
+        @can('processes-list')
+        <li class="menu-item {{ request()->is('processes*') ? 'active' : '' }}">
+            <a href="{{ route('processes.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-git-branch"></i>
+                <div data-i18n="Process Steps">Process Steps</div>
+            </a>
+        </li>
+        @endcan
+
+
+        <!-- Location -->
+        @can('locations-list')
         <li class="menu-item {{ request()->is('location.index') ? 'active' : '' }}">
-            <a href="{{route('location.index')}}" class="menu-link">
+            <a href="{{ route('location.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-map"></i>
                 <div data-i18n="Analytics">Locations</div>
             </a>
         </li>
+        @endcan
+
+
         <!-- Slider -->
+        @can('sliders-list')
         <li class="menu-item {{ request()->is('sliders.index') ? 'active' : '' }}">
             <a href="{{route('sliders.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-carousel"></i>
                 <div data-i18n="Analytics">Sliders</div>
             </a>
         </li>
-        <!-- Package -->
+        @endcan
+
+
+        <!-- Service Type -->
+        @can('service-type-list')
         <li class="menu-item {{ request()->is('package.index') ? 'active' : '' }}">
             <a href="{{route('lead-services.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Analytics">Service Type</div>
             </a>
         </li>
+        @endcan
 
-         <!-- Package -->
-         <li class="menu-item {{ request()->is('package.index') ? 'active' : '' }}">
+
+        <!-- Service -->
+        @can('service-list')
+        <li class="menu-item {{ request()->is('services.index') ? 'active' : '' }}">
             <a href="{{route('services.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Service</div>
             </a>
         </li>
+        @endcan
 
-         <!-- Package -->
-         <li class="menu-item {{ request()->is('package.index') ? 'active' : '' }}">
+
+        <!-- Package -->
+        @can('package-list')
+        <li class="menu-item {{ request()->is('package.index') ? 'active' : '' }}">
             <a href="{{route('package.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Analytics">Package</div>
             </a>
         </li>
+        @endcan
+
 
         <!-- Company -->
+        @can('company-list')
         <li class="menu-item {{ request()->is('companies.index') ? 'active' : '' }}">
             <a href="{{route('companies.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building"></i>
                 <div data-i18n="Analytics">Company</div>
             </a>
         </li>
-        
+        @endcan
+
+
         <!-- Leads -->
+        @can('leads-list')
         <li class="menu-item {{ request()->is('leads.index') ? 'active' : '' }}">
             <a href="{{route('leads.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Analytics">Leads</div>
             </a>
         </li>
-        
-        <!--employees -->
+        @endcan
+
+
+        <!-- Employees -->
+        @can('employees-list')
         <li class="menu-item {{ request()->is('employees.index') ? 'active' : '' }}">
             <a href="{{route('employees.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-pin"></i>
                 <div data-i18n="Analytics">Employees</div>
             </a>
         </li>
+        @endcan
 
-        <!-- Role List -->
+
+        <!-- Manage Roles -->
         @can('role-list')
         <li class="menu-item {{ request()->is('roles*') ? 'active' : '' }}">
             <a href="#" class="menu-link menu-toggle">
@@ -134,7 +195,7 @@
         </li>
         @endcan
 
-        <!-- User List -->
+        <!-- Manage Users -->
         @can('user-list')
         <li class="menu-item {{ request()->is('users*') ? 'active' : '' }}">
             <a href="#" class="menu-link menu-toggle">
@@ -200,7 +261,7 @@
         </li>
         @endcan
 
-        <!-- Permission Management -->
+        <!-- Manage Permissions -->
         @can('permission-list')
         <li class="menu-item {{ request()->is('permission*') ? 'active' : '' }}">
             <a href="#" class="menu-link menu-toggle">
@@ -244,6 +305,7 @@
         @endcan
 
         <!-- Account Setting -->
+        @can('account-setting')
         <li class="menu-item {{ request()->is('profile*') ? 'active' : '' }}">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
@@ -262,6 +324,7 @@
                 </li>
             </ul>
         </li>
+        @endcan
 
         <!-- Logout -->
         <li class="menu-item">
@@ -271,6 +334,5 @@
             </a>
         </li>
     </ul>
-
 </aside>
 <!-- / Menu -->

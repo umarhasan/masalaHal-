@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class WhyChooseController extends Controller
 {
+    
     public function index()
     {
-        $items = WhyChoose::all();
-        return view('admin.why_chooses.index', compact('items'));
+        $whyChooses = WhyChoose::all();
+        return view('admin.why_chooses.index', compact('whyChooses'));
     }
 
     public function create()
@@ -24,60 +25,67 @@ class WhyChooseController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
+            'section' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'icon' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->only(['title', 'description']);
+        $data = $request->all();
 
-        if ($request->hasFile('icon')) {
-            $data['icon'] = $request->file('icon')->store('why_chooses', 'public');
+        if($request->hasFile('image')){
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads/why-choose'), $imageName);
+            $data['image'] = 'uploads/why-choose/' . $imageName;
         }
 
         WhyChoose::create($data);
 
-        return redirect()->route('why_chooses.index')->with('success', 'Item created successfully.');
+        return redirect()->route('why-chooses.index')->with('success', 'Entry created successfully.');
     }
 
-    public function edit(WhyChoose $why_choose)
+    public function edit($id)
     {
-        return view('admin.why_chooses.edit', compact('why_choose'));
+        $whyChoose = WhyChoose::findOrFail($id);
+        return view('admin.why_chooses.edit', compact('whyChoose'));
     }
 
-    public function update(Request $request, WhyChoose $why_choose)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
+            'section' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'icon' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->only(['title', 'description']);
+        $whyChoose = WhyChoose::findOrFail($id);
+        $data = $request->all();
 
-        if ($request->hasFile('icon')) {
-            if ($why_choose->icon) {
-                Storage::disk('public')->delete($why_choose->icon);
-            }
-            $data['icon'] = $request->file('icon')->store('why_chooses', 'public');
+        if($request->hasFile('image')){
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads/why-choose'), $imageName);
+            $data['image'] = 'uploads/why-choose/' . $imageName;
         }
 
-        $why_choose->update($data);
+        $whyChoose->update($data);
 
-        return redirect()->route('why_chooses.index')->with('success', 'Item updated successfully.');
+        return redirect()->route('why-chooses.index')->with('success', 'Entry updated successfully.');
     }
 
-    public function destroy(WhyChoose $why_choose)
+    public function destroy($id)
     {
-        if ($why_choose->icon) {
-            Storage::disk('public')->delete($why_choose->icon);
+        $whyChoose = WhyChoose::findOrFail($id);
+
+        if($whyChoose->image && file_exists(public_path($whyChoose->image))){
+            unlink(public_path($whyChoose->image));
         }
 
-        $why_choose->delete();
-        return redirect()->route('why_chooses.index')->with('success', 'Item deleted successfully.');
+        $whyChoose->delete();
+
+        return redirect()->route('why-chooses.index')->with('success', 'Entry deleted successfully.');
     }
 
-    public function show(WhyChoose $why_choose)
-    {
-        return view('admin.why_chooses.show', compact('why_choose'));
-    }
+    
 }

@@ -11,8 +11,8 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $items = Blog::all();
-        return view('admin.blogs.index', compact('items'));
+        $blogs = Blog::all();
+        return view('admin.blogs.index', compact('blogs'));
     }
 
     public function create()
@@ -24,11 +24,12 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'description' => 'required|string',
+            'author' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $data = $request->only(['title','content']);
+        $data = $request->only(['title','description','author']);
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('blogs','public');
@@ -53,14 +54,17 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'description' => 'required|string',
+            'author' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $data = $request->only(['title','content']);
+        $data = $request->only(['title','description','author']);
 
         if ($request->hasFile('image')) {
-            if ($blog->image) { Storage::disk('public')->delete($blog->image); }
+            if ($blog->image) {
+                Storage::disk('public')->delete($blog->image);
+            }
             $data['image'] = $request->file('image')->store('blogs','public');
         }
 
@@ -71,7 +75,9 @@ class BlogController extends Controller
 
     public function destroy(Blog $blog)
     {
-        if ($blog->image) { Storage::disk('public')->delete($blog->image); }
+        if ($blog->image) {
+            Storage::disk('public')->delete($blog->image);
+        }
         $blog->delete();
         return redirect()->route('blogs.index')->with('success','Blog deleted successfully.');
     }
