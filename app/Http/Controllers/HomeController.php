@@ -33,7 +33,7 @@ class HomeController extends Controller
     // {
     //     $sliders =Slider::get();
     //     $service_types =LeadService::get();
-        
+
     //     return view('home',compact('sliders','service_types'));
     // }
     public function index()
@@ -51,10 +51,10 @@ class HomeController extends Controller
         // Optional: Blog/News for homepage
         $blogs = Blog::latest()->take(3)->get();
         // Optional: Team members
-        $team = Team::all();
+        $teams = Team::all();
     // Optional: Why choose us sections
-        $why_choose = WhyChoose::all();
-
+        $whychooses = WhyChoose::all();
+        $processes = Process::all();
         // Pass all data to home view
         return view('home', compact(
             'sliders',
@@ -63,8 +63,9 @@ class HomeController extends Controller
             'products',
             'testimonials',
             'blogs',
-            'team',
-            'why_choose'
+            'teams',
+            'whychooses',
+            'processes'
         ));
     }
      //service

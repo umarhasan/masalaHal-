@@ -20,42 +20,30 @@ class PermissionTableSeeder extends Seeder
             // SYSTEM
             'dashboard',
             'change-password',
-
             // USERS & ROLES
             'role-list', 'role-create', 'role-edit', 'role-delete',
             'user-list', 'user-create', 'user-edit', 'user-delete',
             'permission-list', 'permission-create', 'permission-edit', 'permission-delete',
-
             // GENERAL SETTINGS
             'general_setting',
-
             // LOCATIONS
             'locations-list', 'locations-create', 'locations-edit', 'locations-delete',
-
             // SLIDERS
             'sliders-list', 'sliders-create', 'sliders-edit', 'sliders-delete',
-
             // SERVICE TYPE
             'service-type-list', 'service-type-create', 'service-type-edit', 'service-type-delete',
-
             // SERVICE
             'service-list', 'service-create', 'service-edit', 'service-delete',
-
             // PACKAGES
             'package-list', 'package-create', 'package-edit', 'package-delete',
-
             // COMPANY
             'company-list', 'company-create', 'company-edit', 'company-delete',
-
             // LEADS
             'leads-list', 'leads-create', 'leads-edit', 'leads-delete',
-
             // EMPLOYEES
             'employees-list', 'employees-create', 'employees-edit', 'employees-delete',
-
             // ACCOUNT
             'account-setting',
-
             // CMS CONTENT
             'about-list', 'about-create', 'about-edit', 'about-delete',
             'whychoose-list', 'whychoose-create', 'whychoose-edit', 'whychoose-delete',

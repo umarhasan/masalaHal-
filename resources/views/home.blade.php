@@ -4,18 +4,16 @@
 <style>
 	.abc{
 		list-style-type: disc; /* default bullets */
-    margin: 10px 0;
-    padding-left: 20px;
-    font-size: 9px; /* smaller size */
-    line-height: 1.5; /* spacing between points */
-    color: #555;
+        margin: 10px 0;
+        padding-left: 20px;
+        font-size: 9px; /* smaller size */
+        line-height: 1.5; /* spacing between points */
+        color: #555;
 	}
 </style>
 <!--==================================================-->
 	<!-- Start Hendre Hero Section  -->
 	<!--==================================================-->
-
-
     <div class="hero-list owl-carousel">
         @foreach($sliders as $slider)
             <div class="hero-section d-flex align-items-center">
@@ -73,56 +71,55 @@
             </div>
         @endforeach
     </div>
-		<!--==================================================-->
+    <!--==================================================-->
 	<!-- Dynamic Service Slider Section -->
 	<!--==================================================-->
+    <div class="feature-section">
+        <div class="container-fluid">
+            <div class="row feature-bg align-items-center">
 
-        <div class="feature-section">
-			<div class="container-fluid">
-				<div class="row feature-bg align-items-center">
+                <div class="col-lg-8 col-md-6">
+                    <div class="hendre-section-title padding-lg">
+                        <h4>features</h4>
+                        <h1>Fixing What We <span>Improves</span></h1>
+                    </div>
+                </div>
 
-					<div class="col-lg-8 col-md-6">
-						<div class="hendre-section-title padding-lg">
-							<h4>features</h4>
-							<h1>Fixing What We <span>Improves</span></h1>
-						</div>
-					</div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-contact-info">
+                        <div class="feature-ctn-icon">
+                            <img src="{{ asset('assets/images/slider/icon.png') }}" alt="">
+                        </div>
+                        <div class="feature-contact">
+                            <span class="feature-ask">For Enquiry :</span>
+                            <h2 class="feature-phone-number">+92 317 211 299 5</h2>
+                        </div>
+                    </div>
+                </div>
 
-					<div class="col-lg-4 col-md-6">
-						<div class="feature-contact-info">
-							<div class="feature-ctn-icon">
-								<img src="{{ asset('assets/images/slider/icon.png') }}" alt="">
-							</div>
-							<div class="feature-contact">
-								<span class="feature-ask">For Enquiry :</span>
-								<h2 class="feature-phone-number">+92 317 211 299 5</h2>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="service-list owl-carousel">
-							@foreach($service_types as $service)
-								<div class="col-lg-12">
-									<div class="feature-single-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 5 }}s">
-								<div class="feature-thumb">
-									<img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
-									<div class="feature-icon">
-										<img src="{{ asset('assets/images/slider/feature1.png') }}" alt="">
-										<a class="feature-icon2" href="{{ url('service-details/'.$service->id) }}"><i class="bi bi-arrow-right"></i></a>
-									</div>
-									<div class="feature-content">
-										<h2>{{ $service->name }}</h2>
-									</div>
-								</div>
-							</div>
-								</div>
-							@endforeach
-						</div>
-					</div>
-    			</div>
-			</div>
-		</div>
+                <div class="row">
+                    <div class="service-list owl-carousel">
+                        @foreach($service_types as $service)
+                            <div class="col-lg-12">
+                                <div class="feature-single-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 5 }}s">
+                            <div class="feature-thumb">
+                                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+                                <div class="feature-icon">
+                                    <img src="{{ asset('assets/images/slider/feature1.png') }}" alt="">
+                                    <a class="feature-icon2" href="{{ url('service-details/'.$service->id) }}"><i class="bi bi-arrow-right"></i></a>
+                                </div>
+                                <div class="feature-content">
+                                    <h2>{{ $service->name }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--==================================================-->
 	<!-- End Hendre Feature Section  -->
 	<!--==================================================-->
@@ -130,71 +127,70 @@
 	<!--==================================================-->
 	<!-- Start Hendre About Section  -->
 	<!--==================================================-->
-		<div id="about" class="about-section">
-		<div class="container">
-			<div class="row align-items-center">
-				<!-- Left Image & Counter -->
-				<div class="col-lg-6 col-md-12">
-					<div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.6s">
-						@if(isset($about->image))
-							<img src="{{ asset('storage/' . $about->image) }}" alt="About Image">
-						@else
-							<img src="{{ asset('assets/images/slider/about.png') }}" alt="">
-						@endif
-						<div class="about-counter">
-							<h2 class="counter">{{ $projects_completed ?? 500 }}</h2>
-							<h2 class="counter1">+</h2>
-							<span class="counter-text">Project Completed</span>
-						</div>
-					</div>
-				</div>
-				<!-- Right Content -->
-				<div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.7s">
-					<div class="hendre-section-title">
-						<h4>ABOUT US</h4>
-						<h1>{{ $about->title ?? 'Problem Solving Every' }}</h1>
-						<p>{{ $about->description ?? 'At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.' }}</p>
-					</div>
+    <div id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Image & Counter -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.6s">
+                        @if(isset($about->image))
+                            <img src="{{ asset('storage/' . $about->image) }}" alt="About Image">
+                        @else
+                            <img src="{{ asset('assets/images/slider/about.png') }}" alt="">
+                        @endif
+                        <div class="about-counter">
+                            <h2 class="counter">{{ $projects_completed ?? 500 }}</h2>
+                            <h2 class="counter1">+</h2>
+                            <span class="counter-text">Project Completed</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Content -->
+                <div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.7s">
+                    <div class="hendre-section-title">
+                        <h4>ABOUT US</h4>
+                        <h1>{{ $about->title ?? 'Problem Solving Every' }}</h1>
+                        <p>{{ $about->description ?? 'At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.' }}</p>
+                    </div>
 
-					<!-- Main About Item -->
-					<div class="about-items">
-						<div class="about-icon">
-							<img src="{{ asset('assets/images/slider/about-icn.png') }}" alt="">
-						</div>
-						<div class="about-item-content">
-							<h2 class="about-item-title">{{ $main_about_item_title ?? 'Smart Repair System' }}</h2>
-							<p class="about-discription">{{ $main_about_item_description ?? 'Conveniently target business opportunities market-driven solutions' }}</p>
-						</div>
-					</div>
+                    <!-- Main About Item -->
+                    <div class="about-items">
+                        <div class="about-icon">
+                            <img src="{{ asset('assets/images/slider/about-icn.png') }}" alt="">
+                        </div>
+                        <div class="about-item-content">
+                            <h2 class="about-item-title">{{ $main_about_item_title ?? 'Smart Repair System' }}</h2>
+                            <p class="about-discription">{{ $main_about_item_description ?? 'Conveniently target business opportunities market-driven solutions' }}</p>
+                        </div>
+                    </div>
 
-					<!-- Dynamic Service List -->
-					<div class="row">
-						@if(isset($service_types) && $service_types->count() > 0)
-							@foreach($service_types as $service)
-								<div class="col-lg-6 col-md-6">
-									<div class="about-item-list">
-										<ul>
-											<li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
-										</ul>
-									</div>
-								</div>
-							@endforeach
-						@else
-							<div class="col-12">
-								<p>No services available currently.</p>
-							</div>
-						@endif
-					</div>
+                    <!-- Dynamic Service List -->
+                    <div class="row">
+                        @if(isset($service_types) && $service_types->count() > 0)
+                            @foreach($service_types as $service)
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="about-item-list">
+                                        <ul>
+                                            <li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-12">
+                                <p>No services available currently.</p>
+                            </div>
+                        @endif
+                    </div>
 
-					<!-- Button -->
-					<div class="hendre-button">
-						<a href="#">Get An Estimate <i class="bi bi-plus"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+                    <!-- Button -->
+                    <div class="hendre-button">
+                        <a href="#">Get An Estimate <i class="bi bi-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<!--==================================================-->
 	<!-- End Hendre About Section  -->
 	<!--==================================================-->
@@ -264,170 +260,122 @@
 	<!--==================================================-->
 	<!-- Start Hendre Why Choose  Section  -->
 	<!--==================================================-->
-	<div id="choose" class="why-choose-section">
-		<div class="container">
-			<div class="row align-items-center wow fadeInDown "data wow daley="3.9s">
-				<div class="col-lg-12">
-					<div class="hendre-section-title text-center padding-lg">
-						<h4> why choose us </h4>
-						<h1> Some Reason for Choose <span> Problem Solving </span></h1>
-						<h1 class="sections"> Repairing Your Home </h1>
-						<div class="rs-video2">
-						<div class="animate-border">
-							<a class="video-vemo-icon venobox vbox-item" data-vbtype="youtube" data-autoplay="true" href="https://youtu.be/BS4TUd7FJSg">
-							Play</a>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<!-- Tab  -->
-					<div class="tab wow fadeInRight "data wow daley="3.9s">
-						<ul class="tabs">
-							<li><a href="#"> <span>01.</span> Why Choose Us ? </a></li>
-							<li><a href="#"> <span>02.</span> MasalaHal </a></li>
-							<li><a href="#"> <span>03.</span> Mission & Vission </a></li>
-						</ul> <!-- / tabs -->
+    <div id="why-choose" class="why-choose-section">
+        <div class="container">
+            <div class="row align-items-center wow fadeInDown" data-wow-delay="3.9s">
+                <div class="col-lg-12">
+                    <div class="hendre-section-title text-center padding-lg">
+                        <h4> why choose us </h4>
+                        <h1> Some Reason for Choose <span> Problem Solving </span></h1>
+                        <h1 class="sections"> Repairing Your Home </h1>
 
-						<div class="tab_content">
-                        <!-- / tabs_item -->
-                        <div class="tabs_item">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="tab-thumb">
-                                        <img src="assets/images/slider/tab_1.jpg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 tab-right">
-                                    <div class="hendre-section-title">
-                                        <h4> Why Choose Us ? </h4>
-                                        <h1> Repairing Your <span> House for </span> </h1>
-                                        <h1 class="sections">Looks as a New Home</h1>
-                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hendre-button">
-                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / tabs_item -->
-                        <div class="tabs_item">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="tab-thumb">
-                                        <img src="assets/images/slider/tab_2.jpg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 tab-right">
-                                    <div class="hendre-section-title">
-                                        <h4> Problem Solving missions </h4>
-                                        <h1> Repairing Your <span> House for </span> </h1>
-                                        <h1 class="sections">Looks as a New Home</h1>
-                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hendre-button">
-                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-                                    </div>
-                                </div>
+                        <div class="rs-video2">
+                            <div class="animate-border">
+                                <a class="video-vemo-icon venobox vbox-item" data-vbtype="youtube" data-autoplay="true" href="https://youtu.be/BS4TUd7FJSg">Play</a>
                             </div>
                         </div>
 
-                        <!-- / tabs_item -->
+                    </div>
+                </div>
+            </div>
 
-                        <div class="tabs_item">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="tab-thumb">
-                                        <img src="assets/images/slider/tab_3.jpg" alt="">
-                                    </div>
-                                </div>
+            <div class="row">
+                <div class="col-lg-12">
 
-                                <div class="col-lg-6 col-md-6 tab-right">
-                                    <div class="hendre-section-title">
-                                        <h4> Mission & Vission </h4>
-                                        <h1> Repairing Your <span> House for </span> </h1>
-                                        <h1 class="sections">Looks as a New Home</h1>
-                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-                                    </div>
+                    <div class="tab wow fadeInRight" data-wow-delay="3.9s">
 
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                        <!-- ========== TABS TITLE (DYNAMIC) ========== -->
+                        <ul class="tabs">
+                             <li>
+                                <a href="#">
+                                        <span>01.</span> Why Choose Us ? </a></li>
+                                        <li><a href="#">
+                                            <span>02.</span> MasalaHal </a>
+                                        </li>
+                                        <li><a href="#"> <span>03.</span> Mission & Vission </a>
+                                        </li>
+                                    </ul>
 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
+                        <!-- ========== TABS CONTENT (DYNAMIC) ========== -->
+                        <div class="tab_content">
+
+                            @foreach($whychooses as $item)
+                            <div class="tabs_item">
+                                <div class="row">
+
+                                    <!-- LEFT IMAGE -->
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="tab-thumb">
+                                            <img src="{{ asset($item->image) }}" alt="">
                                         </div>
                                     </div>
-                                    <div class="hendre-button">
-                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
+
+                                    <!-- RIGHT CONTENT -->
+                                    <div class="col-lg-6 col-md-6 tab-right">
+                                        <div class="hendre-section-title">
+                                            <h4>{{ $item->title }}</h4>
+                                            <h1>{!! $item->subtitle !!}</h1>
+                                            {{-- <h1 class="sections">{{ $item->section }}</h1> --}}
+                                            <p>{{ $item->description }}</p>
+                                        </div>
+
+                                        <div class="row">
+                                            @php
+                                                // Convert bullet_points column to array
+                                                $points = explode("\n", $item->bullet_points);
+                                                $chunks = array_chunk($points, ceil(count($points) / 2));
+                                            @endphp
+
+                                            @foreach($chunks as $chunk)
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="about-item-list">
+                                                    <ul>
+                                                        @foreach($chunk as $point)
+                                                            @if(trim($point) != "")
+                                                                <li><i class="bi bi-check-circle-fill"></i> {{ $point }}</li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @endforeach
+
+                                        </div>
+                                        <!-- Dynamic Service List -->
+                                        <div class="row">
+                                            @if(isset($service_types) && $service_types->count() > 0)
+                                                @foreach($service_types as $service)
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="about-item-list">
+                                                            <ul>
+                                                                <li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="col-12">
+                                                    <p>No services available currently.</p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="hendre-button">
+                                            <a href="{{ $item->button_link }}">Get An Estimate <i class="bi bi-plus"></i></a>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
-                        </div>
+                            @endforeach
 
-						</div>
-					</div>
-					<!-- End tab -->
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 	<!--==================================================-->
 	<!-- End Hendre Why Choose Section  -->
 	<!--==================================================-->
@@ -436,95 +384,60 @@
 	<!-- Start Hendre Team Section  -->
 	<!--==================================================-->
 	<div id="team" class="team-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-12 wow fadeInLeft "data wow daley="3.6s">
-					<div class="hendre-section-title white">
-						<h4> Our Team </h4>
-						<h1> Meet Our Experts </h1>
-						<h1 class="sections"> Team <span>Member</span> </h1>
-						<p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-					</div>
-				</div>
-				<div class="col-lg-8 col-md-12">
-					<div class="row">
-						<div class="team-list owl-carousel">
-							<div class="col-lg-12">
-								<div class="single-team-box wow fadeInDown "data wow daley="3.7s">
-									<div class="team-thumb">
-										<img src="assets/images/slider/team1.png" alt="">
-										<ul class="team-social-list">
-											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-										</ul>
-									</div>
-									<div class="team-content">
-										<h3 class="team-title"> Tina E. Rose </h3>
-										<p class="team-text"> HR Manager </p>
-									</div>
-								</div>
-							</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 wow fadeInLeft" data-wow-delay="3.6s">
+                    <div class="hendre-section-title white">
+                        <h4> Our Team </h4>
+                        <h1> Meet Our Experts </h1>
+                        <h1 class="sections"> Team <span>Member</span> </h1>
+                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
+                    </div>
+                </div>
 
-							<div class="col-lg-12">
-								<div class="single-team-box wow fadeInUp"data wow daley="3.8s">
-									<div class="team-thumb">
-										<img src="assets/images/slider/team2.png" alt="">
+                <div class="col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="team-list owl-carousel">
 
-										<ul class="team-social-list">
-											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-										</ul>
-									</div>
-									<div class="team-content">
-										<h3 class="team-title"> John D. Alexon </h3>
-										<p class="team-text"> Carpenter </p>
-									</div>
-								</div>
-							</div>
+                            @foreach($teams as $index => $team)
+                            <div class="col-lg-12">
+                                <div class="single-team-box wow
+                                    @if($index % 3 == 0) fadeInDown
+                                    @elseif($index % 3 == 1) fadeInUp
+                                    @else fadeInRight
+                                    @endif"
+                                    data-wow-delay="3.{{ 6 + $index*0.1 }}s">
 
-							<div class="col-lg-12">
-								<div class="single-team-box wow fadeInRight "data wow daley="3.9s">
-									<div class="team-thumb">
-										<img src="assets/images/slider/team3.png" alt="">
+                                    <div class="team-thumb">
+                                        <img src="{{ asset($team->image) }}" alt="{{ $team->name }}">
+                                        <ul class="team-social-list">
+                                            @if($team->facebook)
+                                                <li><a href="{{ $team->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                            @endif
+                                            @if($team->twitter)
+                                                <li><a href="{{ $team->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                            @endif
+                                            @if($team->linkedin)
+                                                <li><a href="{{ $team->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                            @endif
+                                        </ul>
+                                    </div>
 
-										<ul class="team-social-list">
-											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-										</ul>
-									</div>
-									<div class="team-content">
-										<h3 class="team-title"> Mark B. Steward </h3>
-										<p class="team-text"> CEO & Founder </p>
-									</div>
-								</div>
-							</div>
+                                    <div class="team-content">
+                                        <h3 class="team-title">{{ $team->name }}</h3>
+                                        <p class="team-text">{{ $team->role }}</p>
+                                    </div>
 
-							<div class="col-lg-12">
-								<div class="single-team-box wow fadeInRight "data wow daley="3.9s">
-									<div class="team-thumb">
-										<img src="assets/images/slider/team2.png" alt="">
+                                </div>
+                            </div>
+                            @endforeach
 
-										<ul class="team-social-list">
-											<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-										</ul>
-									</div>
-									<div class="team-content">
-										<h3 class="team-title"> John D. Alexon </h3>
-										<p class="team-text"> Carpenter </p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<!--==================================================-->
 	<!-- End Hendre Team Section  -->
 	<!--==================================================-->
@@ -533,144 +446,97 @@
 	<!-- Start Hendre Teastimonial Section  -->
 	<!--==================================================-->
 	<div id="testi" class="testimonial-section">
-		<div class="container">
-			<div class="row testi-bg">
-				<div class="col-lg-5 col-md-12">
-					<div class="row">
-						<div class="testmn-bg wow fadeInDown "data wow daley="3.8s">
-							<div class="testi-list owl-carousel">
-								<div class="col-lg-12">
-									<div class="teastimonial-single-box">
-										<div class="testi-content">
-											<div class="testi-icon">
-												<i class="bi bi-quote"></i>
-											</div>
-											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toslider sucking infrastructures wire services authoritatively</p>
-											<div class="testi-rating">
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-											</div>
-											<div class="user-pic">
-												<img src="assets/images/slider/testi.png" alt="">
-											</div>
-											<div class="user-name">
-												<h4>David M. Alexon</h4>
-												<span class="user-sector">IT Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
+        <div class="container">
+            <div class="row testi-bg">
 
-								<div class="col-lg-12">
-									<div class="teastimonial-single-box">
-										<div class="testi-content">
-											<div class="testi-icon">
-												<i class="bi bi-quote"></i>
-											</div>
-											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toslider sucking infrastructures wire services authoritatively</p>
-											<div class="testi-rating">
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-											</div>
-											<div class="user-pic">
-												<img src="assets/images/slider/testi.png" alt="">
-											</div>
-											<div class="user-name">
-												<h4>David M. Alexon</h4>
-												<span class="user-sector">IT Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
+                <!-- Testimonial Carousel -->
+                <div class="col-lg-5 col-md-12">
+                    <div class="row">
+                        <div class="testmn-bg wow fadeInDown" data-wow-delay="3.8s">
+                            <div class="testi-list owl-carousel">
+                                @foreach($testimonials as $testimonial)
+                                <div class="col-lg-12">
+                                    <div class="teastimonial-single-box">
+                                        <div class="testi-content">
+                                            <div class="testi-icon">
+                                                <i class="bi bi-quote"></i>
+                                            </div>
+                                            <p class="testi-desc">{{ $testimonial->content }}</p>
+                                            <div class="testi-rating">
+                                                @for($i=0; $i < $testimonial->rating; $i++)
+                                                    <i class="bi bi-star-fill"></i>
+                                                @endfor
+                                            </div>
+                                            <div class="user-pic">
+                                                <img src="{{ asset('storage/'.$testimonial->image) }}" alt="{{ $testimonial->name }}">
+                                            </div>
+                                            <div class="user-name">
+                                                <h4>{{ $testimonial->name }}</h4>
+                                                <span class="user-sector">{{ $testimonial->position }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-								<div class="col-lg-12">
-									<div class="teastimonial-single-box">
-										<div class="testi-content">
-											<div class="testi-icon">
-												<i class="bi bi-quote"></i>
-											</div>
-											<p class="testi-desc">“Proactively unleash a vertical to communities rather than intuitive niche. Holisticly deliver toslider sucking infrastructures wire services authoritatively</p>
-											<div class="testi-rating">
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-												<i class="bi bi-star-fill"></i>
-											</div>
-											<div class="user-pic">
-												<img src="assets/images/slider/testi.png" alt="">
-											</div>
-											<div class="user-name">
-												<h4>David M. Alexon</h4>
-												<span class="user-sector">IT Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-7 col-md-12">
-					<!-- contact form box -->
-					<div class="contact-form-box wow fadeInUp "data wow daley="3.9s">
+                <!-- Booking Form -->
+                <div class="col-lg-7 col-md-12">
+                    <div class="contact-form-box wow fadeInUp" data-wow-delay="3.9s">
+                        <div class="hendre-section-title pb-tsmn">
+                            <h4> BOOKING NOW </h4>
+                            <h1> Booking A <span>Services</span> </h1>
+                        </div>
+                        <form action="{{ route('lead_genrate') }}" method="POST" id="dreamit-form">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box">
+                                        <input type="text" name="name" placeholder="Your Name*" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box">
+                                        <input type="email" name="email" placeholder="Enter E-Mail">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-box">
+                                        <input type="text" name="phone" placeholder="Mobile No." required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-box">
+                                        <select id="service" name="service" required>
+                                            <option value=""> Select Service* </option>
+                                            @foreach($service_types as $service)
+                                                <option value="{{ $service->name }}">{{ $service->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-box">
+                                        <textarea name="message" cols="30" rows="10" placeholder="Write Message:"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="contact-form">
+                                        <button type="submit">Submit Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="status"></div>
+                    </div>
+                </div>
 
-						<div class="hendre-section-title pb-tsmn">
-							<h4> BOOKING NOW </h4>
-							<h1> Booking A <span>Services</span> </h1>
-						</div>
-						<form action="https://formspree.io/f/myyleorq" method="POST" id="dreamit-form">
-							<div class="row">
-								<div class="col-lg-6 col-md-6">
-									<div class="form-box">
-										<input type="text" placeholder="Your Name*">
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6">
-									<div class="form-box">
-										<input type="text" placeholder="Enter E-Mail">
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div class="form-box">
-										<input type="text" placeholder="Mobile No.">
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div class="form-box">
-										<select id="service" name="service">
-											<option value="select"> Select Service* </option>
-											<option value="select"> Electrical System </option>
-											<option value="select"> Auto Car Repiar </option>
-											<option value="select"> Engine Diagonstrics </option>
-											<option value="select"> Car & Engine Clean </option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div class="form-box">
-										<textarea name="massage" id="massage" cols="30" rows="10" placeholder="Write Massege:"></textarea>
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div class="contact-form">
-										<button type="submit">  Submit Request </button>
-									</div>
-								</div>
-							</div>
-						</form>
-						<div id="status"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 	<!--==================================================-->
 	<!-- End Hendre Testimonial Section  -->
 	<!--==================================================-->
@@ -679,78 +545,35 @@
 	<!-- Start Hendre Process Section  -->
 	<!--==================================================-->
 	<div class="process-section">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-lg-12">
-					<div class="hendre-section-title white text-center padding-lg">
-						<h4> Work Process </h4>
-						<h1> We Follow the <span>Processr</span> </h1>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="single-process-box wow fadeInLeft "data wow daley="3.5s">
-						<div class="process-thumb">
-							<img src="assets/images/slider/process1.png" alt="">
-							<div class="process-number">
-								<span>01</span>
-							</div>
-						</div>
-						<div class="process-content">
-							<h4 class="process-title">Booking Online</h4>
-							<p class="process-desc">Competently repurpose forward conveniently target fixed</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6">
-					<div class="single-process-box wow fadeInDown "data wow daley="3.6s">
-						<div class="process-thumb">
-							<img src="assets/images/slider/process2.png" alt="">
-							<div class="process-number">
-								<span>02</span>
-							</div>
-						</div>
-						<div class="process-content">
-							<h4 class="process-title">Confirmation</h4>
-							<p class="process-desc">Competently repurpose forward conveniently target fixed</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6">
-					<div class="single-process-box wow fadeInUp "data wow daley="3.7s">
-						<div class="process-thumb">
-							<img src="assets/images/slider/process3.png" alt="">
-							<div class="process-number">
-								<span>03</span>
-							</div>
-						</div>
-						<div class="process-content">
-							<h4 class="process-title">Estimate Details</h4>
-							<p class="process-desc">Competently repurpose forward conveniently target fixed</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6">
-					<div class="single-process-box wow fadeInRight "data wow daley="3.9s">
-						<div class="process-thumb">
-							<img src="assets/images/slider/process4.png" alt="">
-							<div class="process-number">
-								<span>04</span>
-							</div>
-						</div>
-						<div class="process-content">
-							<h4 class="process-title">Complete Works</h4>
-							<p class="process-desc">Competently repurpose forward conveniently target fixed</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="hendre-section-title white text-center padding-lg">
+                        <h4> Work Process </h4>
+                        <h1> We Follow the <span>Process</span> </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach($processes as $process)
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-process-box wow fadeInUp" data-wow-delay="0.{{ $loop->iteration + 4 }}s">
+                        <div class="process-thumb">
+                            {{-- <img src="{{ asset('storage/'.$process->image) }}" alt="{{ $process->title }}"> --}}
+                            <div class="process-number">
+                                <span>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                            </div>
+                        </div>
+                        <div class="process-content">
+                            <h4 class="process-title">{{ $process->title }}</h4>
+                            <p class="process-desc">{{ $process->description }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 	<!--==================================================-->
 	<!-- End Hendre Process Section  -->
 	<!--==================================================-->
@@ -759,69 +582,43 @@
 	<!-- Start Hendre Blog Section  -->
 	<!--==================================================-->
 	<div id="blog" class="blog-section">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-lg-12">
-					<div class="hendre-section-title text-center padding-lg">
-						<h4> Our Blog </h4>
-						<h1> Our Recent Blog  <span>Post</span> </h1>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-blog-box wow fadeInLeft "data wow daley="3.7s">
-						<div class="blog-thumb">
-							<img src="assets/images/slider/blog1.jpg" alt="">
-							<div class="meta-blog">
-								<a href="#"> By Admin</a>
-							</div>
-						</div>
-						<div class="blog-content">
-							<h2 class="blog-title"><a href="blog-details.html">Top 5 Secrete Home Repairing Tips Discussions</a></h2>
-							<div class="blog-btn">
-								<a href="blog-details.html">Read More <i class="bi bi-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6">
-					<div class="single-blog-box wow fadeInUp "data wow daley="3.8s">
-						<div class="blog-thumb">
-							<img src="assets/images/slider/blog2.jpg" alt="">
-							<div class="meta-blog">
-								<a href="#"> By Admin</a>
-							</div>
-						</div>
-						<div class="blog-content">
-							<h2 class="blog-title"><a href="blog-details.html">10 Most Popular Comod Clean Styles for your Home</a></h2>
-							<div class="blog-btn">
-								<a href="blog-details.html">Read More <i class="bi bi-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6">
-					<div class="single-blog-box wow fadeInRight "data wow daley="3.9s">
-						<div class="blog-thumb">
-							<img src="assets/images/slider/blog3.jpg" alt="">
-							<div class="meta-blog">
-								<a href="#"> By Admin</a>
-							</div>
-						</div>
-						<div class="blog-content">
-							<h2 class="blog-title"><a href="blog-details.html">Repairing Your Home Pipeline Using Equipments</a></h2>
-							<div class="blog-btn">
-								<a href="blog-details.html">Read More <i class="bi bi-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="hendre-section-title text-center padding-lg">
+                        <h4> Our Blog </h4>
+                        <h1> Our Recent Blog <span>Post</span> </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach($blogs as $blog)
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-box wow fadeInUp" data-wow-delay="0.{{ $loop->iteration + 6 }}s">
+                        <div class="blog-thumb">
+                            <img src="{{ asset('storage/'.$blog->image) }}" alt="{{ $blog->title }}">
+                            <div class="meta-blog">
+                                <a href="#"> By {{ $blog->author }}</a>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <h2 class="blog-title">
+                                <a href="#">
+                                    {{ $blog->title }}
+                                </a>
+                            </h2>
+                            <div class="blog-btn">
+                                <a href="#">
+                                    Read More <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 	<!--==================================================-->
 	<!-- End Hendre Blog Section  -->
 	<!--==================================================-->
@@ -864,4 +661,5 @@
         </div>
         </div>
     </section>
-@endsection
+
+    @endsection
