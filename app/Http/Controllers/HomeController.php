@@ -13,52 +13,67 @@ use App\Models\Service;
 use App\Models\LeadService;
 use App\Models\User;
 use App\Models\UserInformation;
+use App\Models\Testimonial;
+use App\Models\Team;
+use App\Models\WhyChoose;
+use App\Models\Process;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Slider;
 use App\Events\LeadGenerated;
 use App\Mail\LeadGeneratedMail;
+use App\Models\About;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
+    // public function index()
+    // {
+    //     $sliders =Slider::get();
+    //     $service_types =LeadService::get();
+        
+    //     return view('home',compact('sliders','service_types'));
+    // }
     public function index()
     {
-        $sliders =Slider::get();
-        $service_types =LeadService::get();
-        
-        return view('home',compact('sliders','service_types'));
+        // Sliders for homepage
+        $sliders = Slider::orderBy('id', 'desc')->get();
+        // All service types (LeadService)
+        $service_types = LeadService::with('services')->get();
+        // Optional : About Us
+        $testimonials = About::latest()->first();
+        // Optional: Latest 5 products for homepage
+        $products = Product::latest()->take(5)->get();
+        // Optional: Testimonials for homepage
+        $testimonials = Testimonial::latest()->take(5)->get();
+        // Optional: Blog/News for homepage
+        $blogs = Blog::latest()->take(3)->get();
+        // Optional: Team members
+        $team = Team::all();
+    // Optional: Why choose us sections
+        $why_choose = WhyChoose::all();
+
+        // Pass all data to home view
+        return view('home', compact(
+            'sliders',
+            'about',
+            'service_types',
+            'products',
+            'testimonials',
+            'blogs',
+            'team',
+            'why_choose'
+        ));
     }
-    // About us
-    public function about_us()
-    {
-        $sliders =Slider::get();
-        $service_types =LeadService::get();
-        return view('about_us',compact('sliders','service_types'));
-    }
-        // Contact us
-    public function contact_us()
-    {
-        $sliders =Slider::get();
-        $service_types =LeadService::get();
-        return view('contact_us',compact('sliders','service_types'));
-    }
-    //Faqs
-    public function faqs()
-    {
-        $sliders =Slider::get();
-        $service_types =LeadService::get();
-        return view('faqs',compact('sliders','service_types'));
-    }
-    //service
+     //service
     public function service()
     {
         $sliders =Slider::get();
         $service_types =LeadService::get();
         return view('service',compact('sliders','service_types'));
     }
-
 
     public function search(Request $request)
     {
