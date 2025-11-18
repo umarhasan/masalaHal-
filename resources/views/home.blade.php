@@ -130,54 +130,71 @@
 	<!--==================================================-->
 	<!-- Start Hendre About Section  -->
 	<!--==================================================-->
-	<div id="about" class="about-section">
+		<div id="about" class="about-section">
 		<div class="container">
 			<div class="row align-items-center">
+				<!-- Left Image & Counter -->
 				<div class="col-lg-6 col-md-12">
-					<div class="about-right-thumb wow fadeInLeft "data wow daley="3.6s">
-						<img src="assets/images/slider/about.png" alt="">
+					<div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.6s">
+						@if(isset($about->image))
+							<img src="{{ asset('storage/' . $about->image) }}" alt="About Image">
+						@else
+							<img src="{{ asset('assets/images/slider/about.png') }}" alt="">
+						@endif
 						<div class="about-counter">
-							<h2 class="counter">795</h2>
+							<h2 class="counter">{{ $projects_completed ?? 500 }}</h2>
 							<h2 class="counter1">+</h2>
 							<span class="counter-text">Project Completed</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-12 wow fadeInDown "data wow daley="3.7s">
+				<!-- Right Content -->
+				<div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.7s">
 					<div class="hendre-section-title">
 						<h4>ABOUT US</h4>
-						<h1>Problem Solving Every</h1>
-						<p>At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.</p>
+						<h1>{{ $about->title ?? 'Problem Solving Every' }}</h1>
+						<p>{{ $about->description ?? 'At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.' }}</p>
 					</div>
+
+					<!-- Main About Item -->
 					<div class="about-items">
 						<div class="about-icon">
-							<img src="assets/images/slider/about-icn.png" alt="">
+							<img src="{{ asset('assets/images/slider/about-icn.png') }}" alt="">
 						</div>
 						<div class="about-item-content">
-							<h2 class="about-item-title">Smart Repair System</h2>
-							<p class="about-discription">Conveniently target business opportunities market-driven solutions</p>
+							<h2 class="about-item-title">{{ $main_about_item_title ?? 'Smart Repair System' }}</h2>
+							<p class="about-discription">{{ $main_about_item_description ?? 'Conveniently target business opportunities market-driven solutions' }}</p>
 						</div>
 					</div>
+
+					<!-- Dynamic Service List -->
 					<div class="row">
-                        @if(isset($service_types) && count($service_types) > 0)
-                            @foreach($service_types as $service)
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="about-item-list">
-                                        <ul>
-                                            <li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
+						@if(isset($service_types) && $service_types->count() > 0)
+							@foreach($service_types as $service)
+								<div class="col-lg-6 col-md-6">
+									<div class="about-item-list">
+										<ul>
+											<li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
+										</ul>
+									</div>
+								</div>
+							@endforeach
+						@else
+							<div class="col-12">
+								<p>No services available currently.</p>
+							</div>
+						@endif
 					</div>
+
+					<!-- Button -->
 					<div class="hendre-button">
-						<a href="about.html">Get An Estimate <i class="bi bi-plus"></i></a>
+						<a href="#">Get An Estimate <i class="bi bi-plus"></i></a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<!--==================================================-->
 	<!-- End Hendre About Section  -->
 	<!--==================================================-->
@@ -248,169 +265,90 @@
 	<!-- Start Hendre Why Choose  Section  -->
 	<!--==================================================-->
 	<div id="choose" class="why-choose-section">
-		<div class="container">
-			<div class="row align-items-center wow fadeInDown "data wow daley="3.9s">
-				<div class="col-lg-12">
-					<div class="hendre-section-title text-center padding-lg">
-						<h4> why choose us </h4>
-						<h1> Some Reason for Choose <span> Problem Solving </span></h1>
-						<h1 class="sections"> Repairing Your Home </h1>
-						<div class="rs-video2">
-						<div class="animate-border">
-							<a class="video-vemo-icon venobox vbox-item" data-vbtype="youtube" data-autoplay="true" href="https://youtu.be/BS4TUd7FJSg">
-							Play</a>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<!-- Tab  -->
-					<div class="tab wow fadeInRight "data wow daley="3.9s">
-						<ul class="tabs">
-							<li><a href="#"> <span>01.</span> Why Choose Us ? </a></li>
-							<li><a href="#"> <span>02.</span> MasalaHal </a></li>
-							<li><a href="#"> <span>03.</span> Mission & Vission </a></li>
-						</ul> <!-- / tabs -->
+    <div class="container">
+        <div class="row align-items-center wow fadeInDown" data-wow-delay="0.9s">
+            <div class="col-lg-12">
+                <div class="hendre-section-title text-center padding-lg">
+                    <h4>{{ $why_chooses_section_title ?? 'Why Choose Us' }}</h4>
+                    <h1>{{ $why_chooses_heading ?? 'Some Reason for Choose ' }} <span>{{ $why_chooses_span ?? 'Problem Solving' }}</span></h1>
+                    <h1 class="sections">{{ $why_chooses_subheading ?? 'Repairing Your Home' }}</h1>
 
-						<div class="tab_content">
-                        <!-- / tabs_item -->
-                        <div class="tabs_item">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="tab-thumb">
-                                        <img src="assets/images/slider/tab_1.jpg" alt="">
-                                    </div>
-                                </div>
+                    <div class="rs-video2">
+                        <div class="animate-border">
+                            <a class="video-vemo-icon venobox vbox-item" data-vbtype="youtube" data-autoplay="true" href="{{ $why_chooses_video ?? 'https://youtu.be/BS4TUd7FJSg' }}">Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                <div class="col-lg-6 col-md-6 tab-right">
-                                    <div class="hendre-section-title">
-                                        <h4> Why Choose Us ? </h4>
-                                        <h1> Repairing Your <span> House for </span> </h1>
-                                        <h1 class="sections">Looks as a New Home</h1>
-                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-                                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Tab  -->
+                <div class="tab wow fadeInRight" data-wow-delay="0.9s">
+                    <ul class="tabs">
+                        @foreach($why_choose as $index => $item)
+                            <li><a href="#"> <span>{{ sprintf("%02d", $index + 1) }}.</span> {{ $item->title }}</a></li>
+                        @endforeach
+                    </ul> <!-- / tabs -->
 
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
+                    <div class="tab_content">
+                        @foreach($why_choose as $item)
+                            <div class="tabs_item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="tab-thumb">
+                                            @if($item->image)
+                                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}">
+                                            @else
+                                                <img src="{{ asset('assets/images/slider/tab_1.jpg') }}" alt="{{ $item->title }}">
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="hendre-button">
-                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
+
+                                    <div class="col-lg-6 col-md-6 tab-right">
+                                        <div class="hendre-section-title">
+                                            <h4>{{ $item->title }}</h4>
+                                            <h1>{{ $item->subtitle ?? $item->title }}</h1>
+                                            <h1 class="sections">{{ $item->section ?? '' }}</h1>
+                                            <p>{{ $item->description ?? '' }}</p>
+                                        </div>
+
+                                        @php
+                                            // Split description points if needed
+                                            $points = explode("\n", $item->description ?? '');
+                                        @endphp
+                                        <div class="row">
+                                            @foreach(array_chunk($points, ceil(count($points)/2)) as $chunk)
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="about-item-list">
+                                                        <ul>
+                                                            @foreach($chunk as $point)
+                                                                @if(trim($point) != '')
+                                                                    <li><i class="bi bi-check-circle-fill"></i> {{ $point }}</li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <div class="hendre-button">
+                                            <a href="{{ $item->link ?? 'service-details.html' }}">Get An Estimate <i class="bi bi-plus"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- / tabs_item -->
-                        <div class="tabs_item">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="tab-thumb">
-                                        <img src="assets/images/slider/tab_2.jpg" alt="">
-                                    </div>
-                                </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- End tab -->
+            </div>
+        </div>
+    </div>
+</div>
 
-                                <div class="col-lg-6 col-md-6 tab-right">
-                                    <div class="hendre-section-title">
-                                        <h4> Problem Solving missions </h4>
-                                        <h1> Repairing Your <span> House for </span> </h1>
-                                        <h1 class="sections">Looks as a New Home</h1>
-                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hendre-button">
-                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- / tabs_item -->
-
-                        <div class="tabs_item">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="tab-thumb">
-                                        <img src="assets/images/slider/tab_3.jpg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 tab-right">
-                                    <div class="hendre-section-title">
-                                        <h4> Mission & Vission </h4>
-                                        <h1> Repairing Your <span> House for </span> </h1>
-                                        <h1 class="sections">Looks as a New Home</h1>
-                                        <p>Competently repurpose go forward benefits without goal-oriented ROI the conveniently target business opportunities whereas proactive</p>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="about-item-list">
-                                                <ul>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                    <li><i class="bi bi-check-circle-fill"></i> Repairing Roofing and Door</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hendre-button">
-                                        <a href="service-details.html">Get An Estimate <i class="bi bi-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						</div>
-					</div>
-					<!-- End tab -->
-				</div>
-			</div>
-		</div>
-	</div>
 	<!--==================================================-->
 	<!-- End Hendre Why Choose Section  -->
 	<!--==================================================-->

@@ -43,7 +43,7 @@ class HomeController extends Controller
         // All service types (LeadService)
         $service_types = LeadService::with('services')->get();
         // Optional : About Us
-        $testimonials = About::latest()->first();
+        $about = About::latest()->first();
         // Optional: Latest 5 products for homepage
         $products = Product::latest()->take(5)->get();
         // Optional: Testimonials for homepage
