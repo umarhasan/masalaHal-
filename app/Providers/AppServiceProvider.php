@@ -7,7 +7,7 @@ use Request;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\GeneralSetting;
-
+use App\Models\LeadService;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,10 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $REQUEST)
     {
-        // $data['page'] = Request::segment(1);
-        // $data['category'] = Category::all();
-        // $data['generalsetting'] = GeneralSetting::first();
-        // return View::share($data);
+         // Share general data with all views
+        $data['service_types'] = LeadService::all(); // <-- Footer/ServiceTypes
+        // Share with all views
+        View::share($data);
 
     }
 }
