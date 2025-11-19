@@ -63,8 +63,8 @@
 							<li><a href="#service"> Service</a></li>
 							<li><a href="#team"> Team</a></li>
 							<li><a href="#choose"> Why Choose</a></li>
-							<li><a href="#blog">Blog</a></li>
 							<li><a href="#testi">Booking</a></li>
+							<li><a href="#blog">Blog</a></li>
 						</ul>
 						<div class="header-menu-right-btn">
 							<!--header-search-->
@@ -92,8 +92,8 @@
 					<li><a href="#service"> Service</a></li>
 					<li><a href="#team"> Team</a></li>
 					<li><a href="#choose"> Why Choose</a></li>
-					<li><a href="#blog">Blog</a></li>
 					<li><a href="#testi">Booking</a></li>
+					<li><a href="#blog">Blog</a></li>
 				</ul>
 			</nav>
 		</div>

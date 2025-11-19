@@ -11,7 +11,7 @@
                     </div>
                     <div class="subscribe-contact">
                         <span class="subscribe-text">For Enquiry :</span>
-                        <h2 class="subscribe-phone-number">{{ $generalsetting->phone ?? '+923172112995' }}</h2>
+                        <h2 class="subscribe-phone-number">+923172112995</h2>
                     </div>
                 </div>
             </div>
@@ -44,12 +44,12 @@
                 <div class="company-info-desc">
                     <p>{{ $generalsetting->footer_text ?? 'Professionally develop long-term performance based architectures metrics rather than' }}</p>
                 </div>
-                <div class="follow-company-icon">
-                   <i class="fab fa-facebook-f"></i> </a>
-                    <i class="fab fa-twitter"> </i> </a>
-                    <i class="fab fa-linkedin-in"></i> </a>
-                    <i class="fab fa-pinterest-p"></i> </a>
-                </div>
+                						<div class="follow-company-icon">
+							<a href="#"> <i class="fab fa-facebook-f"></i> </a>
+							<a href="#"> <i class="fab fa-twitter"> </i> </a>
+							<a href="#"> <i class="fab fa-linkedin-in"></i> </a>
+							<a href="#"> <i class="fab fa-pinterest-p"></i> </a>
+						</div>
             </div>
         </div>
 
@@ -73,11 +73,13 @@
                 <h4 class="widget-title"> Useful Links </h4>
                 <div class="menu-quick-link-content">
                     <ul class="footer-menu">
-                        <li><a href="{{ url('about') }}"> About Us </a></li>
-                        <li><a href="{{ url('contact') }}"> Contact Us </a></li>
-                        <li><a href="{{ url('testimonials') }}"> Testimonial </a></li>
-                        <li><a href="{{ url('booking') }}"> Appointment </a></li>
-                        <li><a href="{{ url('faq') }}"> FAQ’s </a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#service"> Service</a></li>
+                        <li><a href="#team"> Team</a></li>
+                        <li><a href="#choose"> Why Choose</a></li>
+                        <li><a href="#testi">Booking</a></li>
+                        <li><a href="#blog">Blog</a></li>
                     </ul>
                 </div>
             </div>
@@ -107,25 +109,27 @@
     </div>
     </div>
 </div>
-<div class="footer-bottom-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="footer-bottom-content">
-                    <p>Copyright © {{ date('Y') }} <span>{{ $generalsetting->site_name ?? 'MasalaHal' }}</span>. All rights reserved.</p>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="footer-bottom-menu text-right">
-                    <ul>
-                        <li><a href="{{ url('terms') }}">Terms Condition</a></li>
-                        <li><a href="{{ url('privacy') }}">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="footer-bottom-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+					<div class="footer-bottom-content">
+						<div class="footer-bottom-content-copy">
+							<p>Copyright © 2023 <span>Maslyhal.com</span>. All rights reserved.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<div class="footer-bottom-menu text-right">
+						<ul>
+							<li><a href="#">Terms Condition</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <!-- Search Popup -->
 <div class="search-popup">
     <button class="close-search style-two"><span class="flaticon-multiply"><i class="far fa-times-circle"></i></span></button>

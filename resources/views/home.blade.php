@@ -92,7 +92,7 @@
                         </div>
                         <div class="feature-contact">
                             <span class="feature-ask">For Enquiry :</span>
-                            <h2 class="feature-phone-number">+92 317 211 299 5</h2>
+                            <h2 class="feature-phone-number">+923172112995</h2>
                         </div>
                     </div>
                 </div>
