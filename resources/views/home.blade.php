@@ -14,7 +14,7 @@
 <!--==================================================-->
 	<!-- Start Hendre Hero Section  -->
 	<!--==================================================-->
-    <div class="hero-list owl-carousel">
+    <div id="home" class="hero-list owl-carousel">
         @foreach($sliders as $slider)
             <div class="hero-section d-flex align-items-center">
                 <div class="container">
@@ -132,7 +132,7 @@
             <div class="row align-items-center">
                 <!-- Left Image & Counter -->
                 <div class="col-lg-6 col-md-12">
-                    <div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.6s">
+                    <div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.1s">
                         @if(isset($about->image))
                             <img src="{{ asset('storage/' . $about->image) }}" alt="About Image">
                         @else
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <!-- Right Content -->
-                <div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.7s">
+                <div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.1s">
                     <div class="hendre-section-title">
                         <h4>ABOUT US</h4>
                         <h1>{{ $about->title ?? 'Problem Solving Every' }}</h1>
@@ -200,7 +200,7 @@
 	<!--==================================================-->
 	<div class="service-top-section">
 		<div class="container">
-			<div class="row align-items-center wow fadeInUp "data wow daley="3.6s">
+			<div class="row align-items-center wow fadeInUp "data wow daley="1s">
 				<div class="col-lg-12">
 					<div class="hendre-section-title white padding-lg">
 						<h4>OUR SERVICES</h4>
@@ -218,7 +218,7 @@
 				<div class="service-list owl-carousel">
                     @foreach($service_types as $service)
                         <div class="col-lg-12">
-                            <div class="single-service-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 3 }}s">
+                            <div class="single-service-box" data-wow-delay="0.{{ $loop->index + 3 }}s">
 
                                 {{-- Service Image --}}
                                 <div class="service-thumb">
@@ -260,9 +260,9 @@
 	<!--==================================================-->
 	<!-- Start Hendre Why Choose  Section  -->
 	<!--==================================================-->
-    <div id="why-choose" class="why-choose-section">
+    <div id="choose" class="why-choose-section">
         <div class="container">
-            <div class="row align-items-center wow fadeInDown" data-wow-delay="3.9s">
+            <div class="row align-items-center" data-wow-delay="1s">
                 <div class="col-lg-12">
                     <div class="hendre-section-title text-center padding-lg">
                         <h4> why choose us </h4>
@@ -282,7 +282,7 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <div class="tab wow fadeInRight" data-wow-delay="3.9s">
+                    <div class="tab" data-wow-delay="3.9s">
 
                         <!-- ========== TABS TITLE (DYNAMIC) ========== -->
                         <ul class="tabs">
@@ -386,7 +386,7 @@
 	<div id="team" class="team-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-12 wow fadeInLeft" data-wow-delay="3.6s">
+                <div class="col-lg-4 col-md-12" data-wow-delay="3.6s">
                     <div class="hendre-section-title white">
                         <h4> Our Team </h4>
                         <h1> Meet Our Experts </h1>
@@ -452,7 +452,7 @@
                 <!-- Testimonial Carousel -->
                 <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="testmn-bg wow fadeInDown" data-wow-delay="3.8s">
+                        <div class="testmn-bg" data-wow-delay="3.8s">
                             <div class="testi-list owl-carousel">
                                 @foreach($testimonials as $testimonial)
                                 <div class="col-lg-12">
@@ -485,7 +485,7 @@
 
                 <!-- Booking Form -->
                 <div class="col-lg-7 col-md-12">
-                    <div class="contact-form-box wow fadeInUp" data-wow-delay="3.9s">
+                    <div class="contact-form-box" data-wow-delay="3.9s">
                         <div class="hendre-section-title pb-tsmn">
                             <h4> BOOKING NOW </h4>
                             <h1> Booking A <span>Services</span> </h1>
@@ -582,43 +582,50 @@
 	<!-- Start Hendre Blog Section  -->
 	<!--==================================================-->
 	<div id="blog" class="blog-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <div class="hendre-section-title text-center padding-lg">
-                        <h4> Our Blog </h4>
-                        <h1> Our Recent Blog <span>Post</span> </h1>
-                    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="hendre-section-title text-center padding-lg">
+                    <h4> Our Blog </h4>
+                    <h1> Our Recent Blog <span>Post</span> </h1>
                 </div>
-            </div>
-            <div class="row">
-                @foreach($blogs as $blog)
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-blog-box wow fadeInUp" data-wow-delay="0.{{ $loop->iteration + 6 }}s">
-                        <div class="blog-thumb">
-                            <img src="{{ asset('storage/'.$blog->image) }}" alt="{{ $blog->title }}">
-                            <div class="meta-blog">
-                                <a href="#"> By {{ $blog->author }}</a>
-                            </div>
-                        </div>
-                        <div class="blog-content">
-                            <h2 class="blog-title">
-                                <a href="#">
-                                    {{ $blog->title }}
-                                </a>
-                            </h2>
-                            <div class="blog-btn">
-                                <a href="#">
-                                    Read More <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
             </div>
         </div>
+
+        <!-- Blog Slider -->
+        <div class="row">
+        <div class="blog-list owl-carousel">
+
+            @foreach($blogs as $blog)
+            <div class="col-lg-12">
+                <div class="single-blog-box wow fadeInUp mb-4" style="margin-right:20px;" data-wow-delay="0.{{ $loop->iteration + 6 }}s">
+                    <div class="blog-thumb">
+                        <img src="{{ asset('storage/'.$blog->image) }}" alt="{{ $blog->title }}">
+                        <div class="meta-blog">
+                            <a href="#"> By {{ $blog->author }}</a>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h2 class="blog-title">
+                            <a href="#">
+                                {{ $blog->title }}
+                            </a>
+                        </h2>
+                        <p class="blog-excerpt">{{ \Illuminate\Support\Str::limit($blog->description, 100, '...') }}</p>
+                        <div class="blog-btn">
+                            <a href="#">
+                                Read More <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+        </div>
+</div>
     </div>
+</div>
 	<!--==================================================-->
 	<!-- End Hendre Blog Section  -->
 	<!--==================================================-->
