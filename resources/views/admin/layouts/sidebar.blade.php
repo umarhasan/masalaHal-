@@ -24,7 +24,12 @@
             </a>
         </li>
         @endcan
-
+        <li class="menu-item {{ request()->is('popup*') ? 'active' : '' }}">
+            <a href="{{ route('popup.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                <div data-i18n="About">Popup Section</div>
+            </a>
+        </li>
         <!-- Website Sections -->
         @can('about-list')
         <li class="menu-item {{ request()->is('abouts*') ? 'active' : '' }}">

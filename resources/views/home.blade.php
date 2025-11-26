@@ -10,6 +10,90 @@
         line-height: 1.5; /* spacing between points */
         color: #555;
 	}
+
+    /* Background Overlay */
+    .popup-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.75);
+        display: none; /* hide initially */
+        justify-content: center; /* horizontal center */
+        align-items: center;     /* vertical center */
+        z-index: 999999;
+        overflow: auto; /* in case popup is taller than viewport */
+    }
+
+    /* Popup Box */
+    .popup-box {
+        background: #fff;
+        width: 450px;
+        max-width: 95%;
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        animation: popupFadeIn 0.5s ease forwards;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        transform: translateY(-50px); /* start slightly above */
+    }
+
+    /* Fade-in animation */
+    @keyframes popupFadeIn {
+        0% { opacity: 0; transform: translateY(-50px) scale(0.8); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Full banner image */
+    .popup-img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Popup content */
+    .popup-content {
+        padding: 18px 20px;
+        text-align: center;
+    }
+
+    .popup-content h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 10px;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-btn {
+        background: #25D366;
+        color: #fff;
+        padding: 12px 22px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* Close Button */
+    .popup-close {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        background: #ff3b3b;
+        color: #fff;
+        font-size: 26px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 42px;
+        cursor: pointer;
+    }
 </style>
 <!--==================================================-->
 	<!-- Start Hendre Hero Section  -->
@@ -669,4 +753,36 @@
         </div>
     </section>
 
-    @endsection
+    @foreach($popupBanners as $banner)
+    <div id="promoPopup{{ $banner->id }}" class="popup-container">
+        <div class="popup-box">
+            <span class="popup-close" onclick="closePopup('{{ $banner->id }}')">×</span>
+
+            <img src="{{ $banner->image }}" class="popup-img" alt="{{ $banner->title }}">
+
+            <div class="popup-content">
+                <h2>{{ $banner->title }}</h2>
+                @if($banner->link)
+                <a href="{{ $banner->link }}" class="whatsapp-btn" target="_blank">
+                    Check Now
+                </a>
+                @endif
+            </div>
+        </div>
+    </div>
+    @endforeach
+
+<script>
+    function closePopup(id) {
+        document.getElementById("promoPopup" + id).style.display = "none";
+    }
+
+    // Show the popup nicely centered
+    window.onload = function() {
+        @if(count($popupBanners) > 0)
+            document.getElementById("promoPopup{{ $popupBanners->first()->id }}").style.display = "flex";
+        @endif
+    };
+
+</script>
+@endsection

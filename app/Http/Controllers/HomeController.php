@@ -18,6 +18,7 @@ use App\Models\Team;
 use App\Models\WhyChoose;
 use App\Models\Process;
 use App\Models\Blog;
+use App\Models\PopupBanner;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Slider;
 use App\Events\LeadGenerated;
@@ -55,6 +56,8 @@ class HomeController extends Controller
     // Optional: Why choose us sections
         $whychooses = WhyChoose::all();
         $processes = Process::all();
+        // NEW: Active Popup Banners
+        $popupBanners = PopupBanner::where('status', 1)->latest()->get();
         // Pass all data to home view
         return view('home', compact(
             'sliders',
@@ -65,7 +68,9 @@ class HomeController extends Controller
             'blogs',
             'teams',
             'whychooses',
-            'processes'
+            'processes',
+            'popupBanners',
+
         ));
     }
      //service
