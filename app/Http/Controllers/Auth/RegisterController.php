@@ -30,11 +30,11 @@ class RegisterController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-    
+
     public function redirectTo()
     {
         $user = Auth::user();
-        
+
         if ($user->hasRole('admin')) {
             return 'admin/dashboard';
         } elseif ($user->hasRole('customer')) {
@@ -42,7 +42,7 @@ class RegisterController extends Controller
         } elseif ($user->hasRole('company')) {
             return 'company/dashboard';
         }
-    
+
         return '/login';
     }
     /**
@@ -62,6 +62,8 @@ class RegisterController extends Controller
         ->where(function($query){
             $query->where('name','!=', 'Admin');
             $query->where('name','!=', 'Super-Admin');
+            $query->where('name','!=', 'vendor');
+            $query->where('name','!=', 'company');
         })->get();
         return view('auth.register',$data);
     }
@@ -90,7 +92,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -100,6 +102,6 @@ class RegisterController extends Controller
         return $user;
     }
 
-   
-    
+
+
 }

@@ -149,47 +149,97 @@
             <p>Create your account to get started</p>
 
             {{-- Register Form --}}
-            <form action="{{ route('register') }}" method="POST">
+            <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                 @csrf
-
-                <div class="mb-3 text-start">
-                    <label for="name" class="form-label">Full Name</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control"
+                    id="username" name="name" value="{{ old('name') }}" placeholder="Enter your username" autofocus
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="text" class="form-control" @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" />
+                </div>
+                <div class="field-div">
+                    <label class="form-label" for="Country">Country</label>
+                    <select class="input-text form-control" name="country" id="country" onchange="loadStates(this.value)">
+                        <option value="">Select Your Country</option>
+                        <option value="Pakistan">Pakistan</option>
+                    </select>
                 </div>
 
-                <div class="mb-3 text-start">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+                <div class="field-div">
+                    <label class="form-label" for="State">State</label>
+                    <select class="input-text form-control" name="state" id="state" onchange="loadCities(this.value)">
+                        <option value="">Select Your State</option>
+                        <!-- States will be dynamically loaded based on selected country -->
+                    </select>
                 </div>
 
-                <div class="mb-3 text-start">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="username" placeholder="Choose a username" required>
+                <div class="field-div">
+                    <label class="form-label" for="Cite">City</label>
+                    <select class="input-text form-control" name="city" id="city">
+                        <option value="">Select Your City</option>
+                        <!-- Cities will be dynamically loaded based on selected state -->
+                    </select>
+                </div>
+                <div class="mb-3 form-password-toggle">
+                  <label class="form-label" for="password">Password</label>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      @error('password') is-invalid @enderror" type="password" name="password"
+                      required
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password"
+                    />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
                 </div>
 
-                <div class="mb-3 text-start">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
-                        <button type="button" id="togglePassword" style="background:#fff;">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                <div class="mb-3 form-password-toggle">
+                    <label class="form-label" for="password">Confirm Password</label>
+                    <div class="input-group input-group-merge">
+                      <input
+                        type="password"
+                        id="confirm-password"
+                        class="form-control"
+                        @error('confirm-password') is-invalid @enderror" type="password" name="confirm-password"
+                        required
+                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                        aria-describedby="password"
+                      />
+                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <label class="form-label" for="password">Role</label>
+                        <select name="roles" class="form-control" required="required">
+                            <option disabled selected valüe="">select role</option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->name}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
-                <div class="mb-3 text-start">
-                    <label for="password_confirmation" class="form-label">Confirm Password</label>
-                    <div class="input-group">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
-                            placeholder="••••••••" required>
-                        <button type="button" id="togglePassword2" style="background:#fff;">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
 
-                <button type="submit" class="btn btn-primary w-100">Create Account</button>
-            </form>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                    <label class="form-check-label" for="terms-conditions">
+                      I agree to
+                      <a href="javascript:void(0);">privacy policy & terms</a>
+                    </label>
+                  </div>
+                </div>
+                <button class="btn btn-primary d-grid w-100">Sign up</button>
+
+              </form>
 
             <div class="divider">Or continue with</div>
 
@@ -204,25 +254,81 @@
 
     <script src="{{ asset('assets/js/vendor/jquery-3.6.2.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+    <!-- Page JS -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
-        // Toggle password visibility
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const password = document.getElementById('password');
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.innerHTML = type === 'password'
-                ? '<i class="fas fa-eye"></i>'
-                : '<i class="fas fa-eye-slash"></i>';
-        });
+        // Example: States and Cities data
+const data = {
+    Pakistan: {
+        Sindh: ["Karachi", "Hyderabad", "Sukkur"],
+        Punjab: ["Lahore", "Faisalabad", "Multan"],
+        Balochistan: ["Quetta", "Gwadar"],
+    },
+    India: {
+        Maharashtra: ["Mumbai", "Pune", "Nagpur"],
+        Delhi: ["New Delhi", "South Delhi"],
+        Gujarat: ["Ahmedabad", "Surat"],
+    },
+    "United States": {
+        California: ["Los Angeles", "San Francisco", "San Diego"],
+        Texas: ["Houston", "Dallas", "Austin"],
+        Florida: ["Miami", "Orlando", "Tampa"],
+    },
+    Canada: {
+        Ontario: ["Toronto", "Ottawa"],
+        Quebec: ["Montreal", "Quebec City"],
+    },
+};
 
-        document.getElementById('togglePassword2').addEventListener('click', function() {
-            const password = document.getElementById('password_confirmation');
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.innerHTML = type === 'password'
-                ? '<i class="fas fa-eye"></i>'
-                : '<i class="fas fa-eye-slash"></i>';
+// Load states based on selected country
+function loadStates(country) {
+    const stateSelect = document.getElementById("state");
+    const citySelect = document.getElementById("city");
+
+    // Clear existing options
+    stateSelect.innerHTML = '<option value="">Select Your State</option>';
+    citySelect.innerHTML = '<option value="">Select Your City</option>';
+
+    if (country && data[country]) {
+        const states = Object.keys(data[country]);
+        states.forEach((state) => {
+            const option = document.createElement("option");
+            option.value = state;
+            option.textContent = state;
+            stateSelect.appendChild(option);
         });
+    }
+}
+
+// Load cities based on selected state
+function loadCities(state) {
+    const country = document.getElementById("country").value;
+    const citySelect = document.getElementById("city");
+
+    // Clear existing options
+    citySelect.innerHTML = '<option value="">Select Your City</option>';
+
+    if (country && data[country] && data[country][state]) {
+        const cities = data[country][state];
+        cities.forEach((city) => {
+            const option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+    }
+}
     </script>
 </body>
 

@@ -194,7 +194,7 @@
 
             {{-- Social Login --}}
             <div class="social-login">
-                <a href="{{ route('register') }}" title="Register"><i class="fas fa-user-plus"></i></a>
+                <a href="{{ route('signup') }}" title="Register"><i class="fas fa-user-plus"></i></a>
                 <a href="{{ url('auth/google') }}" title="Login with Google"><i class="fab fa-google"></i></a>
                 <a href="{{ url('auth/facebook') }}" title="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
