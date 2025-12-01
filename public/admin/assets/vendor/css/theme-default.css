@@ -758,12 +758,12 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   background-color: #b4bdc6 !important;
 }
 .bg-menu-theme .menu-sub > .menu-item.active > .menu-link:not(.menu-toggle):before {
-  background-color: #696cff !important;
+  background-color: #d32f2e !important;
   border: 3px solid #e7e7ff !important;
 }
 
 .app-brand .layout-menu-toggle {
-  background-color: #696cff;
+  background-color: #d32f2e;
   border: 7px solid #f5f5f9;
 }
 .app-brand .layout-menu-toggle i {
@@ -778,22 +778,22 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   color: #ffff;
 }
 .bg-footer-theme .footer-link {
-  color: #697a8d;
+  color: #ffff;
 }
 .bg-footer-theme .footer-link:hover, .bg-footer-theme .footer-link:focus {
-  color: #566a7f;
+  color: #ffff;
 }
 .bg-footer-theme .footer-link.disabled {
-  color: #a1abb8 !important;
+  color: #ffff !important;
 }
 .bg-footer-theme .footer-text {
-  color: #566a7f;
+  color: #ffff;
 }
 .bg-footer-theme .show > .footer-link,
 .bg-footer-theme .active > .footer-link,
 .bg-footer-theme .footer-link.show,
 .bg-footer-theme .footer-link.active {
-  color: #566a7f;
+  color: #fff;
 }
 .bg-footer-theme hr {
   border-color: rgba(86, 106, 127, 0.0768713725);

@@ -1,49 +1,101 @@
 @extends('admin.layouts.app')
+
 @section('content')
-<div class="container">
-    <h2>Why Choose Us List</h2>
-    <a href="{{ route('why-chooses.create') }}" class="btn btn-primary mb-3">Add New</a>
+<div class="content-wrapper">
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    <!-- Page Header -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Subtitle</th>
-                <th>Section</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($whyChooses as $item)
-            <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->subtitle }}</td>
-                <td>{{ $item->section }}</td>
-                <td>{{ $item->description }}</td>
-                <td>
-                    @if($item->image)
-                        <img src="{{ asset($item->image) }}" width="80" alt="">
+                <div class="col-sm-8">
+                    <h1>Why Choose Us List</h1>
+                </div>
+
+                <div class="col-sm-4">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Why Choose Us</li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <a href="{{ route('why-chooses.create') }}" class="btn btn-primary">Add New</a>
+        </div>
+    </section>
+
+
+    <!-- Main Content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card mt-3">
+
+                <div class="card-body">
+
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                </td>
-                <td>
-                    <a href="{{ route('why-chooses.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('why-chooses.destroy', $item->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+
+                    <table id="example" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Subtitle</th>
+                                <th>Section</th>
+                                <th>Description</th>
+                                <th>Image</th>
+                                <th width="180px">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach($whyChooses as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td>{{ $item->section }}</td>
+                                <td>{{ $item->description }}</td>
+                                <td>
+                                    @if($item->image)
+                                        <img src="{{ asset($item->image) }}" width="70" class="rounded">
+                                    @endif
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('why-chooses.show', $item->id) }}" class="btn btn-info btn-sm">View</a>
+                                    <a href="{{ route('why-chooses.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                    <form action="{{ route('why-chooses.destroy', $item->id) }}"
+                                          method="POST"
+                                          class="d-inline">
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure?')">
+                                            Delete
+                                        </button>
+
+                                    </form>
+                                </td>
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
 </div>
 @endsection
