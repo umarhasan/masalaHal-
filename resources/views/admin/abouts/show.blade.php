@@ -8,13 +8,17 @@
     </section>
 
     <section class="content">
-        <div><strong>Title:</strong> {{ $about->title }}</div>
-        <div><strong>Description:</strong> {{ $about->description }}</div>
-        <div>
-            <strong>Image:</strong>
-            @if($about->image)
-                <img src="{{ asset('storage/'.$about->image) }}" width="150">
-            @endif
+        <div class="card">
+            <div class="card-header">
+                <div><strong>Title:</strong> {{ $about->title }}</div>
+                <div><strong>Description:</strong> {{ $about->description }}</div>
+                <div>
+                    <strong>Image:</strong>
+                    @if($about->image)
+                        <img src="{{ asset('storage/'.$about->image) }}" width="150">
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 </div>

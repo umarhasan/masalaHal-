@@ -9,19 +9,23 @@
     <section class="content">
         <form action="{{ route('abouts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-                <strong>Title:</strong>
-                <input type="text" name="title" class="form-control" required>
+             <div class="card">
+                <div class="card-header">
+                    <div class="form-group">
+                        <strong>Title:</strong>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <strong>Description:</strong>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <strong>Image:</strong>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
-            <div class="form-group">
-                <strong>Description:</strong>
-                <textarea name="description" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-                <strong>Image:</strong>
-                <input type="file" name="image" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </section>
 </div>

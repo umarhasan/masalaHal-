@@ -6,9 +6,11 @@
         <h1>Abouts</h1>
         <a class="btn btn-success" href="{{ route('abouts.create') }}">New About</a>
     </section>
-
+    <br/>
     <section class="content">
-        <table class="table table-bordered">
+        <div class="card">
+        <div class="card-body">
+        <table id="example" class="table table-bordered">
             <thead>
                 <tr>
                     <th>No</th>
@@ -42,6 +44,8 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
+        </div>
     </section>
 </div>
 @endsection

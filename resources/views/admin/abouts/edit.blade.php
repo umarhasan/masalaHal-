@@ -10,6 +10,8 @@
         <form action="{{ route('abouts.update', $about->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="card">
+                <div class="card-header">
             <div class="form-group">
                 <strong>Title:</strong>
                 <input type="text" name="title" class="form-control" value="{{ $about->title }}" required>
@@ -26,6 +28,8 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            </div>
         </form>
     </section>
 </div>
