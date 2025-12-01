@@ -3,9 +3,9 @@
     <div class="app-brand demo">
         <a href="/admin/dashboard" class="app-brand-link">
             <span class="app-brand-logo demo">
-                   <img src="{{ asset('assets/images/logo.png') }}" class="logo1" style="width:50%;"/>
+                   <img src="{{ asset('assets/images/logo.png') }}" class="logo1" style="width:100%;"/>
             </span>
-            <span class="demo menu-text fw-bolder ms-2" style="font-size:30px">Quick Solutions</span>
+            {{-- <span class="demo menu-text fw-bolder ms-2" style="font-size:30px">Quick Solutions</span> --}}
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

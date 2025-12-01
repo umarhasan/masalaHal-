@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Dashboard  | Quick Solutions Dashboard</title>
+    <title>Masala Hal | Dashboard</title>
 
     <meta name="description" content="" />
 
@@ -43,7 +43,7 @@
 </head>
   <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navbar" style="background-color: #02033c;">
         <div class="layout-container">
 
             <!-- Menu -->
@@ -72,7 +72,8 @@
         </div>
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
+        </div>
+    </div>    
     <!-- / Layout wrapper -->
     <script src="{{ asset('admin/assets/vendor/libs/jquery/jquery.js')}}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/popper/popper.js')}}"></script>
