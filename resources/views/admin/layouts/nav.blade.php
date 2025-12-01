@@ -27,7 +27,7 @@
     <div class="d-flex align-items-center ms-auto">
         <!-- Home Icon -->
         <a href="/" target="_blank" data-toggle="tooltip" data-placement="bottom" title="home" role="button" class="me-3">
-            <i class="bx bx-home fs-4" style="color: #020202;"></i>
+            <i class="bx bx-home fs-4" style="color: #fff;"></i>
         </a>
 
     </div>
