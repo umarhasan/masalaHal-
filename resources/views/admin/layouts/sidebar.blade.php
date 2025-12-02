@@ -24,6 +24,18 @@
             </a>
         </li>
         @endcan
+        <li class="menu-item {{ request()->is('categories*') ? 'active' : '' }}">
+            <a href="{{ route('categories.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                <div data-i18n="categories">categories</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('products*') ? 'active' : '' }}">
+            <a href="{{ route('products.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                <div data-i18n="products">products</div>
+            </a>
+        </li>
         <li class="menu-item {{ request()->is('popup*') ? 'active' : '' }}">
             <a href="{{ route('popup.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-info-circle"></i>

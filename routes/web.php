@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ProcessController;
 use App\Http\Controllers\Admin\PopupBannerController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\SocialiteController;
@@ -87,6 +89,8 @@ use App\Http\Controllers\company\VendorController;
     Route::post('/employee/register', [EmployeeController::class, 'store'])->name('employees.store');
     Route::get('/quote-form', [QuoteController::class, 'create'])->name('quotes.create')->middleware('auth');
     Route::post('/quotes', [QuoteController::class, 'store'])->name('quotes.store')->middleware('auth');
+    Route::get('/shop', [HomeController::class, 'shop'])->name('shop.index');
+    Route::get('/shop/{slug}', [HomeController::class, 'shop_details'])->name('shop.detail');
     // End Employee
     // Socailite End
     // Auth::routes();
@@ -116,6 +120,9 @@ use App\Http\Controllers\company\VendorController;
         Route::resource('blogs', BlogController::class);
         Route::resource('processes', ProcessController::class);
         Route::resource('popup', PopupBannerController::class);
+
+        Route::resource('categories', CategoryController::class);
+        Route::resource('products', ProductController::class);
 
         Route::post('bulk-update-page', [ServiceController::class, 'bulkUpdatePage'])->name('services.bulkUpdatePage');
         Route::get('service/delete/{id}', [ServiceController::class,'destroy'])->name('services.destroy');

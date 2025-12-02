@@ -65,6 +65,7 @@
 							<li><a href="#choose"> Why Choose</a></li>
 							<li><a href="#testi">Booking</a></li>
 							<li><a href="#blog">Blog</a></li>
+                            <li><a href="{{ route('shop.index') }}">Shop</a></li>
 						</ul>
 						<div class="header-menu-right-btn">
 							<!--header-search-->

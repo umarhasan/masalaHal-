@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\VeriantSize;
 use App\Models\LeadGenrate;
 use App\Models\PageCategory;
+use App\Models\Category;
 use App\Models\PageSections;
 use App\Models\VeriantColor;
 use App\Models\Service;
@@ -216,5 +217,27 @@ class HomeController extends Controller
         return view('admin.product_detail',$data);
     }
 
+        // Shop Page
+        public function shop(Request $request) {
+            $categories = Category::with('products')->get();
 
+            $popular_products = Product::orderBy('id', 'desc')->take(5)->get();
+
+            $products = Product::query();
+
+            // Search filter
+            if ($request->s) {
+                $products = $products->where('name', 'like', '%'.$request->s.'%');
+            }
+
+            $products = $products->paginate(12);
+
+            return view('shop', compact('categories', 'popular_products', 'products'));
+        }
+
+        public function show($slug)
+        {
+            $product = Product::where('slug', $slug)->firstOrFail();
+            return view('shop_details', compact('product'));
+        }
 }
