@@ -58,13 +58,13 @@
 				<div class="col-lg-10">
 					<nav class="hendre_menu">
 						<ul class="nav_scroll">
-							<li><a href="#home">Home</a></li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#service"> Service</a></li>
-							<li><a href="#team"> Team</a></li>
-							<li><a href="#choose"> Why Choose</a></li>
-							<li><a href="#testi">Booking</a></li>
-							<li><a href="#blog">Blog</a></li>
+							<li><a href="/#home">Home</a></li>
+							<li><a href="/#about">About</a></li>
+							<li><a href="/#service"> Service</a></li>
+							<li><a href="/#team"> Team</a></li>
+							<li><a href="/#choose"> Why Choose</a></li>
+							<li><a href="/#testi">Booking</a></li>
+							<li><a href="/#blog">Blog</a></li>
                             <li><a href="{{ route('shop.index') }}">Shop</a></li>
 						</ul>
 						<div class="header-menu-right-btn">
@@ -88,13 +88,13 @@
 		<div class="mobile-menu">
 			<nav class="hendre_menu">
 				<ul class="nav_scroll">
-					<li><a href="#home">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#service"> Service</a></li>
-					<li><a href="#team"> Team</a></li>
-					<li><a href="#choose"> Why Choose</a></li>
-					<li><a href="#testi">Booking</a></li>
-					<li><a href="#blog">Blog</a></li>
+					<li><a href="/#home">Home</a></li>
+					<li><a href="/#about">About</a></li>
+					<li><a href="/#service"> Service</a></li>
+					<li><a href="/#team"> Team</a></li>
+					<li><a href="/#choose"> Why Choose</a></li>
+					<li><a href="/#testi">Booking</a></li>
+					<li><a href="/#blog">Blog</a></li>
 				</ul>
 			</nav>
 		</div>
