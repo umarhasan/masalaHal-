@@ -562,59 +562,90 @@
                             <h1> Booking A <span>Services</span> </h1>
                         </div>
                         <form action="{{ route('lead_genrate') }}" method="POST" id="dreamit-form">
-                            @csrf
-                            <div class="row">
+                        @csrf
+                        <div class="row">
 
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-box">
-                                        <input type="text" name="name" placeholder="Your Name*"
-                                            value="{{ old('name') }}" required>
-                                    </div>
+                            <!-- Name -->
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-box">
+                                    <input type="text" name="name" placeholder="Your Name*" value="{{ old('name') }}" required>
                                 </div>
-
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-box">
-                                        <input type="email" name="email" placeholder="Enter E-Mail"
-                                            value="{{ old('email') }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form-box">
-                                        <input type="text" name="phone" placeholder="Mobile No.*"
-                                            value="{{ old('phone') }}" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form-box">
-                                        <select id="service" name="service" required>
-                                            <option value=""> Select Service* </option>
-                                            @foreach($service_types as $service)
-                                                <option value="{{ $service->name }}"
-                                                    {{ old('service') == $service->name ? 'selected' : '' }}>
-                                                    {{ $service->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form-box">
-                                        <textarea name="message" cols="30" rows="10"
-                                                placeholder="Write Message:">{{ old('message') }}</textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="contact-form">
-                                        <button type="submit">Submit Request</button>
-                                    </div>
-                                </div>
-
                             </div>
-                        </form>
+
+                            <!-- Email -->
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-box">
+                                    <input type="email" name="email" placeholder="Enter E-Mail" value="{{ old('email') }}">
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <input type="text" name="phone" placeholder="Mobile No.*" value="{{ old('phone') }}" required>
+                                </div>
+                            </div>
+
+                            <!-- Service Type -->
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <select id="service_type" name="need" required>
+                                        <option value="">Select Service Type*</option>
+                                        @foreach($service_types as $type)
+                                            <option value="{{ $type->name }}" data-id="{{ $type->id }}">{{ $type->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Services -->
+                            <div class="col-lg-12" id="services-container"></div>
+
+                            <!-- Business Details -->
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <input type="text" name="business" placeholder="Business Name" value="{{ old('business') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <input type="text" name="industry" placeholder="Industry" value="{{ old('industry') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <input type="text" name="live_website" placeholder="Live Website (if any)" value="{{ old('live_website') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <input type="text" name="hire" placeholder="Hiring Need" value="{{ old('hire') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <input type="text" name="budget" placeholder="Budget" value="{{ old('budget') }}">
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <textarea name="message" cols="30" rows="5" placeholder="Write Message:">{{ old('message') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="contact-form">
+                                    <button type="submit">Submit Request</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                         <div id="status"></div>
                     </div>
                 </div>
@@ -768,7 +799,26 @@
         </div>
     </div>
 @endforeach
+<script>
+document.getElementById('service_type').addEventListener('change', function() {
+    let serviceType = this.value;
+    let container = document.getElementById('services-container');
+    container.innerHTML = 'Loading...';
 
+    if(serviceType){
+        fetch('/get-service-form-data/' + encodeURIComponent(serviceType))
+        .then(res => res.json())
+        .then(data => {
+            container.innerHTML = data.html;
+        })
+        .catch(err => {
+            container.innerHTML = '<p>Error loading services.</p>';
+        });
+    } else {
+        container.innerHTML = '';
+    }
+});
+</script>
 <script>
     function closePopup(id) {
         document.getElementById("promoPopup" + id).style.display = "none";

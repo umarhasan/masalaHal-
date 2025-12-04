@@ -87,35 +87,39 @@ class HomeController extends Controller
     }
 
     // Lead Genrate
-    public function lead_genrate(Request $request)
+   public function lead_genrate(Request $request)
     {
-        // Validate the fields from the form
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'nullable|email',
-            'service' => 'required|string|max:255',
+            'need' => 'required|string|max:255',
+            'business' => 'nullable|string|max:255',
+            'industry' => 'nullable|string|max:255',
+            'live_website' => 'nullable|string|max:255',
+            'hire' => 'nullable|string|max:255',
+            'budget' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:2000',
         ]);
 
-        // --- Get location from IP ---
-        $ip = $request->ip(); // Get visitor IP
+        // IP-based location
+        $ip = $request->ip();
         $location = @json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
 
         $country = $location->country ?? 'N/A';
         $city = $location->city ?? 'N/A';
         $state = $location->regionName ?? 'N/A';
         $zip = $location->zip ?? 'N/A';
+        $address = $location->query ?? 'N/A';
 
-        // Check if user exists
+        // Check or create user
         $user = null;
-        $password = '12345678'; // default password
+        $password = '12345678';
         if ($request->email) {
             $user = User::where('email', $request->email)->first();
         }
 
         if (!$user) {
-            // Create new user
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email ?? null,
@@ -132,6 +136,7 @@ class HomeController extends Controller
                 'city' => $city,
                 'state' => $state,
                 'zip' => $zip,
+                'address' => $address,
             ]);
 
             $user->assignRole('customer');
@@ -139,31 +144,34 @@ class HomeController extends Controller
 
         // Lead generation
         $leadData = [
+            'need' => $request->need,
+            'business' => $request->business ?? null,
+            'industry' => $request->industry ?? null,
+            'live_website' => $request->live_website ?? null,
+            'hire' => $request->hire ?? null,
+            'budget' => $request->budget ?? null,
             'name' => $request->name,
-            'email' => $request->email ?? null,
             'phone' => $request->phone,
-            'service' => $request->service,
-            'message' => $request->message ?? null,
-            'country' => $country,
+            'email' => $request->email ?? null,
+            'zip' => $zip,
+            'address' => $address,
             'city' => $city,
             'state' => $state,
-            'zip' => $zip,
+            'country' => $country,
             'created_by' => $user->id,
         ];
 
         $lead = LeadGenrate::create($leadData);
 
-        // Fire event
         event(new LeadGenerated($lead));
 
-        // Send email if email exists
         if ($user->email) {
             Mail::to($user->email)->send(new LeadGeneratedMail($user, $password, $leadData));
         } else {
             \Log::error("User email is null", ['user_id' => $user->id]);
         }
 
-        return redirect()->back()->with('success', 'Lead generated successfully and email sent!');
+        return redirect()->back()->with('success', 'Lead generated successfully!');
     }
 
     // onclick Service Type
@@ -171,34 +179,19 @@ class HomeController extends Controller
     {
         $service = LeadService::where('name', $serviceType)->first();
 
-        if ($service) {
-            $dynamicContent = '';
-            $url = asset('storage/' . $service->image);
-            if ($service->services && $service->services->count() > 0) {
-                $dynamicContent .= '<div class="row">
-                <div class="col-12 text-center">
-                    <div class="image-container">
-                        <img src="' . $url . '"  class="img-fluid" style="width: 100%; height:200px; border-radius: 10px;">
-                    </div>
-                    <h2 class="fs-title">What are your ' . $serviceType . ' needs?</h2>
-                </div>
+        if ($service && $service->services->count() > 0) {
+            $html = '<h4>Select a service:</h4>';
+            foreach ($service->services as $item) {
+                $html .= '<div class="field-div">
+                    <input type="radio" id="service-'.$item->id.'" name="service_selected" value="'.$item->name.'" required>
+                    <label for="service-'.$item->id.'">'.$item->name.' - Price: '.$item->price.' - Credit: '.$item->credit.'</label>
+                    <input type="hidden" name="service_id" value="'.$item->id.'">
                 </div>';
-
-                foreach ($service->services as $item) {
-                    $dynamicContent .= '<div class="field-div">
-                        <input type="radio" id="service-' . $item->id . '" name="need" value="' . $item->name . '" required>
-                        <label for="service-' . $item->id . '">' . $item->name . '</label>
-                        <input type="hidden" name="service_id" value="' . $item->id . '">
-                    </div>';
-                }
-            } else {
-                $dynamicContent = '<div class="field-div"><p>No services found for "' . $serviceType . '".</p></div>';
             }
-
-            return response()->json(['html' => $dynamicContent]);
+            return response()->json(['html' => $html]);
         }
 
-        return response()->json(['html' => 'No form data available.'], 404);
+        return response()->json(['html' => '<p>No services found for "'.$serviceType.'"</p>']);
     }
 
     public function login(){
