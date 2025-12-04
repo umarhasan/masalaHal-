@@ -31,40 +31,28 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-    // public function index()
-    // {
-    //     $sliders =Slider::get();
-    //     $service_types =LeadService::get();
 
-    //     return view('home',compact('sliders','service_types'));
-    // }
     public function index()
     {
-        // Sliders for homepage
         $sliders = Slider::orderBy('id', 'desc')->get();
-        // All service types (LeadService)
         $service_types = LeadService::with('services')->get();
-        // Optional : About Us
         $about = About::latest()->first();
-        // Optional: Latest 5 products for homepage
-        $products = Product::latest()->take(5)->get();
-        // Optional: Testimonials for homepage
+        $products = Product::latest()->paginate(12); // pagination
+        $categories = Category::with('products')->get();
+        $popular_products = Product::orderBy('id', 'desc')->take(5)->get();
         $testimonials = Testimonial::latest()->take(5)->get();
-        // Optional: Blog/News for homepage
         $blogs = Blog::latest()->take(3)->get();
-        // Optional: Team members
         $teams = Team::all();
-    // Optional: Why choose us sections
         $whychooses = WhyChoose::all();
         $processes = Process::all();
-        // NEW: Active Popup Banners
         $popupBanners = PopupBanner::where('status', 1)->latest()->get();
-        // Pass all data to home view
         return view('home', compact(
             'sliders',
             'about',
             'service_types',
             'products',
+            'categories',
+            'popular_products',
             'testimonials',
             'blogs',
             'teams',
@@ -74,7 +62,7 @@ class HomeController extends Controller
 
         ));
     }
-     //service
+
     public function service()
     {
         $sliders =Slider::get();
@@ -86,12 +74,10 @@ class HomeController extends Controller
     {
         $query = $request->input('service');
 
-        // Fetch services matching the query with their relationships
         $services = LeadService::with('services')
             ->where('name', 'LIKE', '%' . $query . '%')
             ->get();
 
-        // Add the image URL dynamically
         $services->transform(function ($service) {
             $service->image_url = $service->image ? asset('storage/' . $service->image) : asset('images/default.jpg');
             return $service;
@@ -103,76 +89,91 @@ class HomeController extends Controller
     // Lead Genrate
     public function lead_genrate(Request $request)
     {
-        // Validate input data
+        // Validate the fields from the form
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required',
-            'country' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
             'email' => 'nullable|email',
+            'service' => 'required|string|max:255',
+            'message' => 'nullable|string|max:2000',
         ]);
 
-        // Check if the user already exists
-        $user = User::where('email', $request->email)->first();
-        $password = '12345678';  // Default password, consider making this dynamic or generated
+        // --- Get location from IP ---
+        $ip = $request->ip(); // Get visitor IP
+        $location = @json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
+
+        $country = $location->country ?? 'N/A';
+        $city = $location->city ?? 'N/A';
+        $state = $location->regionName ?? 'N/A';
+        $zip = $location->zip ?? 'N/A';
+
+        // Check if user exists
+        $user = null;
+        $password = '12345678'; // default password
+        if ($request->email) {
+            $user = User::where('email', $request->email)->first();
+        }
 
         if (!$user) {
-            // If the user does not exist, create a new user
+            // Create new user
             $user = User::create([
                 'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($password), // Hash the password
+                'email' => $request->email ?? null,
+                'password' => Hash::make($password),
                 'email_verified_at' => now(),
             ]);
 
-            // Save additional information in the UserInformation table
             UserInformation::create([
                 'user_id' => $user->id,
                 'name' => $request->name,
-                'email' => $request->email,
+                'email' => $request->email ?? null,
                 'phone' => $request->phone,
-                'country' => $request->country,
-                'city' => $request->city,
-                'state' => $request->state,
+                'country' => $country,
+                'city' => $city,
+                'state' => $state,
+                'zip' => $zip,
             ]);
 
-            // Assign the 'customer' role to the new user
             $user->assignRole('customer');
         }
 
-        // Prepare lead data and assign the user's ID to 'created_by'
-        $leadData = $request->all();
-        $leadData['created_by'] = $user->id;
+        // Lead generation
+        $leadData = [
+            'name' => $request->name,
+            'email' => $request->email ?? null,
+            'phone' => $request->phone,
+            'service' => $request->service,
+            'message' => $request->message ?? null,
+            'country' => $country,
+            'city' => $city,
+            'state' => $state,
+            'zip' => $zip,
+            'created_by' => $user->id,
+        ];
 
-        // Create the lead
         $lead = LeadGenrate::create($leadData);
 
-        // Fire the LeadGenerated event (if needed)
+        // Fire event
         event(new LeadGenerated($lead));
 
-        // Send the email to the user with lead data
+        // Send email if email exists
         if ($user->email) {
             Mail::to($user->email)->send(new LeadGeneratedMail($user, $password, $leadData));
         } else {
             \Log::error("User email is null", ['user_id' => $user->id]);
         }
 
-        // Return success message to the user
         return redirect()->back()->with('success', 'Lead generated successfully and email sent!');
     }
 
     // onclick Service Type
     public function getServiceFormData($serviceType)
     {
-        // Retrieve the service type from the database based on the service name
         $service = LeadService::where('name', $serviceType)->first();
 
         if ($service) {
-            // Generate the dynamic content (HTML) based on the data
             $dynamicContent = '';
             $url = asset('storage/' . $service->image);
-            // Assuming service has a relationship with 'services' which contains related data
             if ($service->services && $service->services->count() > 0) {
                 $dynamicContent .= '<div class="row">
                 <div class="col-12 text-center">
@@ -183,7 +184,6 @@ class HomeController extends Controller
                 </div>
                 </div>';
 
-                // Loop through services and generate radio inputs
                 foreach ($service->services as $item) {
                     $dynamicContent .= '<div class="field-div">
                         <input type="radio" id="service-' . $item->id . '" name="need" value="' . $item->name . '" required>
@@ -195,16 +195,13 @@ class HomeController extends Controller
                 $dynamicContent = '<div class="field-div"><p>No services found for "' . $serviceType . '".</p></div>';
             }
 
-            // Return the HTML content in the response
             return response()->json(['html' => $dynamicContent]);
         }
 
-        // Return an error message if the service is not found
         return response()->json(['html' => 'No form data available.'], 404);
     }
 
     public function login(){
-        // $this->middleware('auth')->except('logout');
         return view('auth.login');
     }
 
@@ -217,27 +214,25 @@ class HomeController extends Controller
         return view('admin.product_detail',$data);
     }
 
-        // Shop Page
-        public function shop(Request $request) {
-            $categories = Category::with('products')->get();
+    public function shop(Request $request) {
+        $categories = Category::with('products')->get();
 
-            $popular_products = Product::orderBy('id', 'desc')->take(5)->get();
+        $popular_products = Product::orderBy('id', 'desc')->take(5)->get();
 
-            $products = Product::query();
+        $products = Product::query();
 
-            // Search filter
-            if ($request->s) {
-                $products = $products->where('name', 'like', '%'.$request->s.'%');
-            }
-
-            $products = $products->paginate(12);
-
-            return view('shop', compact('categories', 'popular_products', 'products'));
+        if ($request->s) {
+            $products = $products->where('name', 'like', '%'.$request->s.'%');
         }
 
-        public function show($slug)
-        {
-            $product = Product::where('slug', $slug)->firstOrFail();
-            return view('shop_details', compact('product'));
-        }
+        $products = $products->paginate(12);
+
+        return view('shop', compact('categories', 'popular_products', 'products'));
+    }
+
+    public function show($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('shop_details', compact('product'));
+    }
 }

@@ -1,6 +1,4 @@
-<!--==================================================-->
-<!-- Start Hendre Footer Section  -->
-<!--==================================================-->
+<!-- Footer Section -->
 <div class="footer-section">
     <div class="container">
         <div class="row subscribe-section">
@@ -11,7 +9,7 @@
                     </div>
                     <div class="subscribe-contact">
                         <span class="subscribe-text">For Enquiry :</span>
-                        <h2 class="subscribe-phone-number">+923172112995</h2>
+                        <h2 class="subscribe-phone-number">{{ env('FOOTER_PHONE', '+923172112995') }}</h2>
                     </div>
                 </div>
             </div>
@@ -23,55 +21,50 @@
             <div class="col-lg-4 col-md-12">
                 <div class="subscribe-widget">
                     <form action="#" method="get">
-                        <input type="text" class="src-input-box" placeholder="Search Here" name="s" value="" title="src-input-box">
-                        <button class="subscribe-btn" type="submit">
-                            <span>Subscribe</span>
-                        </button>
+                        <input type="text" class="src-input-box" placeholder="Search Here" name="s" value="">
+                        <button class="subscribe-btn" type="submit"><span>Subscribe</span></button>
                     </form>
                 </div>
             </div>
         </div>
 
-    <div class="row footer-bg">
-        <!-- Company Info -->
-        <div class="col-lg-3 col-md-6">
-            <div class="widget widgets-company-info">
-                <div class="dreamhub-logo">
-                    <a class="logo_thumb" href="{{ url('/') }}" title="logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="" />
-                    </a>
+        <div class="row footer-bg">
+            <!-- Company Info -->
+            <div class="col-lg-3 col-md-6">
+                <div class="widget widgets-company-info">
+                    <div class="dreamhub-logo">
+                        <a class="logo_thumb" href="{{ url('/') }}" title="logo">
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="logo" />
+                        </a>
+                    </div>
+                    <div class="company-info-desc">
+                        <p>{{ env('FOOTER_TEXT', 'Professionally develop long-term performance based architectures metrics rather than') }}</p>
+                    </div>
+                    <div class="follow-company-icon">
+                        <a href="{{ env('FOOTER_FACEBOOK', '#') }}"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ env('FOOTER_TWITTER', '#') }}"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ env('FOOTER_LINKEDIN', '#') }}"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ env('FOOTER_PINTEREST', '#') }}"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
                 </div>
-                <div class="company-info-desc">
-                    <p>{{ $generalsetting->footer_text ?? 'Professionally develop long-term performance based architectures metrics rather than' }}</p>
-                </div>
-                						<div class="follow-company-icon">
-							<a href="#"> <i class="fab fa-facebook-f"></i> </a>
-							<a href="#"> <i class="fab fa-twitter"> </i> </a>
-							<a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-							<a href="#"> <i class="fab fa-pinterest-p"></i> </a>
-						</div>
             </div>
-        </div>
 
-        <!-- Popular Services -->
-        <div class="col-lg-3 col-md-6 pl-40">
-            <div class="widget widget-nav-menu">
-                <h4 class="widget-title">Popular Services</h4>
-                <div class="menu-quick-link-content">
+            <!-- Popular Services -->
+            <div class="col-lg-3 col-md-6 pl-40">
+                <div class="widget widget-nav-menu">
+                    <h4 class="widget-title">Popular Services</h4>
                     <ul class="footer-menu">
                         @foreach($service_types as $service)
-                            <li><a href="{{ url('service-details/'.$service->id) }}"> {{ $service->name }} </a></li>
+                            <li><a href="{{ url('service-details/'.$service->id) }}">{{ $service->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
             </div>
-        </div>
 
-        <!-- Useful Links -->
-        <div class="col-lg-3 col-md-6">
-            <div class="widget widget-nav-menu">
-                <h4 class="widget-title"> Useful Links </h4>
-                <div class="menu-quick-link-content">
+            <!-- Useful Links -->
+            <div class="col-lg-3 col-md-6">
+                <div class="widget widget-nav-menu">
+                    <h4 class="widget-title"> Useful Links </h4>
                     <ul class="footer-menu">
                         <li><a href="/#home">Home</a></li>
                         <li><a href="/#about">About</a></li>
@@ -83,71 +76,35 @@
                     </ul>
                 </div>
             </div>
-        </div>
 
-        <!-- Working Hours -->
-        <div class="col-lg-3 col-md-6 pr-0">
-            <div class="menu-quick-link-contact">
-                <h4 class="widget-title"> Working Hours </h4>
-                <div class="company-work-hour">
+            <!-- Working Hours -->
+            <div class="col-lg-3 col-md-6 pr-0">
+                <div class="menu-quick-link-contact">
+                    <h4 class="widget-title"> Working Hours </h4>
                     <ul>
-                        <li>Mon - Wed <span class="table-text">8.00 AM - 5.00 PM</span></li>
-                        <li>Thu - Fri <span>9.00 AM - 4.00 PM</span></li>
-                        <li>Saturday <span>9.00 AM - 2.00 PM</span></li>
-                        <li class="table-brb">Sunday <span>Closed</span></li>
+                        <li>Mon - Wed <span>{{ env('WORKING_HOURS_MON_WED', '8.00 AM - 5.00 PM') }}</span></li>
+                        <li>Thu - Fri <span>{{ env('WORKING_HOURS_THU_FRI', '9.00 AM - 4.00 PM') }}</span></li>
+                        <li>Saturday <span>{{ env('WORKING_HOURS_SAT', '9.00 AM - 2.00 PM') }}</span></li>
+                        <li>Sunday <span>{{ env('WORKING_HOURS_SUN', 'Closed') }}</span></li>
                     </ul>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="footer-shape">
-            <img src="{{ asset('assets/images/resource/footer-shp.png') }}" alt="">
-        </div>
-        <div class="footer-shape2">
-            <img src="{{ asset('assets/images/resource/footer-shp2.png') }}" alt="">
-        </div>
-    </div>
-    </div>
-</div>
-	<div class="footer-bottom-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-6">
-					<div class="footer-bottom-content">
-						<div class="footer-bottom-content-copy">
-							<p>Copyright © 2023 <span>Maslyhal.com</span>. All rights reserved.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6">
-					<div class="footer-bottom-menu text-right">
-						<ul>
-							<li><a href="#">Terms Condition</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- Search Popup -->
-<div class="search-popup">
-    <button class="close-search style-two"><span class="flaticon-multiply"><i class="far fa-times-circle"></i></span></button>
-    <button class="close-search"><i class="bi bi-arrow-up"></i></button>
-    <form method="post" action="#">
-        <div class="form-group">
-            <input type="search" name="search-field" value="" placeholder="Search Here" required="">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </form>
-</div>
-<!-- Scrollup -->
-<div class="scroll-area">
-    <div class="top-wrap">
-        <div class="go-top-btn-wraper">
-            <div class="go-top go-top-button">
-                <i class="bi bi-chevron-double-up"></i>
-                <i class="bi bi-chevron-double-up"></i>
+<!-- Footer Bottom -->
+<div class="footer-bottom-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <p>Copyright © {{ env('COPYRIGHT_YEAR', date('Y')) }} <span>{{ env('COPYRIGHT_TEXT', 'Maslyhal.com') }}</span>. All rights reserved.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 text-right">
+                <ul>
+                    <li><a href="#">Terms Condition</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
             </div>
         </div>
     </div>

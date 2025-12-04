@@ -2,16 +2,17 @@
 
 @section('content')
 <style>
-	.abc{
-		list-style-type: disc; /* default bullets */
+    /* -------------------- List Styling -------------------- */
+    .abc {
+        list-style-type: disc;
         margin: 10px 0;
         padding-left: 20px;
-        font-size: 9px; /* smaller size */
-        line-height: 1.5; /* spacing between points */
+        font-size: 9px;
+        line-height: 1.5;
         color: #555;
-	}
+    }
 
-    /* Background Overlay */
+    /* -------------------- Popup Styling -------------------- */
     .popup-container {
         position: fixed;
         top: 0;
@@ -19,14 +20,13 @@
         width: 100%;
         height: 100%;
         background: rgba(0,0,0,0.75);
-        display: none; /* hide initially */
-        justify-content: center; /* horizontal center */
-        align-items: center;     /* vertical center */
+        display: none;
+        justify-content: center;
+        align-items: center;
         z-index: 999999;
-        overflow: auto; /* in case popup is taller than viewport */
+        overflow: auto;
     }
 
-    /* Popup Box */
     .popup-box {
         background: #fff;
         width: 450px;
@@ -36,16 +36,14 @@
         position: relative;
         animation: popupFadeIn 0.5s ease forwards;
         box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        transform: translateY(-50px); /* start slightly above */
+        transform: translateY(-50px);
     }
 
-    /* Fade-in animation */
     @keyframes popupFadeIn {
         0% { opacity: 0; transform: translateY(-50px) scale(0.8); }
         100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Full banner image */
     .popup-img {
         width: 100%;
         height: 380px;
@@ -53,7 +51,6 @@
         display: block;
     }
 
-    /* Popup content */
     .popup-content {
         padding: 18px 20px;
         text-align: center;
@@ -66,7 +63,6 @@
         margin-bottom: 10px;
     }
 
-    /* WhatsApp Button */
     .whatsapp-btn {
         background: #25D366;
         color: #fff;
@@ -79,7 +75,6 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     }
 
-    /* Close Button */
     .popup-close {
         position: absolute;
         top: -12px;
@@ -94,365 +89,357 @@
         line-height: 42px;
         cursor: pointer;
     }
+
+    /* -------------------- Hero Section Fix -------------------- */
+    .hero-list .hero-section {
+        position: relative;
+        width: 100%;
+    }
+
+    .hero-thumb img {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+    }
+
+    /* -------------------- Service, Feature, About, Process -------------------- */
+    .service-list .col-lg-12,
+    .feature-list .col-lg-12 {
+        padding: 0 8px;
+    }
+
+    .about-item-list ul li i {
+        color: #25D366;
+        margin-right: 6px;
+    }
+
+    .single-process-box .process-number span {
+        display: inline-block;
+        background: #25D366;
+        color: #fff;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        text-align: center;
+        line-height: 36px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .single-process-box .process-content h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    /* -------------------- Blog -------------------- */
+    .single-blog-box {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .blog-excerpt {
+        font-size: 13px;
+        color: #555;
+    }
+
+    .blog-btn a {
+        color: #25D366;
+        font-weight: 600;
+    }
+
+    /* -------------------- Team -------------------- */
+    .single-team-box {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .team-social-list li {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    /* -------------------- Testimonial -------------------- */
+    .teastimonial-single-box .testi-desc {
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* -------------------- Booking Form -------------------- */
+    #dreamit-form .form-box input,
+    #dreamit-form .form-box select,
+    #dreamit-form .form-box textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        margin-bottom: 12px;
+    }
+
+    #dreamit-form button {
+        background: #25D366;
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
 </style>
-<!--==================================================-->
-	<!-- Start Hendre Hero Section  -->
-	<!--==================================================-->
-    <div id="home" class="hero-list owl-carousel">
-        @foreach($sliders as $slider)
-            <div class="hero-section d-flex align-items-center">
-                <div class="container">
-                    <div class="row align-items-center">
 
-                        {{-- ===== Left Side (Text) ===== --}}
-                        <div class="col-lg-6 col-md-6">
-                            {{-- 🔽 Always-visible Static Block --}}
-                                <div class="sero-content mt-4">
-                                    <h4>100% Satisfaction Gaurenty</h4>
-                                    <h1>Heighst Quality</h1>
-                                    <h1>Home Services</h1>
-                                    <h1>With <span>MasalaHal</span></h1>
-                                </div>
-                                <div class="">
-                                    {{-- Dynamic Content from Slider --}}
-                                    @if($slider->tagline)
-                                        <h1>{{ $slider->tagline }}</h1>
-                                    @endif
-                                    <h3>{{ $slider->title }}</h3>
-                                    @if($slider->subtitle)
-                                        <h1>{{ $slider->subtitle }}</h1>
-                                    @endif
-                                    @if($slider->highlight_text)
-                                        <h1>With <span>{{ $slider->highlight_text }}</span></h1>
-                                    @endif
-                                    @if($slider->button_text)
-                                    <div class="hero-button">
-                                        <a href="{{ $slider->button_link ?? '#' }}">
-                                            {{ $slider->button_text }} <i class="bi bi-plus"></i>
-                                        </a>
-                                    </div>
-                                    @endif
-                                    <div class="hero-button">
-                                            <a href="#">
-                                                Get An Estimate <i class="bi bi-plus"></i>
-                                            </a>
-                                        </div>
-
-                                    <div class="hero-shape">
-                                        <img src="{{ asset('assets/images/slider/hero-shape.png') }}" alt="">
-                                    </div>
-                                </div>
+<!-- =================== HERO SECTION =================== -->
+<div id="home" class="hero-list owl-carousel">
+    @foreach($sliders as $slider)
+        <div class="hero-section d-flex align-items-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="sero-content mt-4">
+                            <h4>100% Satisfaction Guarantee</h4>
+                            <h1>Highest Quality Home Services</h1>
+                            <h1>With <span>MasalaHal</span></h1>
                         </div>
 
-                        {{-- ===== Right Side (Image) ===== --}}
-                        <div class="col-lg-6 col-md-6">
-                            <div class="hero-thumb">
-                                <img src="{{ asset('storage/'.$slider->image) }}" alt="">
+                        <div>
+                            @if($slider->tagline)<h1>{{ $slider->tagline }}</h1>@endif
+                            <h3>{{ $slider->title }}</h3>
+                            @if($slider->subtitle)<h1>{{ $slider->subtitle }}</h1>@endif
+                            @if($slider->highlight_text)<h1>With <span>{{ $slider->highlight_text }}</span></h1>@endif
+                            @if($slider->button_text)
+                                <div class="hero-button">
+                                    <a href="{{ $slider->button_link ?? '#' }}">{{ $slider->button_text }} <i class="bi bi-plus"></i></a>
+                                </div>
+                            @endif
+                            <div class="hero-button">
+                                <a href="#">Get An Estimate <i class="bi bi-plus"></i></a>
                             </div>
+                            <div class="hero-shape">
+                                <img src="{{ asset('assets/images/slider/hero-shape.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="hero-thumb">
+                            <img src="{{ asset('storage/'.$slider->image) }}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
-    </div>
-    <!--==================================================-->
-	<!-- Dynamic Service Slider Section -->
-	<!--==================================================-->
-    <div class="feature-section">
-        <div class="container-fluid">
-            <div class="row feature-bg align-items-center">
+        </div>
+    @endforeach
+</div>
 
-                <div class="col-lg-8 col-md-6">
-                    <div class="hendre-section-title padding-lg">
-                        <h4>features</h4>
-                        <h1>Fixing What We <span>Improves</span></h1>
+<!-- =================== FEATURE SECTION =================== -->
+<div class="feature-section">
+    <div class="container-fluid">
+        <div class="row feature-bg align-items-center">
+            <div class="col-lg-8 col-md-6">
+                <div class="hendre-section-title padding-lg">
+                    <h4>features</h4>
+                    <h1>Fixing What We <span>Improve</span></h1>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-contact-info">
+                    <div class="feature-ctn-icon"><img src="{{ asset('assets/images/slider/icon.png') }}" alt=""></div>
+                    <div class="feature-contact">
+                        <span class="feature-ask">For Enquiry :</span>
+                        <h2 class="feature-phone-number">+923172112995</h2>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-contact-info">
-                        <div class="feature-ctn-icon">
-                            <img src="{{ asset('assets/images/slider/icon.png') }}" alt="">
-                        </div>
-                        <div class="feature-contact">
-                            <span class="feature-ask">For Enquiry :</span>
-                            <h2 class="feature-phone-number">+923172112995</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="service-list owl-carousel">
-                        @foreach($service_types as $service)
-                            <div class="col-lg-12">
-                                <div class="feature-single-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 5 }}s">
+        <div class="row">
+            <div class="service-list owl-carousel">
+                @foreach($service_types as $service)
+                    <div class="col-lg-12">
+                        <div class="feature-single-box wow fadeInUp" data-wow-delay="0.{{ $loop->index + 5 }}s">
                             <div class="feature-thumb">
                                 <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
                                 <div class="feature-icon">
                                     <img src="{{ asset('assets/images/slider/feature1.png') }}" alt="">
                                     <a class="feature-icon2" href="{{ url('service-details/'.$service->id) }}"><i class="bi bi-arrow-right"></i></a>
                                 </div>
-                                <div class="feature-content">
-                                    <h2>{{ $service->name }}</h2>
-                                </div>
+                                <div class="feature-content"><h2>{{ $service->name }}</h2></div>
                             </div>
                         </div>
-                            </div>
-                        @endforeach
                     </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =================== ABOUT SECTION =================== -->
+<div id="about" class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Left Image & Counter -->
+            <div class="col-lg-6 col-md-12">
+                <div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.1s">
+                    <img src="{{ isset($about->image) ? asset('storage/' . $about->image) : asset('assets/images/slider/about.png') }}" alt="About Image">
+                    <div class="about-counter">
+                        <h2 class="counter">{{ $projects_completed ?? 500 }}</h2>
+                        <h2 class="counter1">+</h2>
+                        <span class="counter-text">Project Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.1s">
+                <div class="hendre-section-title">
+                    <h4>ABOUT US</h4>
+                    <h1>{{ $about->title ?? 'Problem Solving Every' }}</h1>
+                    <p>{{ $about->description ?? 'At Masala Hal, we provide professional home services across all categories...' }}</p>
+                </div>
+
+                <div class="about-items">
+                    <div class="about-icon"><img src="{{ asset('assets/images/slider/about-icn.png') }}" alt=""></div>
+                    <div class="about-item-content">
+                        <h2 class="about-item-title">{{ $main_about_item_title ?? 'Smart Repair System' }}</h2>
+                        <p class="about-discription">{{ $main_about_item_description ?? 'Conveniently target business opportunities market-driven solutions' }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    @forelse($service_types as $service)
+                        <div class="col-lg-6 col-md-6">
+                            <div class="about-item-list">
+                                <ul><li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li></ul>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-12"><p>No services available currently.</p></div>
+                    @endforelse
+                </div>
+
+                <div class="hendre-button"><a href="#">Get An Estimate <i class="bi bi-plus"></i></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =================== SERVICE SECTION =================== -->
+<div class="service-top-section">
+    <div class="container">
+        <div class="row align-items-center wow fadeInUp" data-wow-delay="1s">
+            <div class="col-lg-12">
+                <div class="hendre-section-title white padding-lg">
+                    <h4>OUR SERVICES</h4>
+                    <h1>Solutions for Renovating Home <span>Repairing</span></h1>
                 </div>
             </div>
         </div>
     </div>
-    <!--==================================================-->
-	<!-- End Hendre Feature Section  -->
-	<!--==================================================-->
+</div>
 
-	<!--==================================================-->
-	<!-- Start Hendre About Section  -->
-	<!--==================================================-->
-    <div id="about" class="about-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Left Image & Counter -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="about-right-thumb wow fadeInLeft" data-wow-delay="0.1s">
-                        @if(isset($about->image))
-                            <img src="{{ asset('storage/' . $about->image) }}" alt="About Image">
-                        @else
-                            <img src="{{ asset('assets/images/slider/about.png') }}" alt="">
-                        @endif
-                        <div class="about-counter">
-                            <h2 class="counter">{{ $projects_completed ?? 500 }}</h2>
-                            <h2 class="counter1">+</h2>
-                            <span class="counter-text">Project Completed</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Right Content -->
-                <div class="col-lg-6 col-md-12 wow fadeInDown" data-wow-delay="0.1s">
-                    <div class="hendre-section-title">
-                        <h4>ABOUT US</h4>
-                        <h1>{{ $about->title ?? 'Problem Solving Every' }}</h1>
-                        <p>{{ $about->description ?? 'At Masala Hal, we provide professional home services across all categories – from maintenance and cleaning to technical repairs and renovation. Our mission is to make your home safe, functional, and beautiful, ensuring every project is completed with care and quality.' }}</p>
-                    </div>
-
-                    <!-- Main About Item -->
-                    <div class="about-items">
-                        <div class="about-icon">
-                            <img src="{{ asset('assets/images/slider/about-icn.png') }}" alt="">
-                        </div>
-                        <div class="about-item-content">
-                            <h2 class="about-item-title">{{ $main_about_item_title ?? 'Smart Repair System' }}</h2>
-                            <p class="about-discription">{{ $main_about_item_description ?? 'Conveniently target business opportunities market-driven solutions' }}</p>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Service List -->
-                    <div class="row">
-                        @if(isset($service_types) && $service_types->count() > 0)
-                            @foreach($service_types as $service)
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="about-item-list">
-                                        <ul>
-                                            <li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="col-12">
-                                <p>No services available currently.</p>
-                            </div>
-                        @endif
-                    </div>
-
-                    <!-- Button -->
-                    <div class="hendre-button">
-                        <a href="#">Get An Estimate <i class="bi bi-plus"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<!--==================================================-->
-	<!-- End Hendre About Section  -->
-	<!--==================================================-->
-
-	<!--==================================================-->
-	<!-- Start Hendre Service Section  -->
-	<!--==================================================-->
-	<div class="service-top-section">
-		<div class="container">
-			<div class="row align-items-center wow fadeInUp "data wow daley="1s">
-				<div class="col-lg-12">
-					<div class="hendre-section-title white padding-lg">
-						<h4>OUR SERVICES</h4>
-						<h1>Solutions for Renovating</h1>
-						<h1 class="sections">Home <span>Repairing</span></h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="service" class="service-section">
-		<div class="container">
-			<div class="row service-bg">
-				<div class="service-list owl-carousel">
-                    @foreach($service_types as $service)
-                        <div class="col-lg-12">
-                            <div class="single-service-box" data-wow-delay="0.{{ $loop->index + 3 }}s">
-
-                                {{-- Service Image --}}
-                                <div class="service-thumb">
-                                    <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
-                                </div>
-
-                                {{-- Service Content --}}
-                                <div class="service-content">
-                                    <h3 class="service-title">{{ $service->name }}</h3>
-
-                                    {{-- Description as list points --}}
-                                    @if($service->description)
-                                        @php
-                                            // Split description by new lines or commas
-                                            $points = preg_split("/[\r\n,]+/", $service->description);
-                                        @endphp
-                                        <ul class="abc">
-                                            @foreach($points as $point)
-                                                <li>{{ trim($point) }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-
-                                    <a class="hendre-button" href="{{ url('service-details/'.$service->id) }}">
-                                        Read More <i class="bi bi-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--==================================================-->
-	<!-- End Hendre Service Section  -->
-	<!--==================================================-->
-
-	<!--==================================================-->
-	<!-- Start Hendre Why Choose  Section  -->
-	<!--==================================================-->
-    <div id="choose" class="why-choose-section">
-        <div class="container">
-            <div class="row align-items-center" data-wow-delay="1s">
-                <div class="col-lg-12">
-                    <div class="hendre-section-title text-center padding-lg">
-                        <h4> why choose us </h4>
-                        <h1> Some Reason for Choose <span> Problem Solving </span></h1>
-                        <h1 class="sections"> Repairing Your Home </h1>
-
-                        <div class="rs-video2">
-                            <div class="animate-border">
-                                <a class="video-vemo-icon venobox vbox-item" data-vbtype="youtube" data-autoplay="true" href="https://youtu.be/BS4TUd7FJSg">Play</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <div class="tab" data-wow-delay="3.9s">
-
-                        <!-- ========== TABS TITLE (DYNAMIC) ========== -->
-                        <ul class="tabs">
-                             <li>
-                                <a href="#">
-                                        <span>01.</span> Why Choose Us ? </a></li>
-                                        <li><a href="#">
-                                            <span>02.</span> MasalaHal </a>
-                                        </li>
-                                        <li><a href="#"> <span>03.</span> Mission & Vission </a>
-                                        </li>
+<div id="service" class="service-section">
+    <div class="container">
+        <div class="row service-bg">
+            <div class="service-list owl-carousel">
+                @foreach($service_types as $service)
+                    <div class="col-lg-12">
+                        <div class="single-service-box" data-wow-delay="0.{{ $loop->index + 3 }}s">
+                            <div class="service-thumb"><img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}"></div>
+                            <div class="service-content">
+                                <h3 class="service-title">{{ $service->name }}</h3>
+                                @if($service->description)
+                                    @php $points = preg_split("/[\r\n,]+/", $service->description); @endphp
+                                    <ul class="abc">
+                                        @foreach($points as $point)<li>{{ trim($point) }}</li>@endforeach
                                     </ul>
+                                @endif
+                                <a class="hendre-button" href="{{ url('service-details/'.$service->id) }}">Read More <i class="bi bi-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <!-- ========== TABS CONTENT (DYNAMIC) ========== -->
-                        <div class="tab_content">
+<!-- =================== WHY CHOOSE SECTION =================== -->
+<div id="choose" class="why-choose-section">
+    <div class="container">
+        <div class="row align-items-center" data-wow-delay="1s">
+            <div class="col-lg-12">
+                <div class="hendre-section-title text-center padding-lg">
+                    <h4> why choose us </h4>
+                    <h1> Some Reason for Choose <span> Problem Solving </span></h1>
+                    <h1 class="sections"> Repairing Your Home </h1>
 
-                            @foreach($whychooses as $item)
+                    <div class="rs-video2">
+                        <div class="animate-border">
+                            <a class="video-vemo-icon venobox vbox-item" data-vbtype="youtube" data-autoplay="true" href="https://youtu.be/BS4TUd7FJSg">Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="tab" data-wow-delay="3.9s">
+                    <ul class="tabs">
+                        <li><a href="#"><span>01.</span> Why Choose Us ? </a></li>
+                        <li><a href="#"><span>02.</span> MasalaHal </a></li>
+                        <li><a href="#"><span>03.</span> Mission & Vission </a></li>
+                    </ul>
+
+                    <div class="tab_content">
+                        @foreach($whychooses as $item)
                             <div class="tabs_item">
                                 <div class="row">
-
-                                    <!-- LEFT IMAGE -->
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="tab-thumb">
-                                            <img src="{{ asset($item->image) }}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <!-- RIGHT CONTENT -->
+                                    <div class="col-lg-6 col-md-6"><img src="{{ asset($item->image) }}" alt=""></div>
                                     <div class="col-lg-6 col-md-6 tab-right">
                                         <div class="hendre-section-title">
                                             <h4>{{ $item->title }}</h4>
                                             <h1>{!! $item->subtitle !!}</h1>
-                                            {{-- <h1 class="sections">{{ $item->section }}</h1> --}}
                                             <p>{{ $item->description }}</p>
                                         </div>
 
                                         <div class="row">
                                             @php
-                                                // Convert bullet_points column to array
-                                                $points = explode("\n", $item->bullet_points);
-                                                $chunks = array_chunk($points, ceil(count($points) / 2));
+                                                $points = array_filter(explode("\n", $item->bullet_points));
+                                                $chunkSize = max(1, ceil(count($points)/2)); // avoid zero
+                                                $chunks = array_chunk($points, $chunkSize);
                                             @endphp
-
                                             @foreach($chunks as $chunk)
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="about-item-list">
-                                                    <ul>
-                                                        @foreach($chunk as $point)
-                                                            @if(trim($point) != "")
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="about-item-list">
+                                                        <ul>
+                                                            @foreach($chunk as $point)
                                                                 <li><i class="bi bi-check-circle-fill"></i> {{ $point }}</li>
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @endforeach
-
-                                        </div>
-                                        <!-- Dynamic Service List -->
-                                        <div class="row">
-                                            @if(isset($service_types) && $service_types->count() > 0)
-                                                @foreach($service_types as $service)
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <div class="about-item-list">
-                                                            <ul>
-                                                                <li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li>
-                                                            </ul>
-                                                        </div>
+                                                            @endforeach
+                                                        </ul>
                                                     </div>
-                                                @endforeach
-                                            @else
-                                                <div class="col-12">
-                                                    <p>No services available currently.</p>
                                                 </div>
-                                            @endif
+                                            @endforeach
                                         </div>
-                                        <div class="hendre-button">
-                                            <a href="{{ $item->button_link }}">Get An Estimate <i class="bi bi-plus"></i></a>
-                                        </div>
-                                    </div>
 
+                                        <div class="row">
+                                            @forelse($service_types as $service)
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="about-item-list">
+                                                        <ul><li><i class="bi bi-check-circle-fill"></i> {{ $service->name }}</li></ul>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <div class="col-12"><p>No services available currently.</p></div>
+                                            @endforelse
+                                        </div>
+
+                                        <div class="hendre-button"><a href="{{ $item->button_link }}">Get An Estimate <i class="bi bi-plus"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
-                            @endforeach
-
-                        </div>
+                        @endforeach
                     </div>
 
                 </div>
@@ -577,41 +564,55 @@
                         <form action="{{ route('lead_genrate') }}" method="POST" id="dreamit-form">
                             @csrf
                             <div class="row">
+
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box">
-                                        <input type="text" name="name" placeholder="Your Name*" required>
+                                        <input type="text" name="name" placeholder="Your Name*"
+                                            value="{{ old('name') }}" required>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-box">
-                                        <input type="email" name="email" placeholder="Enter E-Mail">
+                                        <input type="email" name="email" placeholder="Enter E-Mail"
+                                            value="{{ old('email') }}">
                                     </div>
                                 </div>
+
                                 <div class="col-lg-12">
                                     <div class="form-box">
-                                        <input type="text" name="phone" placeholder="Mobile No." required>
+                                        <input type="text" name="phone" placeholder="Mobile No.*"
+                                            value="{{ old('phone') }}" required>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-12">
                                     <div class="form-box">
                                         <select id="service" name="service" required>
                                             <option value=""> Select Service* </option>
                                             @foreach($service_types as $service)
-                                                <option value="{{ $service->name }}">{{ $service->name }}</option>
+                                                <option value="{{ $service->name }}"
+                                                    {{ old('service') == $service->name ? 'selected' : '' }}>
+                                                    {{ $service->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-12">
                                     <div class="form-box">
-                                        <textarea name="message" cols="30" rows="10" placeholder="Write Message:"></textarea>
+                                        <textarea name="message" cols="30" rows="10"
+                                                placeholder="Write Message:">{{ old('message') }}</textarea>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-12">
                                     <div class="contact-form">
                                         <button type="submit">Submit Request</button>
                                     </div>
                                 </div>
+
                             </div>
                         </form>
                         <div id="status"></div>
@@ -753,36 +754,30 @@
         </div>
     </section>
 
-    @foreach($popupBanners as $banner)
+@foreach($popupBanners as $banner)
     <div id="promoPopup{{ $banner->id }}" class="popup-container">
         <div class="popup-box">
             <span class="popup-close" onclick="closePopup('{{ $banner->id }}')">×</span>
-
             <img src="{{ $banner->image }}" class="popup-img" alt="{{ $banner->title }}">
-
             <div class="popup-content">
                 <h2>{{ $banner->title }}</h2>
                 @if($banner->link)
-                <a href="{{ $banner->link }}" class="whatsapp-btn" target="_blank">
-                    Check Now
-                </a>
+                    <a href="{{ $banner->link }}" class="whatsapp-btn" target="_blank">Check Now</a>
                 @endif
             </div>
         </div>
     </div>
-    @endforeach
+@endforeach
 
 <script>
     function closePopup(id) {
         document.getElementById("promoPopup" + id).style.display = "none";
     }
 
-    // Show the popup nicely centered
     window.onload = function() {
         @if(count($popupBanners) > 0)
             document.getElementById("promoPopup{{ $popupBanners->first()->id }}").style.display = "flex";
         @endif
     };
-
 </script>
 @endsection

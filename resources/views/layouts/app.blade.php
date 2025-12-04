@@ -3,47 +3,85 @@
 
 <head>
     <meta charset="UTF-8">
+
+    <!-- Mobile Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('assets/images/q.png') }}" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="56x56" href="assets/images/fav-icon/icon.png') }}">
-	<!-- bootstrap CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css" media="all">
-	<!-- carousel CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" type="text/css" media="all">
-	<!-- animate CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" type="text/css" media="all">
-	<!-- animated-text CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/animated-text.css') }}" type="text/css" media="all">
-	<!-- font-awesome CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}" type="text/css" media="all">
-	<!-- font-flaticon CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}" type="text/css" media="all">
-	<!-- theme-default CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/theme-default.css') }}" type="text/css" media="all">
-	<!-- meanmenu CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/meanmenu.min.css') }}" type="text/css" media="all">
-	<!-- transitions CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/owl.transitions.css') }}" type="text/css" media="all">
-	<!-- venobox CSS -->
-	<link rel="stylesheet" href="{{ asset('venobox/venobox.css') }}" type="text/css" media="all">
-	<!-- bootstrap icons -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-icons.css') }}" type="text/css" media="all">
-	<!-- Main Style CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" media="all">
-	<!-- responsive CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css" media="all">
-	<!-- modernizr js -->
-	<script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
-    <link rel="icon" href="{{ asset('assets/images/maslyhal.png') }}" type="image/x-icon">
-    <title>Problem Solving</title>
+
+    <!-- Primary SEO -->
+    <title>MaslyHal - Ghar Ka Har Masla Hal</title>
+    <meta name="description" content="Electrician, Plumber, AC Repair, Painting, Carpenter & Home Maintenance services. Book Now on WhatsApp for fast, reliable home repair.">
+    <meta name="keywords" content="home services, electrician, plumber, AC repair, carpenter, pakistan home maintenance, maslyhal">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://maslyhal.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/images/maslyhal.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/maslyhal.png') }}">
+
+    <!-- Performance Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Open Graph (Social Preview) -->
+    <meta property="og:title" content="MaslyHal - Ghar Ka Har Masla Hal">
+    <meta property="og:description" content="Electrician, Plumber, AC Repair & Home Maintenance Services. Quick WhatsApp Booking!">
+    <meta property="og:image" content="{{ asset('assets/images/maslyhal.png') }}">
+    <meta property="og:url" content="https://maslyhal.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MaslyHal - Home Repair Services">
+    <meta name="twitter:description" content="Ghar ka har masla — MaslyHal se hal! Book now on WhatsApp.">
+    <meta name="twitter:image" content="{{ asset('assets/images/maslyhal.png') }}">
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "MaslyHal",
+        "image": "{{ asset('assets/images/maslyhal.png') }}",
+        "url": "https://maslyhal.com",
+        "telephone": "+923172112995",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "PK"
+        },
+        "description": "Electrician, Plumber, AC Repair, Painting & Home Maintenance services."
+    }
+    </script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animated-text.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/theme-default.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.transitions.css') }}">
+    <link rel="stylesheet" href="{{ asset('venobox/venobox.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+
+    <!-- Modernizr -->
+    <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+
     <style>
         b, strong {
             font-weight: bolder;
             color: #208bee;
         }
     </style>
-
 </head>
+
 
   <body>
     <!-- loder -->
@@ -62,7 +100,7 @@
                 <!-- Footer -->
                 @include('layouts.footer')
                 <!-- / Footer -->
-                
+
     <script src="{{ asset('assets/js/vendor/jquery-3.6.2.min.js') }}"></script>
 	<script src="{{ asset('assets/js/popper.min.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
