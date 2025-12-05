@@ -41,12 +41,12 @@
                 <div class="company-info-desc">
                     <p>{{ $generalsetting->footer_text ?? 'Professionally develop long-term performance based architectures metrics rather than' }}</p>
                 </div>
-                						<div class="follow-company-icon">
-							<a href="#"> <i class="fab fa-facebook-f"></i> </a>
-							<a href="#"> <i class="fab fa-twitter"> </i> </a>
-							<a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-							<a href="#"> <i class="fab fa-pinterest-p"></i> </a>
-						</div>
+                    <div class="follow-company-icon">
+                        <a href="{{ env('FACEBOOK_URL', '#') }}"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ env('TWITTER_URL', '#') }}"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ env('LINKEDIN_URL', '#') }}"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ env('PINTEREST_URL', '#') }}"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
             </div>
         </div>
 
