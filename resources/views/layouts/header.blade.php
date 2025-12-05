@@ -35,6 +35,7 @@
                     <div class="hendre-social-icon me-3">
                         <ul>
                             <li><a href="{{ env('FACEBOOK_URL', '#') }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="{{ env('GMAIL_URL', '#') }}" target="_blank"><i class="fas fa-envelope"></i></a></li>
                             <li><a href="{{ env('TWITTER_URL', '#') }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
                             <li><a href="{{ env('LINKEDIN_URL', '#') }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                             <li><a href="{{ env('PINTEREST_URL', '#') }}" target="_blank"><i class="fab fa-pinterest-p"></i></a></li>

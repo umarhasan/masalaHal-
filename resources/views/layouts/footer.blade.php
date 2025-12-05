@@ -88,10 +88,10 @@
                 <h4 class="widget-title"> Working Hours </h4>
                 <div class="company-work-hour">
                     <ul>
-                        <li>Mon - Wed <span class="table-text">8.00 AM - 5.00 PM</span></li>
-                        <li>Thu - Fri <span>9.00 AM - 4.00 PM</span></li>
-                        <li>Saturday <span>9.00 AM - 2.00 PM</span></li>
-                        <li class="table-brb">Sunday <span>Closed</span></li>
+                        <li>Mon - Wed <span>{{ env('WORKING_HOURS_MON_WED', '8.00 AM - 5.00 PM') }}</span></li>
+                        <li>Thu - Fri <span>{{ env('WORKING_HOURS_THU_FRI', '9.00 AM - 4.00 PM') }}</span></li>
+                        <li>Saturday <span>{{ env('WORKING_HOURS_SAT', '9.00 AM - 2.00 PM') }}</span></li>
+                        <li>Sunday <span>{{ env('WORKING_HOURS_SUN', 'Closed') }}</span></li>
                     </ul>
                 </div>
             </div>
@@ -113,7 +113,7 @@
             <div class="col-lg-6 col-md-6">
                 <div class="footer-bottom-content">
                     <div class="footer-bottom-content-copy">
-                        <p>Copyright © 2026 <span>Maslyhal.com</span>. All rights reserved.</p>
+                        <p>Copyright © {{ env('COPYRIGHT_YEAR', date('Y')) }} <span>{{ env('COPYRIGHT_TEXT', 'Maslyhal.com') }}</span>. All rights reserved.</p>
                     </div>
                 </div>
             </div>
