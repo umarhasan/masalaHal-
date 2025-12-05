@@ -93,11 +93,11 @@ use App\Http\Controllers\company\VendorController;
     Route::get('/shop/{slug}', [HomeController::class, 'shop_details'])->name('shop.detail');
     // End Employee
     // Socailite End
-    Auth::routes();
-    // Auth::routes(['verify' => true]);
+    // Auth::routes();
+    Auth::routes(['verify' => true]);
     //Admin
-    // Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
-    Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
+    Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
+    // Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
         Route::get('/change/password', [DashboardController::class, 'change_password'])->name('change_password');
         Route::post('/store_change_password', [DashboardController::class, 'store_change_password'])->name('store_change_password');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
