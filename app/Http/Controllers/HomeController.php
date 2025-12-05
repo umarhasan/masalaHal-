@@ -95,9 +95,6 @@ class HomeController extends Controller
             'email' => 'nullable|email',
             'need' => 'required|string|max:255',
             'business' => 'nullable|string|max:255',
-            'industry' => 'nullable|string|max:255',
-            'live_website' => 'nullable|string|max:255',
-            'hire' => 'nullable|string|max:255',
             'budget' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:2000',
         ]);
@@ -135,7 +132,7 @@ class HomeController extends Controller
                 'country' => $country,
                 'city' => $city,
                 'state' => $state,
-                'zip' => $zip,
+                'zip_code' => $zip,
                 'address' => $address,
             ]);
 
@@ -146,9 +143,6 @@ class HomeController extends Controller
         $leadData = [
             'need' => $request->need,
             'business' => $request->business ?? null,
-            'industry' => $request->industry ?? null,
-            'live_website' => $request->live_website ?? null,
-            'hire' => $request->hire ?? null,
             'budget' => $request->budget ?? null,
             'name' => $request->name,
             'phone' => $request->phone,
@@ -158,7 +152,7 @@ class HomeController extends Controller
             'city' => $city,
             'state' => $state,
             'country' => $country,
-            'created_by' => $user->id,
+            // 'created_by' => $user->id,
         ];
 
         $lead = LeadGenrate::create($leadData);
@@ -174,25 +168,43 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Lead generated successfully!');
     }
 
-    // onclick Service Type
     public function getServiceFormData($serviceType)
     {
         $service = LeadService::where('name', $serviceType)->first();
 
-        if ($service && $service->services->count() > 0) {
-            $html = '<h4>Select a service:</h4>';
-            foreach ($service->services as $item) {
-                $html .= '<div class="field-div">
-                    <input type="radio" id="service-'.$item->id.'" name="service_selected" value="'.$item->name.'" required>
-                    <label for="service-'.$item->id.'">'.$item->name.' - Price: '.$item->price.' - Credit: '.$item->credit.'</label>
-                    <input type="hidden" name="service_id" value="'.$item->id.'">
+        if ($service) {
+            $dynamicContent = '';
+            $url = asset('storage/' . $service->image);
+            if ($service->services && $service->services->count() > 0) {
+                $dynamicContent .= '<div class="row">
+                <div class="col-12 text-center">
+                    <div class="image-container">
+                        <img src="' . $url . '"  class="img-fluid" style="width: 100%; height:200px; border-radius: 10px;">
+                    </div>
+                    <h2 class="fs-title">What are your ' . $serviceType . ' needs?</h2>
+                </div>
                 </div>';
+
+                foreach ($service->services as $item) {
+                    $dynamicContent .= '<div class="field-div">
+                        <input type="radio" id="service-'.$item->id.'" name="business" value="'.$item->name.'" required>
+                        <label for="service-'.$item->name.'" style="color: #000;font-size: 13px;">'.$item->description.' - Price: '.$item->price.' - Credit: '.$item->credit.'</label>
+                        <input type="hidden" name="service_id" value="'.$item->id.'">
+                        <input type="hidden" name="budget" value="'.$item->price.'">
+                        <input type="hidden" name="credit" value="'.$item->credit.'">
+                    </div>';
+                }
+            } else {
+                $dynamicContent = '<div class="field-div"><p>No services found for "' . $serviceType . '".</p></div>';
             }
-            return response()->json(['html' => $html]);
+
+            return response()->json(['html' => $dynamicContent]);
         }
 
-        return response()->json(['html' => '<p>No services found for "'.$serviceType.'"</p>']);
+        return response()->json(['html' => 'No form data available.'], 404);
     }
+    // onclick Service Type
+
 
     public function login(){
         return view('auth.login');

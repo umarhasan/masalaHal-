@@ -601,36 +601,6 @@
                             <!-- Dynamic Services -->
                             <div class="col-lg-12" id="services-container"></div>
 
-                            <!-- Business Details -->
-                            <div class="col-lg-12">
-                                <div class="form-box">
-                                    <input type="text" name="business" placeholder="Business Name" value="{{ old('business') }}">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-box">
-                                    <input type="text" name="industry" placeholder="Industry" value="{{ old('industry') }}">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-box">
-                                    <input type="text" name="live_website" placeholder="Live Website (if any)" value="{{ old('live_website') }}">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-box">
-                                    <input type="text" name="hire" placeholder="Hiring Need" value="{{ old('hire') }}">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-box">
-                                    <input type="text" name="budget" placeholder="Budget" value="{{ old('budget') }}">
-                                </div>
-                            </div>
 
                             <!-- Message -->
                             <div class="col-lg-12">
