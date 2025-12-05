@@ -103,40 +103,11 @@ class HomeController extends Controller
         $ip = $request->ip();
         $location = @json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
 
-        $lat = $location->lat ?? null;
-        $lon = $location->lon ?? null;
-
-        // Defaults
         $country = $location->country ?? 'N/A';
         $city = $location->city ?? 'N/A';
         $state = $location->regionName ?? 'N/A';
         $zip = $location->zip ?? 'N/A';
-        $address = $location->query ?? 'N/A';
-
-        // ======================================
-        // ✅ REVERSE GEOCODING (Lat/Lng → Full Address)
-        // ======================================
-        if (!empty($lat) && !empty($lon)) {
-
-            $url = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
-
-            $response = @file_get_contents($url);
-            $geo = json_decode($response, true);
-
-            if (!empty($geo['address'])) {
-
-                $addr = $geo['address'];
-
-                // Overwrite with more accurate data
-                $address = $geo['display_name'] ?? $address;
-                $city = $addr['city'] ?? $addr['town'] ?? $addr['village'] ?? $city;
-                $state = $addr['state'] ?? $state;
-                $country = $addr['country'] ?? $country;
-                $zip = $addr['postcode'] ?? $zip;
-            }
-        }
-        // ======================================
-
+        $address = $request->address ?? 'N/A';
 
         // Check or create user
         $user = null;
@@ -182,6 +153,7 @@ class HomeController extends Controller
             'city' => $city,
             'state' => $state,
             'country' => $country,
+            // 'created_by' => $user->id,
         ];
 
         $lead = LeadGenrate::create($leadData);
@@ -207,10 +179,7 @@ class HomeController extends Controller
             if ($service->services && $service->services->count() > 0) {
                 $dynamicContent .= '<div class="row">
                 <div class="col-12 text-center">
-                    <div class="image-container">
-                        <img src="' . $url . '"  class="img-fluid" style="width: 100%; height:200px; border-radius: 10px;">
-                    </div>
-                    <h2 class="fs-title">What are your ' . $serviceType . ' needs?</h2>
+                    <h4 class="fs-title"> ' . $serviceType . '</h4>
                 </div>
                 </div>';
 

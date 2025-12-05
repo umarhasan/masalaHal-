@@ -601,7 +601,12 @@
                             <!-- Dynamic Services -->
                             <div class="col-lg-12" id="services-container"></div>
 
-
+                            <!-- address -->
+                            <div class="col-lg-12">
+                                <div class="form-box">
+                                    <textarea name="address" cols="30" rows="5" placeholder="Address:">{{ old('address') }}</textarea>
+                                </div>
+                            </div>
                             <!-- Message -->
                             <div class="col-lg-12">
                                 <div class="form-box">
