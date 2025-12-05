@@ -94,7 +94,6 @@ use App\Http\Controllers\company\VendorController;
     // End Employee
     // Socailite End
     // Auth::routes();
-    Auth::routes(['verify' => true]);
     //Admin
     // Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
     Route::group(['prefix' => 'admin'], function () {
