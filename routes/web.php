@@ -96,7 +96,8 @@ use App\Http\Controllers\company\VendorController;
     // Auth::routes();
     Auth::routes(['verify' => true]);
     //Admin
-    Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
+    // Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
+    Route::group(['prefix' => 'admin'], function () {
         Route::get('/change/password', [DashboardController::class, 'change_password'])->name('change_password');
         Route::post('/store_change_password', [DashboardController::class, 'store_change_password'])->name('store_change_password');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
