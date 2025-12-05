@@ -93,7 +93,8 @@ use App\Http\Controllers\company\VendorController;
     Route::get('/shop/{slug}', [HomeController::class, 'shop_details'])->name('shop.detail');
     // End Employee
     // Socailite End
-    // Auth::routes();
+    Auth::routes();
+    // Auth::routes(['verify' => true]);
     //Admin
     // Route::group(['prefix' => 'admin','middleware'=> ['auth', 'verified']], function(){
     Route::group(['prefix' => 'admin'], function () {
