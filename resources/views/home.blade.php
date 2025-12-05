@@ -163,7 +163,7 @@
     /* -------------------- Testimonial -------------------- */
     .teastimonial-single-box .testi-desc {
         font-size: 14px;
-        color: #555;
+        color: #fff;
     }
 
     /* -------------------- Booking Form -------------------- */
