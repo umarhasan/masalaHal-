@@ -99,19 +99,49 @@ class HomeController extends Controller
             'message' => 'nullable|string|max:2000',
         ]);
 
-        // IP-based location
+        // IP-based location (first stage)
         $ip = $request->ip();
         $location = @json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
 
+        $lat = $location->lat ?? null;
+        $lon = $location->lon ?? null;
+
+        // Defaults
         $country = $location->country ?? 'N/A';
         $city = $location->city ?? 'N/A';
         $state = $location->regionName ?? 'N/A';
         $zip = $location->zip ?? 'N/A';
         $address = $location->query ?? 'N/A';
 
+        // ======================================
+        // ✅ REVERSE GEOCODING (Lat/Lng → Full Address)
+        // ======================================
+        if (!empty($lat) && !empty($lon)) {
+
+            $url = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
+
+            $response = @file_get_contents($url);
+            $geo = json_decode($response, true);
+
+            if (!empty($geo['address'])) {
+
+                $addr = $geo['address'];
+
+                // Overwrite with more accurate data
+                $address = $geo['display_name'] ?? $address;
+                $city = $addr['city'] ?? $addr['town'] ?? $addr['village'] ?? $city;
+                $state = $addr['state'] ?? $state;
+                $country = $addr['country'] ?? $country;
+                $zip = $addr['postcode'] ?? $zip;
+            }
+        }
+        // ======================================
+
+
         // Check or create user
         $user = null;
         $password = '12345678';
+
         if ($request->email) {
             $user = User::where('email', $request->email)->first();
         }
@@ -152,7 +182,6 @@ class HomeController extends Controller
             'city' => $city,
             'state' => $state,
             'country' => $country,
-            // 'created_by' => $user->id,
         ];
 
         $lead = LeadGenrate::create($leadData);
