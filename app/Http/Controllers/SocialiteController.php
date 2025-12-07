@@ -60,7 +60,7 @@ class SocialiteController extends Controller
 
 
             // Assign the default role (e.g., 'company') to the user
-            $user->assignRole('company');
+            $user->assignRole('customer');
             $UserInformation = UserInformation::create([
                 'user_id' => $user->id,
                 'name' => $socialUser->getName(),
@@ -80,14 +80,14 @@ class SocialiteController extends Controller
         // Ensure it's an array and has at least one role
         if (is_array($role) && count($role) > 0) {
             switch ($role[0]) {
-                case 'company':
-                    return redirect('company/dashboard'); // Redirect to company dashboard
+                case 'customer':
+                    return redirect('/'); // Redirect to company dashboard
                 default:
                     return redirect('login'); // Default redirection if role is not matched
             }
         }
 
         // Fallback if no roles are assigned
-        return redirect('company/dashboard');
+        return redirect('/');
     }
 }
