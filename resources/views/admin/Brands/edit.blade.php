@@ -4,24 +4,38 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>Edit Brand</h1>
+        <a href="{{ route('brands.index') }}" class="btn btn-secondary mb-2">Back</a>
     </section>
 
     <section class="content">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
+            </div>
+        @endif
+
         <form action="{{ route('brands.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf @method('PUT')
+            @csrf
+            @method('PUT')
+
             <div class="mb-3">
                 <label>Name</label>
-                <input type="text" name="name" value="{{ $brand->name }}" class="form-control" required>
+                <input type="text" name="name" class="form-control" value="{{ $brand->name }}" required>
             </div>
+
             <div class="mb-3">
                 <label>Slug</label>
-                <input type="text" name="slug" value="{{ $brand->slug }}" class="form-control" required>
+                <input type="text" name="slug" class="form-control" value="{{ $brand->slug }}" required>
             </div>
+
             <div class="mb-3">
                 <label>Logo</label>
                 <input type="file" name="logo" class="form-control">
-                @if($brand->logo)<img src="{{ asset('uploads/brands/'.$brand->logo) }}" width="60">@endif
+                @if($brand->logo)
+                    <img src="{{ asset('uploads/brands/'.$brand->logo) }}" width="80" class="mt-2">
+                @endif
             </div>
+
             <button class="btn btn-success">Update Brand</button>
         </form>
     </section>
