@@ -1,42 +1,42 @@
 @extends('admin.layouts.app')
 
-
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2> Show User</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-                </div>
-            </div>
+        <div class="container-fluid">
+            <h2>Category Details</h2>
+            <a class="btn btn-secondary mb-2" href="{{ route('categories.index') }}">Back to List</a>
         </div>
+    </section>
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    {{ $user->name }}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Email:</strong>
-                    {{ $user->email }}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Roles:</strong>
-                    @if(!empty($user->getRoleNames()))
-                        @foreach($user->getRoleNames() as $v)
-                            <label class="badge badge-success">{{ $v }}</label>
-                        @endforeach
-                    @endif
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-body">
+                    <div class="form-group">
+                        <strong>Name:</strong> {{ $category->name }}
+                    </div>
+                    <div class="form-group">
+                        <strong>Slug:</strong> {{ $category->slug }}
+                    </div>
+                    <div class="form-group">
+                        <strong>Status:</strong> {{ $category->status ? 'Active' : 'Inactive' }}
+                    </div>
+                    <div class="form-group">
+                        <strong>Image:</strong>
+                        @if($category->image)
+                            <br>
+                            <img src="{{ asset('uploads/categories/'.$category->image) }}" width="120">
+                        @else
+                            N/A
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <strong>Created At:</strong> {{ $category->created_at->format('d M, Y') }}
+                    </div>
+                    <div class="form-group">
+                        <strong>Updated At:</strong> {{ $category->updated_at->format('d M, Y') }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@ use App\Events\LeadGenerated;
 use App\Mail\LeadGeneratedMail;
 use App\Models\About;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -218,24 +218,90 @@ class HomeController extends Controller
     }
 
     public function shop(Request $request) {
-        $categories = Category::with('products')->get();
+        $perPage = (int) $request->get('perPage', 12);
 
-        $popular_products = Product::orderBy('id', 'desc')->take(5)->get();
+        $q = Product::query()
+            ->with(['category', 'brand', 'images'])
+            ->where('is_approved', 1)
+            ->where('status', 1);
 
-        $products = Product::query();
-
-        if ($request->s) {
-            $products = $products->where('name', 'like', '%'.$request->s.'%');
+        // Category Filter
+        if ($request->filled('category')) {
+            $q->whereIn('category_id', (array) $request->category);
         }
 
-        $products = $products->paginate(12);
+        // Brand Filter
+        if ($request->filled('brand')) {
+            $q->whereIn('brand_id', (array) $request->brand);
+        }
 
-        return view('shop', compact('categories', 'popular_products', 'products'));
+        // Condition Filter
+        if ($request->filled('condition')) {
+            $q->where('condition', $request->condition);
+        }
+
+        // Price Range
+        $min = $request->min ?? 0;
+        $max = $request->max ?? 9999999;
+        $q->whereBetween('price', [$min, $max]);
+
+        // Search
+        if ($request->filled('s')) {
+            $s = $request->s;
+            $q->where(function ($w) use ($s) {
+                $w->where('name', 'LIKE', "%$s%")
+                  ->orWhere('description', 'LIKE', "%$s%");
+            });
+        }
+
+        // Sorting
+        switch ($request->sort) {
+            case 'price_asc':
+                $q->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $q->orderBy('price', 'desc');
+                break;
+            case 'latest':
+                $q->latest();
+                break;
+            case 'popular':
+                $q->orderBy('views', 'desc');
+                break;
+            default:
+                $q->latest();
+        }
+
+        // Cached Categories (Optional)
+        $categories = Cache::remember('shop_categories', 3600, function () {
+            return Category::where('status', 1)->get();
+        });
+
+        $products = $q->paginate($perPage)->withQueryString();
+
+        return view('shop', compact('products', 'categories'));
     }
 
+    // PRODUCT DETAILS PAGE
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
-        return view('shop_details', compact('product'));
+        $product = Product::with([
+            'images',
+            'variants',
+            'colors',
+            'sizes',
+            'reviews.user',
+            'brand',
+            'category'
+        ])
+        ->where('slug', $slug)
+        ->where('is_approved', 1)
+        ->where('status', 1)
+        ->firstOrFail();
+
+        // Optional: Increase views
+        // $product->increment('views');
+
+        return view('shop.details', compact('product'));
     }
 }

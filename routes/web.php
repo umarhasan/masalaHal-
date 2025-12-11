@@ -25,12 +25,21 @@ use App\Http\Controllers\Admin\ProcessController;
 use App\Http\Controllers\Admin\PopupBannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+// New Addtional
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\SellerController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\FlashSaleController;
+
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\QuoteController;
-
+use App\Http\Controllers\SellerProductController;
 
 // users Dashboard
 use App\Http\Controllers\customer\DashboardController as customerDashboardController;
@@ -91,6 +100,15 @@ use App\Http\Controllers\company\VendorController;
     Route::post('/quotes', [QuoteController::class, 'store'])->name('quotes.store')->middleware('auth');
     Route::get('/shop', [HomeController::class, 'shop'])->name('shop.index');
     Route::get('/shop/{slug}', [HomeController::class, 'shop_details'])->name('shop.detail');
+
+    Route::get('/cart', [CartController::class,'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class,'add'])->name('cart.add');
+    Route::delete('/cart/item/{id}', [CartController::class,'remove'])->name('cart.remove');
+
+    // Checkout
+    Route::get('/checkout', [CheckoutController::class,'checkout'])->name('checkout.index')->middleware('auth');
+    Route::post('/checkout/place', [CheckoutController::class,'placeOrder'])->name('checkout.place')->middleware('auth');
+
     // End Employee
     // Socailite End
     Auth::routes();
@@ -125,6 +143,13 @@ use App\Http\Controllers\company\VendorController;
 
         Route::resource('categories', CategoryController::class);
         Route::resource('products', ProductController::class);
+        Route::post('products/approve/{id}', [ProductController::class,'approve'])->name('products.approve');
+        Route::resource('brands', BrandController::class);
+        Route::resource('sellers', SellerController::class);
+        Route::post('sellers/verify/{id}', [SellerController::class,'verify'])->name('sellers.verify');
+        Route::resource('orders', OrderController::class);
+        Route::resource('banners', BannerController::class);
+        Route::resource('flash-sales', FlashSaleController::class);
 
         Route::post('bulk-update-page', [ServiceController::class, 'bulkUpdatePage'])->name('services.bulkUpdatePage');
         Route::get('service/delete/{id}', [ServiceController::class,'destroy'])->name('services.destroy');
@@ -147,6 +172,11 @@ use App\Http\Controllers\company\VendorController;
         Route::get('/places/{placeId}/view', [LocationSearchController::class, 'viewPlace'])->name('places.view');
         Route::get('/places/{placeId}/review', [LocationSearchController::class, 'ReviewPlace'])->name('places.review');
         Route::post('/submit-review', [LocationSearchController::class, 'RivewStore'])->name('review.store');
+
+        Route::get('products/pending', [\App\Http\Controllers\Admin\ProductApprovalController::class,'index'])->name('admin.products.pending');
+        Route::post('products/{id}/approve', [\App\Http\Controllers\Admin\ProductApprovalController::class,'approve'])->name('admin.products.approve');
+        Route::post('products/{id}/reject', [\App\Http\Controllers\Admin\ProductApprovalController::class,'reject'])->name('admin.products.reject');
+
     });
     //Customer
     Route::group(['prefix' => 'customer','middleware'=> ['auth', 'verified']], function(){
@@ -160,6 +190,11 @@ use App\Http\Controllers\company\VendorController;
         Route::post('/update/profile/{section}', [customerDashboardController::class, 'usersProfileUpdate'])->name('customer.profile.update');
         Route::post('/edit/profile', [customerDashboardController::class, 'user_edit_profile'])->name('customer.edit.profile');
         Route::post('/bank/detail', [customerDashboardController::class, 'usersBankDetail'])->name('customer.bank.detail');
+    });
+    Route::prefix('seller')->middleware(['auth'])->group(function() {
+        Route::get('products', [SellerProductController::class,'index'])->name('seller.products.index');
+        Route::get('products/create', [SellerProductController::class,'create'])->name('seller.products.create');
+        Route::post('products/store', [SellerProductController::class,'store'])->name('seller.products.store');
     });
     //Company
     Route::group(['prefix' => 'company','middleware'=> ['auth', 'verified']], function(){

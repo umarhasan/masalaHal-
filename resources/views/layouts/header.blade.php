@@ -58,21 +58,32 @@
 
                         @guest
                         <div class="header-button">
-                            <a class="quote-btn" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
+                            <a class="quote-btn btn btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
+                            <a class="quote-btn btn btn-sm" href="{{ route('signup') }}">Sign Up</a>
                         </div>
+                        {{-- <div class="header-button">
+                            <a class="quote-btn" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
+                            <a class="btn btn-primary me-2" href="{{ route('signup') }}">Sign Up</a>
+                        </div> --}}
                         @endguest
-                        
+
                         @auth
                         <div class="dropdown">
                             <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a>
-                                <a class="dropdown-item" href="{{ route('customer.profile') }}">Profile</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="{{ route('customer.profile') }}">Profile</a>
+                                    <a class="dropdown-item quote-btn" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item text-danger" type="submit">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                            </div>    
 
                         @endauth
                     </div>

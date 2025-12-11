@@ -2,146 +2,123 @@
 
 @section('content')
 <div class="shop-section">
-    <div class="container">
-        <div class="row">
+  <div class="container py-4">
 
-            <!-- Sidebar -->
-            <div class="col-lg-3 col-md-12 pr-0 pl-0">
+    <!-- PAGE HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold">Shop</h3>
 
-                <!-- Categories Widget -->
-                <div class="widget-check-box">
-                    <div class="categories-title">
-                        <h4> Categories </h4>
+        <form class="d-flex" method="GET">
+            <input type="text" name="s" value="{{ request('s') }}" class="form-control"
+                placeholder="Search products...">
+            <button class="btn btn-primary ms-2">Search</button>
+        </form>
+    </div>
+
+    <div class="row">
+
+        <!-- FILTER SIDEBAR -->
+        <div class="col-lg-3">
+            <div class="card p-3 shadow-sm">
+
+                <h5 class="fw-bold">Filters</h5>
+
+                <form method="GET">
+
+                    <!-- CATEGORY FILTER -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Category</label>
+                        <select name="category[]" class="form-select" multiple>
+                            @foreach($categories as $cat)
+                                <option value="{{ $cat->id }}"
+                                    @if(request()->has('category') && in_array($cat->id, request('category'))) selected @endif>
+                                    {{ $cat->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
-                    @foreach($categories as $category)
-                        <label class="widget-check">
-                            {{ $category->name }} <p>({{ $category->products->count() }})</p>
-                            <input type="checkbox" name="category[]" value="{{ $category->id }}">
-                            <span class="checkmark"></span>
-                        </label>
-                    @endforeach
-                </div>
 
-                <!-- Price Range Widget -->
-                <div class="range-wrapper-box mt-4">
-                    <div class="categories-title">
-                        <h4> Price Range </h4>
-                    </div>
-                    <div id="slider-range"></div>
-                    <div class="slider-labels d-flex justify-content-between mt-2">
-                        <span id="slider-range-value1"></span>
-                        <span id="slider-range-value2"></span>
-                    </div>
-                </div>
-
-                <!-- Popular Products -->
-                <div class="product-categories-box mt-4">
-                    <div class="categories-title">
-                        <h4> Popular Products </h4>
-                    </div>
-                    @foreach($popular_products as $product)
-                    <div class="products-collection d-flex mb-3">
-                        <div class="product-thumb me-2">
-                            <img src="{{ asset('uploads/products/'.$product->image) }}" alt="{{ $product->name }}" style="width:100%;">
-                        </div>
-                        <div class="products-content">
-                            <div class="products-title">
-                                <h6>{{ $product->name }}</h6>
-                            </div>
-                            <div class="product-price">
-                                <span>Rs: {{ $product->price }}</span>
-                            </div>
-                            <div class="product-icon-list">
-                                <ul class="d-flex">
-                                    @for($i=0;$i<5;$i++)
-                                        <li><i class="bi {{ $i < $product->rating ? 'bi-star-fill' : 'bi-star' }}"></i></li>
-                                    @endfor
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-
-            </div> <!-- /Sidebar -->
-
-            <!-- Products Grid -->
-            <div class="col-lg-9 col-md-12">
-                <div class="row mb-3">
-
-                    <!-- Items per page -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="form_box">
-                            <p class="form-text">Show on Page</p>
-                            <select id="perPage" class="form-select">
-                                <option value="6">6 items</option>
-                                <option value="12">12 items</option>
-                                <option value="24">24 items</option>
-                            </select>
+                    <!-- PRICE FILTER -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Price Range</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" name="min" class="form-control" placeholder="Min"
+                                   value="{{ request('min') }}">
+                            <input type="number" name="max" class="form-control" placeholder="Max"
+                                   value="{{ request('max') }}">
                         </div>
                     </div>
 
-                    <!-- Search -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="widget_search upper">
-                            <form action="{{ route('shop.index') }}" method="get">
-                                <input type="text" name="s" value="{{ request('s') }}" placeholder="Search Here" title="Search for:">
-                                <button type="submit" class="icons"><i class="fa fa-search"></i></button>
-                            </form>
+                    <!-- CONDITION -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Condition</label>
+                        <select name="condition" class="form-select">
+                            <option value="">Any</option>
+                            <option value="new" {{ request('condition')=='new'?'selected':'' }}>New</option>
+                            <option value="used" {{ request('condition')=='used'?'selected':'' }}>Used</option>
+                        </select>
+                    </div>
+
+                    <!-- SORTING -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Sort By</label>
+                        <select name="sort" class="form-select">
+                            <option value="">Latest</option>
+                            <option value="price_asc"  {{ request('sort')=='price_asc'?'selected':'' }}>Price Low to High</option>
+                            <option value="price_desc" {{ request('sort')=='price_desc'?'selected':'' }}>Price High to Low</option>
+                            <option value="popular"    {{ request('sort')=='popular'?'selected':'' }}>Most Viewed</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-dark w-100">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PRODUCTS LIST -->
+        <div class="col-lg-9">
+
+            <div class="row">
+
+                @forelse($products as $p)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+
+                            <a href="{{ route('product.details', $p->slug) }}">
+                                <img src="{{ $p->images->first()->url ?? 'https://via.placeholder.com/300' }}"
+                                     class="card-img-top" style="height: 220px; object-fit: cover;">
+                            </a>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">{{ $p->name }}</h6>
+                                <p class="text-muted">{{ Str::limit($p->description, 50) }}</p>
+                                <h5 class="text-primary fw-bold">{{ number_format($p->price) }} PKR</h5>
+                            </div>
+
+                            <div class="card-footer bg-white">
+                                <a href="{{ route('product.details', $p->slug) }}" class="btn btn-primary w-100">
+                                    View Details
+                                </a>
+                            </div>
+
                         </div>
                     </div>
-                </div>
+                @empty
+                    <p class="text-center">No products found.</p>
+                @endforelse
 
-                <!-- Products Loop -->
-                <div class="row products">
-                    @foreach($products as $product)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="single-products-box">
-                            <div class="products-thumb position-relative">
-                                <img src="{{ asset('uploads/products/'.$product->image) }}" alt="{{ $product->name }}">
-                                @if($product->sale_price)
-                                <div class="product-sale"><span> SALE </span></div>
-                                @endif
-                                <div class="product-thumb-icon">
-                                    <a href="#"> <i class="bi bi-cart3"></i> </a>
-                                    {{-- <a href="{{ route('cart.add', $product->id) }}"> <i class="bi bi-cart3"></i> </a> --}}
-                                    <a href="{{ route('shop.detail', $product->slug) }}"> <i class="bi bi-suit-heart"></i> </a>
-                                </div>
-                            </div>
-                            <div class="product-content mt-2">
-                                <ul class="product-rating d-flex">
-                                    @for($i=0;$i<5;$i++)
-                                        <li><i class="bi {{ $i < $product->rating ? 'bi-star-fill' : 'bi-star' }}"></i></li>
-                                    @endfor
-                                </ul>
-                                <div class="product-title">
-                                    <h2>{{ $product->name }}</h2>
-                                </div>
-                                <div class="product-price">
-                                    <p>£{{ $product->price }}
-                                        @if($product->sale_price)
-                                        <span>Rs: {{ $product->sale_price }}</span>
-                                        @endif
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+            </div>
 
-                <!-- Pagination -->
-                <div class="col-lg-12">
-                    <div class="pagination-menu text-center mt-4">
-                        {{ $products->links() }}
-                    </div>
-                </div>
-
-            </div> <!-- /Products Grid -->
+            <!-- PAGINATION -->
+            <div class="mt-3">
+                {{ $products->links() }}
+            </div>
 
         </div>
 
     </div>
+
+</div>
 </div>
    <!-- Get a Free Quote Section -->
     <section id="get-free-quote" class="quote-section">
@@ -181,4 +158,11 @@
         </div>
         </div>
     </section>
+<script>
+document.getElementById('perPage')?.addEventListener('change', function(){
+  const url = new URL(window.location.href);
+  url.searchParams.set('perPage', this.value);
+  window.location = url.toString();
+});
+</script>
 @endsection

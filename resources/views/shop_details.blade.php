@@ -1,38 +1,28 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container py-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="{{ asset('uploads/products/'.$product->image) }}" class="img-fluid" alt="{{ $product->name }}">
-            @if($product->images->count())
-            <div class="mt-3 d-flex flex-wrap">
-                @foreach($product->images as $img)
-                    <img src="{{ asset('uploads/products/gallery/'.$img->image) }}" class="img-thumbnail me-2 mb-2" style="width:70px; height:70px; object-fit:cover;">
-                @endforeach
-            </div>
-            @endif
-        </div>
-        <div class="col-md-6">
-            <h2>{{ $product->name }}</h2>
-            <p>{{ $product->description }}</p>
-            <h4>
-                @if($product->old_price)
-                    <span class="text-muted text-decoration-line-through">${{ number_format($product->old_price, 2) }}</span>
-                @endif
-                <span class="fw-bold ms-1">${{ number_format($product->price, 2) }}</span>
-            </h4>
-            @if($product->sizes)
-                <p>Size: {{ implode(', ', $product->sizes->pluck('size')->toArray()) }}</p>
-            @endif
-            @if($product->colors)
-                <p>Color:
-                    @foreach($product->colors as $color)
-                        <span style="background-color: {{ $color->color_code ?? '#000' }}; display:inline-block; width:20px; height:20px; border-radius:50%; margin-right:5px;"></span>
-                    @endforeach
-                </p>
-            @endif
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ asset('uploads/products/'.$product->image) }}" class="img-fluid">
+      @foreach($product->images as $img)
+        <img src="{{ asset('uploads/products/gallery/'.$img->image) }}" style="width:80px;">
+      @endforeach
     </div>
+    <div class="col-md-6">
+      <h3>{{ $product->name }}</h3>
+      <p>Rs. {{ $product->sale_price ?? $product->price }}</p>
+      <p>Condition: {{ ucfirst($product->condition) }}</p>
+
+      <form action="{{ route('cart.add') }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <div class="mb-2">
+          <label>Quantity</label>
+          <input type="number" name="quantity" value="1" min="1" class="form-control" style="width:120px;">
+        </div>
+        <button class="btn btn-primary">Add to Cart</button>
+      </form>
+    </div>
+  </div>
 </div>
 @endsection
