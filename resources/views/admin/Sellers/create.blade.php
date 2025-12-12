@@ -13,7 +13,7 @@
 
             <div class="mb-3">
                 <label>User</label>
-                <select name="user_id" class="form-control">
+                <select name="user_id" class="form-control" required>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->email }})</option>
                     @endforeach

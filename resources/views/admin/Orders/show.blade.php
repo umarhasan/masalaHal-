@@ -27,6 +27,7 @@
                     <thead>
                         <tr>
                             <th>Product</th>
+                            <th>Image</th>
                             <th>Variant</th>
                             <th>Quantity</th>
                             <th>Unit Price</th>
@@ -37,6 +38,11 @@
                         @foreach($order->order_items as $item)
                         <tr>
                             <td>{{ $item->product->name }}</td>
+                            <td>
+                                @if($item->product->image)
+                                    <img src="{{ asset('uploads/products/'.$item->product->image) }}" width="60">
+                                @endif
+                            </td>
                             <td>
                                 @if($item->variant_id)
                                     Color: {{ $item->variant->color?->color_name ?? 'N/A' }}, Size: {{ $item->variant->size?->size ?? 'N/A' }}
@@ -57,7 +63,6 @@
                 <p><strong>Shipping:</strong> ${{ number_format($order->shipping,2) }}</p>
                 <p><strong>Tax:</strong> ${{ number_format($order->tax,2) }}</p>
                 <p><strong>Total:</strong> ${{ number_format($order->total,2) }}</p>
-
             </div>
         </div>
     </section>

@@ -6,10 +6,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-10">
-                    <h1>Brands</h1>
+                    <h1>Flash Sales</h1>
                 </div>
                 <div class="col-sm-2">
-                    <a href="{{ route('brands.create') }}" class="btn btn-success float-right">New Brand</a>
+                    <a href="{{ route('flash-sales.create') }}" class="btn btn-success float-right">Add Flash Sale</a>
                 </div>
             </div>
         </div>
@@ -23,27 +23,24 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Logo</th>
+                                <th>Title</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($brands as $brand)
+                            @foreach($flashSales as $flash)
                             <tr>
-                                <td>{{ $brand->id }}</td>
-                                <td>{{ $brand->name }}</td>
-                                <td>{{ $brand->slug }}</td>
+                                <td>{{ $flash->id }}</td>
+                                <td>{{ $flash->title }}</td>
+                                <td>{{ $flash->starts_at }}</td>
+                                <td>{{ $flash->ends_at }}</td>
+                                <td>{{ $flash->is_active ? 'Active' : 'Inactive' }}</td>
                                 <td>
-                                    @if($brand->logo)
-                                        <img src="{{ asset('uploads/brands/'.$brand->logo) }}" width="80">
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('brands.show', $brand->id) }}" class="btn btn-info btn-sm">View</a>
-                                    <a href="{{ route('brands.edit', $brand->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
+                                    <a href="{{ route('flash-sales.edit', $flash->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{ route('flash-sales.destroy', $flash->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm">Delete</button>
@@ -53,6 +50,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $flashSales->links() }}
                 </div>
             </div>
         </div>
