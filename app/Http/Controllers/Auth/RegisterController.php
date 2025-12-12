@@ -58,14 +58,14 @@ class RegisterController extends Controller
     public function register_form()
     {
 
-        $data['roles'] = \Spatie\Permission\Models\Role::select(['id','name'])
-        ->where(function($query){
-            $query->where('name','!=', 'Admin');
-            $query->where('name','!=', 'Super-Admin');
-            $query->where('name','!=', 'vendor');
-            $query->where('name','!=', 'company');
-        })->get();
-        return view('auth.register',$data);
+        // $data['roles'] = \Spatie\Permission\Models\Role::select(['id','name'])
+        // ->where(function($query){
+        //     $query->where('name','!=', 'Admin');
+        //     $query->where('name','!=', 'Super-Admin');
+        //     $query->where('name','!=', 'vendor');
+        //     $query->where('name','!=', 'company');
+        // })->get();
+        return view('auth.register');
     }
 
     /**
@@ -92,7 +92,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -101,7 +100,6 @@ class RegisterController extends Controller
         $user->assignRole($data['roles']);
         return $user;
     }
-
 
 
 }

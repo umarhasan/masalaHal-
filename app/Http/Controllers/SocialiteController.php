@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,85 +10,93 @@ use Illuminate\Support\Facades\Auth;
 
 class SocialiteController extends Controller
 {
-    // Google Redirect
-    public function redirectToGoogle()
+
+    public function redirectToGoogle($role)
     {
+        session(['social_role' => $role]);
         return Socialite::driver('google')->redirect();
     }
 
-    // Google Callback
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->stateless()->user();
-        $this->findOrCreateUser($user, 'google');
-        // Role-based redirection after login
+        $socialUser = Socialite::driver('google')->stateless()->user();
+        $this->findOrCreateUser($socialUser, 'google');
+
         return $this->redirectTo();
     }
 
-    // Facebook Redirect
-    public function redirectToFacebook()
+
+    public function redirectToFacebook($role)
     {
+        session(['social_role' => $role]);
         return Socialite::driver('facebook')->redirect();
     }
 
-    // Facebook Callback
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->stateless()->user();
-        $this->findOrCreateUser($user, 'facebook');
+        $socialUser = Socialite::driver('facebook')->stateless()->user();
+        $this->findOrCreateUser($socialUser, 'facebook');
 
-        // Role-based redirection after login
         return $this->redirectTo();
     }
 
-    // Find or create a user and log them in
+
+    // ==========================
+    // FIND OR CREATE USER
+    // ==========================
     private function findOrCreateUser($socialUser, $provider)
     {
+        $role = session('social_role', 'customer'); // default = customer
 
-        // Check if the user already exists based on email
-        $user = User::where('email', $socialUser->getEmail())->first();
+        // Check if email already exists
+        $existingUser = User::where('email', $socialUser->getEmail())->first();
 
-        if (!$user) {
-            // Create a new user if it does not exist
-            $user = User::create([
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
-                'password' => bcrypt('12345678'), // Hash the default password
-                'provider' => $provider,
-                'provider_id' => $socialUser->getId(),
-            ]);
-
-
-
-            // Assign the default role (e.g., 'company') to the user
-            $user->assignRole('customer');
-            $UserInformation = UserInformation::create([
-                'user_id' => $user->id,
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
-            ]);
+        if ($existingUser) {
+            // Just login, do NOT change role
+            Auth::login($existingUser);
+            return;
         }
 
-        // Log the user in
+        // Create new user
+        $user = User::create([
+            'name'        => $socialUser->getName(),
+            'email'       => $socialUser->getEmail(),
+            'password'    => bcrypt('12345678'),
+            'provider'    => $provider,
+            'provider_id' => $socialUser->getId(),
+        ]);
+
+        // Assign role selected on frontend
+        $user->assignRole($role);
+
+        // Save basic info
+        UserInformation::create([
+            'user_id' => $user->id,
+            'name'    => $socialUser->getName(),
+            'email'   => $socialUser->getEmail(),
+        ]);
+
         Auth::login($user);
     }
 
-    // Role-based Redirection
+
+
     public function redirectTo()
     {
-        // Get the roles of the authenticated user
-        $role = Auth::user()->getRoleNames();
-        // Ensure it's an array and has at least one role
-        if (is_array($role) && count($role) > 0) {
-            switch ($role[0]) {
-                case 'customer':
-                    return redirect('/'); // Redirect to company dashboard
-                default:
-                    return redirect('login'); // Default redirection if role is not matched
-            }
+        $role = Auth::user()->getRoleNames()->first();
+
+        if ($role === 'customer') {
+            return redirect('/');
         }
 
-        // Fallback if no roles are assigned
+        if ($role === 'seller') {
+            return redirect('/seller/dashboard');
+        }
+
+        if ($role === 'admin') {
+            return redirect('/admin/dashboard');
+        }
+
         return redirect('/');
     }
 }

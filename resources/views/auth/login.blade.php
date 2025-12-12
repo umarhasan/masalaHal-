@@ -194,9 +194,13 @@
 
             {{-- Social Login --}}
             <div class="social-login">
-                <a href="{{ route('signup') }}" title="Register"><i class="fas fa-user-plus"></i></a>
-                <a href="{{ url('auth/google') }}" title="Login with Google"><i class="fab fa-google"></i></a>
-                <a href="{{ url('auth/facebook') }}" title="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ route('signup') }}" title="Already have account"><i class="fas fa-sign-in-alt"></i></a>
+                <a href="javascript:void(0)" onclick="chooseRole('google')" title="Register with Google">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="javascript:void(0)" onclick="chooseRole('facebook')" title="Register with Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -213,6 +217,15 @@
                 '<i class="fas fa-eye"></i>' :
                 '<i class="fas fa-eye-slash"></i>';
         });
+    </script>
+    <script>
+        function chooseRole(provider) {
+            let role = confirm("OK = Customer | Cancel = Seller")
+                ? 'customer'
+                : 'seller';
+
+            window.location.href = `/auth/${provider}/${role}`;
+        }
     </script>
 </body>
 

@@ -71,7 +71,16 @@
                                 {{ Auth::user()->name }}
                             </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('customer.dashboard') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="
+                                            @if(Auth::user()->hasRole('admin'))
+                                                {{ route('admin.dashboard') }}
+                                            @elseif(Auth::user()->hasRole('seller'))
+                                                {{ route('seller.dashboard') }}
+                                            @else
+                                                {{ route('customer.dashboard') }}
+                                            @endif
+                                    ">Dashboard
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('customer.profile') }}">Profile</a>
                                     <a class="dropdown-item quote-btn" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
                                     <form action="{{ route('logout') }}" method="POST">

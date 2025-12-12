@@ -139,6 +139,47 @@
                 transform: translateY(0);
             }
         }
+        /* Role */
+        .role-select-wrapper {
+        display: flex;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .role-card {
+        flex: 1;
+        padding: 18px;
+        border-radius: 12px;
+        border: 2px solid #ffffff50;
+        text-align: center;
+        cursor: pointer;
+        background: #ffffff15;
+        color: white;
+        transition: 0.3s;
+        user-select: none;
+    }
+
+    .role-card:hover {
+        border-color: #fff;
+        background: #ffffff25;
+    }
+
+    .role-card.active {
+        border-color: #00ffbf;
+        background: #ffffff35;
+        box-shadow: 0 0 12px rgba(0, 255, 191, 0.6);
+    }
+
+    .role-card i {
+        font-size: 32px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .role-label {
+        font-size: 18px;
+        font-weight: 600;
+    }
     </style>
 </head>
 
@@ -215,18 +256,37 @@
                       <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <label class="form-label" for="password">Role</label>
-                        <select name="roles" class="form-control" required="required">
-                            <option disabled selected valüe="">select role</option>
-                            @foreach($roles as $role)
-                                <option value="{{$role->name}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
+                    {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <label class="form-label" for="password">Role</label>
+                            <select name="roles" class="form-control" required="required">
+                                <option disabled selected valüe="">select role</option>
+                                @foreach($roles as $role)
+                                    <option value="{{$role->name}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
+                <div class="text-start">
+                    <label class="form-label d-block">Select Account Type</label>
+                </div>
+
+                <div class="role-select-wrapper">
+                    <div class="role-card active" data-role="customer">
+                        <i class="fas fa-user"></i>
+                        <div class="role-label">Customer</div>
+                        <small>Buy products & order services</small>
+                    </div>
+
+                    <div class="role-card" data-role="seller">
+                        <i class="fas fa-store"></i>
+                        <div class="role-label">Seller</div>
+                        <small>Sell your services & products</small>
                     </div>
                 </div>
 
+                <!-- Hidden Field for Submission -->
+                <input type="hidden" id="roleInput" name="roles" value="customer">
 
                 <div class="mb-3">
                   <div class="form-check">
@@ -246,8 +306,12 @@
             {{-- Social Login --}}
             <div class="social-login">
                 <a href="{{ route('login') }}" title="Already have account"><i class="fas fa-sign-in-alt"></i></a>
-                <a href="{{ url('auth/google') }}" title="Register with Google"><i class="fab fa-google"></i></a>
-                <a href="{{ url('auth/facebook') }}" title="Register with Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="javascript:void(0)" onclick="chooseRole('google')" title="Register with Google">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="javascript:void(0)" onclick="chooseRole('facebook')" title="Register with Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -269,66 +333,92 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         // Example: States and Cities data
-const data = {
-    Pakistan: {
-        Sindh: ["Karachi", "Hyderabad", "Sukkur"],
-        Punjab: ["Lahore", "Faisalabad", "Multan"],
-        Balochistan: ["Quetta", "Gwadar"],
-    },
-    India: {
-        Maharashtra: ["Mumbai", "Pune", "Nagpur"],
-        Delhi: ["New Delhi", "South Delhi"],
-        Gujarat: ["Ahmedabad", "Surat"],
-    },
-    "United States": {
-        California: ["Los Angeles", "San Francisco", "San Diego"],
-        Texas: ["Houston", "Dallas", "Austin"],
-        Florida: ["Miami", "Orlando", "Tampa"],
-    },
-    Canada: {
-        Ontario: ["Toronto", "Ottawa"],
-        Quebec: ["Montreal", "Quebec City"],
-    },
-};
+        const data = {
+            Pakistan: {
+                Sindh: ["Karachi", "Hyderabad", "Sukkur"],
+                Punjab: ["Lahore", "Faisalabad", "Multan"],
+                Balochistan: ["Quetta", "Gwadar"],
+            },
+            India: {
+                Maharashtra: ["Mumbai", "Pune", "Nagpur"],
+                Delhi: ["New Delhi", "South Delhi"],
+                Gujarat: ["Ahmedabad", "Surat"],
+            },
+            "United States": {
+                California: ["Los Angeles", "San Francisco", "San Diego"],
+                Texas: ["Houston", "Dallas", "Austin"],
+                Florida: ["Miami", "Orlando", "Tampa"],
+            },
+            Canada: {
+                Ontario: ["Toronto", "Ottawa"],
+                Quebec: ["Montreal", "Quebec City"],
+            },
+        };
 
-// Load states based on selected country
-function loadStates(country) {
-    const stateSelect = document.getElementById("state");
-    const citySelect = document.getElementById("city");
+        // Load states based on selected country
+        function loadStates(country) {
+            const stateSelect = document.getElementById("state");
+            const citySelect = document.getElementById("city");
 
-    // Clear existing options
-    stateSelect.innerHTML = '<option value="">Select Your State</option>';
-    citySelect.innerHTML = '<option value="">Select Your City</option>';
+            // Clear existing options
+            stateSelect.innerHTML = '<option value="">Select Your State</option>';
+            citySelect.innerHTML = '<option value="">Select Your City</option>';
 
-    if (country && data[country]) {
-        const states = Object.keys(data[country]);
-        states.forEach((state) => {
-            const option = document.createElement("option");
-            option.value = state;
-            option.textContent = state;
-            stateSelect.appendChild(option);
-        });
+            if (country && data[country]) {
+                const states = Object.keys(data[country]);
+                states.forEach((state) => {
+                    const option = document.createElement("option");
+                    option.value = state;
+                    option.textContent = state;
+                    stateSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Load cities based on selected state
+        function loadCities(state) {
+        const country = document.getElementById("country").value;
+        const citySelect = document.getElementById("city");
+
+        // Clear existing options
+        citySelect.innerHTML = '<option value="">Select Your City</option>';
+
+        if (country && data[country] && data[country][state]) {
+            const cities = data[country][state];
+            cities.forEach((city) => {
+                const option = document.createElement("option");
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
     }
-}
+    </script>
+    <script>
+        const roleCards = document.querySelectorAll(".role-card");
+        const roleInput = document.getElementById("roleInput");
 
-// Load cities based on selected state
-function loadCities(state) {
-    const country = document.getElementById("country").value;
-    const citySelect = document.getElementById("city");
+        roleCards.forEach(card => {
+            card.addEventListener("click", function () {
 
-    // Clear existing options
-    citySelect.innerHTML = '<option value="">Select Your City</option>';
+                roleCards.forEach(c => c.classList.remove("active"));
 
-    if (country && data[country] && data[country][state]) {
-        const cities = data[country][state];
-        cities.forEach((city) => {
-            const option = document.createElement("option");
-            option.value = city;
-            option.textContent = city;
-            citySelect.appendChild(option);
+                this.classList.add("active");
+
+                let selectedRole = this.getAttribute("data-role");
+
+                roleInput.value = selectedRole;
+            });
         });
-    }
-}
+    </script>
+    <script>
+        function chooseRole(provider) {
+            let role = confirm("OK = Customer | Cancel = Seller")
+                ? 'customer'
+                : 'seller';
+
+            window.location.href = `/auth/${provider}/${role}`;
+        }
     </script>
 </body>
 
