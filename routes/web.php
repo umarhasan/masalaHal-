@@ -99,7 +99,7 @@ use App\Http\Controllers\company\VendorController;
     Route::get('/quote-form', [QuoteController::class, 'create'])->name('quotes.create')->middleware('auth');
     Route::post('/quotes', [QuoteController::class, 'store'])->name('quotes.store')->middleware('auth');
     Route::get('/shop', [HomeController::class, 'shop'])->name('shop.index');
-    Route::get('/shop/{slug}', [HomeController::class, 'shop_details'])->name('shop.detail');
+    Route::get('/shop/{slug}', [HomeController::class, 'show'])->name('shop.details');
 
     Route::get('/cart', [CartController::class,'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class,'add'])->name('cart.add');
@@ -147,6 +147,7 @@ use App\Http\Controllers\company\VendorController;
         Route::resource('brands', BrandController::class);
         Route::resource('sellers', SellerController::class);
         Route::post('sellers/verify/{id}', [SellerController::class,'verify'])->name('sellers.verify');
+            Route::post('sellers/{id}/unverify', [SellerController::class, 'unverify'])->name('sellers.unverify');
         Route::resource('orders', OrderController::class);
         Route::resource('banners', BannerController::class);
         Route::resource('flash-sales', FlashSaleController::class);

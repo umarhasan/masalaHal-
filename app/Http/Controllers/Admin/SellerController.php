@@ -9,25 +9,28 @@ use App\Models\User;
 
 class SellerController extends Controller
 {
+    // List all sellers
     public function index()
     {
-        $sellers = Seller::with('user')->latest()->get();
+        $sellers = Seller::with('user','products')->latest()->get();
         return view('admin.sellers.index', compact('sellers'));
     }
 
+    // Create seller form
     public function create()
     {
         $users = User::doesntHave('seller')->get();
         return view('admin.sellers.create', compact('users'));
     }
 
+    // Store seller
     public function store(Request $request)
     {
         $request->validate([
             'user_id'=>'required|exists:users,id|unique:sellers,user_id',
             'store_name'=>'required|string',
             'slug'=>'nullable|string|unique:sellers,slug',
-            'logo'=>'nullable|image'
+            'logo'=>'nullable|image',
         ]);
 
         $logo = null;
@@ -48,18 +51,21 @@ class SellerController extends Controller
         return redirect()->route('sellers.index')->with('success','Seller added.');
     }
 
+    // Show seller details
     public function show($id)
     {
         $seller = Seller::with(['user','products'=>function($q){ $q->with('images')->latest(); }])->findOrFail($id);
         return view('admin.sellers.show', compact('seller'));
     }
 
+    // Edit seller form
     public function edit($id)
     {
         $seller = Seller::findOrFail($id);
         return view('admin.sellers.edit', compact('seller'));
     }
 
+    // Update seller
     public function update(Request $request, $id)
     {
         $seller = Seller::findOrFail($id);
@@ -67,7 +73,7 @@ class SellerController extends Controller
         $request->validate([
             'store_name'=>'required|string',
             'slug'=>'nullable|string|unique:sellers,slug,'.$seller->id,
-            'logo'=>'nullable|image'
+            'logo'=>'nullable|image',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -89,6 +95,7 @@ class SellerController extends Controller
         return redirect()->route('sellers.index')->with('success','Seller updated.');
     }
 
+    // Toggle verification
     public function toggleVerification($id)
     {
         $seller = Seller::findOrFail($id);
@@ -97,10 +104,29 @@ class SellerController extends Controller
         return redirect()->back()->with('success','Seller verification status updated.');
     }
 
+    public function verify($id)
+    {
+        $seller = Seller::findOrFail($id);
+        $seller->is_verified = 1;
+        $seller->save();
+
+        return redirect()->back()->with('success', 'Seller verified.');
+    }
+
+    public function unverify($id)
+    {
+        $seller = Seller::findOrFail($id);
+        $seller->is_verified = 0;
+        $seller->save();
+
+        return redirect()->back()->with('success', 'Seller unverified.');
+    }
+
+    // Delete seller
     public function destroy($id)
     {
         $seller = Seller::findOrFail($id);
-        // Optionally delete seller products or transfer
+        // Optionally delete seller products here
         $seller->delete();
         return redirect()->route('sellers.index')->with('success','Seller removed.');
     }

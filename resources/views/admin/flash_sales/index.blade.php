@@ -50,7 +50,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $flashSales->links() }}
+
                 </div>
             </div>
         </div>

@@ -29,6 +29,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Seller</th>
+                            <th>Image</th>
                             <th>Price</th>
                             <th>Status</th>
                             <th>Approved</th>
@@ -43,6 +44,8 @@
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->user ? $product->user->name : 'Admin' }}</td>
+                                <td><img src="{{ asset('uploads/products/'.$product->image) }}" width="80" class="mt-2 me-1" alt="Gallery Image">
+</td>
                                 <td>{{ number_format($product->price) }}</td>
                                 <td>
                                     <span class="badge bg-{{ $product->status ? 'success' : 'secondary' }}">

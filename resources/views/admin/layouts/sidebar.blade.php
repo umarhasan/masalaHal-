@@ -82,44 +82,65 @@
         @endif
 
         <!-- Products & Services -->
-        <li class="menu-item {{ request()->is('categories*','products*','services*','package*','lead-services*','sliders*','companies*') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-box"></i>
-                <div data-i18n="Products & Services">Products & Services</div>
+        <li class="menu-item {{ request()->is(
+            'categories*','products*','brands*','flashsales*','sellers*','orders*',
+            'services*','lead-services*','package*','sliders*','companies*'
+        ) ? 'active open' : '' }}">
+            <a class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div>E-Commerce</div>
             </a>
+
             <ul class="menu-sub">
+
                 <li class="menu-item {{ request()->is('categories*') ? 'active' : '' }}">
-                    <a href="{{ route('categories.index') }}" class="menu-link"><div data-i18n="Categories">Categories</div></a>
+                    <a href="{{ route('categories.index') }}" class="menu-link">Categories</a>
                 </li>
+
                 <li class="menu-item {{ request()->is('products*') ? 'active' : '' }}">
-                    <a href="{{ route('products.index') }}" class="menu-link"><div data-i18n="Products">Products</div></a>
+                    <a href="{{ route('products.index') }}" class="menu-link">Products</a>
                 </li>
-                <!-- @can('service-list') -->
-                <li class="menu-item {{ request()->is('services*') ? 'active' : '' }}">
-                    <a href="{{ route('services.index') }}" class="menu-link"><div data-i18n="Service">Service</div></a>
+
+                <!-- NEW: Brands -->
+                <li class="menu-item {{ request()->is('brands*') ? 'active' : '' }}">
+                    <a href="{{ route('brands.index') }}" class="menu-link">Brands</a>
                 </li>
-                <!-- @endcan -->
-                <!-- @can('service-type-list') -->
-                <li class="menu-item {{ request()->is('lead-services*') ? 'active' : '' }}">
-                    <a href="{{ route('lead-services.index') }}" class="menu-link"><div data-i18n="Service Type">Service Type</div></a>
+
+                <!-- NEW: Flash Sales -->
+                <li class="menu-item {{ request()->is('flash-sales*') ? 'active' : '' }}">
+                    <a href="{{ route('flash-sales.index') }}" class="menu-link">Flash Sales</a>
                 </li>
-                <!-- @endcan -->
-                <!-- @can('package-list') -->
-                <li class="menu-item {{ request()->is('package*') ? 'active' : '' }}">
-                    <a href="{{ route('package.index') }}" class="menu-link"><div data-i18n="Package">Package</div></a>
-                </li>
-                <!-- @endcan -->
-                <!-- @can('sliders-list') -->
+
                 <li class="menu-item {{ request()->is('sliders*') ? 'active' : '' }}">
-                    <a href="{{ route('sliders.index') }}" class="menu-link"><div data-i18n="Sliders">Sliders</div></a>
+                    <a href="{{ route('sliders.index') }}" class="menu-link">Sliders</a>
                 </li>
-                <!-- @endcan -->
-                <!-- @can('company-list') -->
+
                 <li class="menu-item {{ request()->is('companies*') ? 'active' : '' }}">
-                    <a href="{{ route('companies.index') }}" class="menu-link"><div data-i18n="Companies">Companies</div></a>
+                    <a href="{{ route('companies.index') }}" class="menu-link">Companies</a>
                 </li>
-                <!-- @endcan -->
-                 
+
+                <li class="menu-item {{ request()->is('services*') ? 'active' : '' }}">
+                    <a href="{{ route('services.index') }}" class="menu-link">Service</a>
+                </li>
+
+                <li class="menu-item {{ request()->is('lead-services*') ? 'active' : '' }}">
+                    <a href="{{ route('lead-services.index') }}" class="menu-link">Service Type</a>
+                </li>
+
+                <li class="menu-item {{ request()->is('package*') ? 'active' : '' }}">
+                    <a href="{{ route('package.index') }}" class="menu-link">Package</a>
+                </li>
+
+                <!-- NEW: Sellers -->
+                <li class="menu-item {{ request()->is('sellers*') ? 'active' : '' }}">
+                    <a href="{{ route('sellers.index') }}" class="menu-link">Sellers</a>
+                </li>
+
+                <!-- NEW: Orders -->
+                <li class="menu-item {{ request()->is('orders*') ? 'active' : '' }}">
+                    <a href="{{ route('orders.index') }}" class="menu-link">Orders</a>
+                </li>
+
             </ul>
         </li>
 

@@ -1,6 +1,6 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('main-content')
+@section('content')
 
 <div class="section-header">
     <h1>Product Details</h1>

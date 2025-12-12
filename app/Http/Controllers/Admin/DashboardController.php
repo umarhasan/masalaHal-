@@ -39,30 +39,33 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Retrieve data
+        // Basic Counts
         $usersCount = User::count();
         $leadsCount = LeadGenrate::count();
+        $ordersCount = Order::count();
+        $productsCount = Product::count();
 
-        // Calculate yearly revenue, transactions, and profit
+        // Current Year
         $currentYear = now()->year;
-        // $currentYear = 2024;
+
+        // =============== YEARLY REVENUE ===============
         $revenue = Transaction::selectRaw('YEAR(created_at) as year, SUM(amount) as total_revenue')
-                        ->groupBy('year')
-                        ->get()
-                        ->keyBy('year');
+            ->groupBy('year')
+            ->orderBy('year', 'ASC')
+            ->get()
+            ->keyBy('year');
 
         $transactions = Transaction::whereYear('created_at', $currentYear)->sum('amount');
-        $profit = $transactions; // Assuming profit is equivalent to the transactions for now
+        $profit = $transactions;
 
-        // Calculate the previous year's revenue for growth calculation
+        // Previous year
         $previousYearRevenue = $revenue->get($currentYear - 1)->total_revenue ?? 0;
-        $growthPercentage = 0;
 
-        if ($previousYearRevenue > 0) {
-            $growthPercentage = (($revenue[$currentYear]->total_revenue - $previousYearRevenue) / $previousYearRevenue) * 100;
-        }
+        $growthPercentage = $previousYearRevenue > 0
+            ? (($transactions - $previousYearRevenue) / $previousYearRevenue) * 100
+            : 0;
 
-        // Prepare data for the chart
+        // Convert revenue for chart
         $yearlyData = $revenue->map(function ($item) {
             return [
                 'year' => $item->year,
@@ -70,19 +73,33 @@ class DashboardController extends Controller
             ];
         });
 
-        $data = [
-            'user' => $user,
-            'users_count' => $usersCount,
-            'leads_count' => $leadsCount,
-            'transactions' => $transactions,
-            'profit' => $profit,
-            'yearly_data' => $yearlyData,
-            'growth_percentage' => $growthPercentage, // Pass growth percentage to the view
-        ];
+        // =============== MONTHLY SALES ===============
+        $monthlySales = Order::selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
 
-        return view('admin.dashboard', $data);
+        // =============== TODAY'S DATA ===============
+        $todayOrders = Order::whereDate('created_at', today())->count();
+        $todayRevenue = Order::whereDate('created_at', today())->sum('total');
+
+        return view('admin.dashboard', [
+            'user'                  => $user,
+            'users_count'           => $usersCount,
+            'leads_count'           => $leadsCount,
+            'orders_count'          => $ordersCount,
+            'products_count'        => $productsCount,
+            'transactions'          => $transactions,
+            'profit'                => $profit,
+            'yearly_data'           => $yearlyData,
+            'growth_percentage'     => number_format($growthPercentage, 2),
+            'monthly_sales'         => $monthlySales,
+            'today_orders'          => $todayOrders,
+            'today_revenue'         => $todayRevenue,
+        ]);
     }
-    
+
     public function admin_profile()
     {
         $user = auth()->user();
@@ -117,11 +134,11 @@ class DashboardController extends Controller
     }
     public function Update(Request $request,$section)
     {
-    
+
         $user = auth()->user();
         $userInformation = $user->userInformation;
         // Now, calculate the profile completion percentage
-        
+
         if (!$userInformation) {
             // Try creating a new userInformation record
             if (!$userInformation) {
@@ -131,7 +148,7 @@ class DashboardController extends Controller
                     'email' => $user->email, // User email
                     'phone' => $user->phone, // User phone
                 ]);
-    
+
                 // If creation fails, return an error
                 if (!$userInformation) {
                     return redirect()->back()->withErrors('User information could not be created. Please try again.');
@@ -140,7 +157,7 @@ class DashboardController extends Controller
         }
         switch ($section) {
         case 'basic':
-        
+
             $user->update($request->only('name', 'email', 'phone'));
             $userInformation->update([
                 'name' => $user->name,
@@ -195,22 +212,22 @@ class DashboardController extends Controller
             'description', 'founded_year', 'registration_number',
             'social_links', 'images'
         ];
-    
+
         $totalFields = count($fields);
         $filledFields = 0;
-    
+
         foreach ($fields as $field) {
             if (!empty($user->$field) || !empty($userInformation->$field)) {
                 $filledFields++;
             }
         }
-    
+
         // Calculate completion percentage
         $completionPercentage = ($totalFields > 0) ? ($filledFields / $totalFields) * 100 : 0;
-        
+
         // If profile completion reaches or exceeds 80%, and credits/assign_status are null, update them
         if ($completionPercentage >= 80) {
-            
+
             if ($user->credit === null && $user->assign_status === null) {
                 $user->update([
                     'credit' => 20,           // Set credits to 10
@@ -236,7 +253,7 @@ class DashboardController extends Controller
           'password_confirmation' => 'required',
         ]);
 
-        if(Hash::check($request->oldpassword, $userPassword)) 
+        if(Hash::check($request->oldpassword, $userPassword))
         {
             return back()->with(['error'=>'Old password not match']);
         }
@@ -253,14 +270,14 @@ class DashboardController extends Controller
         $users =User::with('wallet')->where('role',3)->get();
         return view('admin.wallet.wallet_user_list',["users"=>$users]);
      }
- 
+
      public function walletdeposit($id){
          $users = User::findOrFail($id);
          return view('admin.wallet.deposit',["users"=>$users]);
      }
- 
+
      public function createdeposite(Request $request){
-         
+
         // dd($request->all());
          $id =$request->user_id;
             $deposit_amount=$request->dep_amount;
@@ -280,7 +297,7 @@ class DashboardController extends Controller
             // dd($users);
          return redirect()->back()->with('success','Wallet Amount Deposit Has been submitted successfully');
      }
- 
+
      public function walletwithdraw($id){
          $users = User::findOrFail($id);
          return view('admin.wallet.withdraw',["users"=>$users]);

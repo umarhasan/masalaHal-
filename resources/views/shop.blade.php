@@ -84,9 +84,9 @@
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
 
-                            <a href="{{ route('product.details', $p->slug) }}">
-                                <img src="{{ $p->images->first()->url ?? 'https://via.placeholder.com/300' }}"
-                                     class="card-img-top" style="height: 220px; object-fit: cover;">
+                            <a href="{{ route('shop.details', $p->slug) }}">
+                                <img src="{{ $p->images->first()->image ? asset('uploads/products/'.$p->images->first()->image) : 'https://via.placeholder.com/300' }}"
+                                    class="card-img-top" style="height: 220px; object-fit: cover;">
                             </a>
 
                             <div class="card-body">
@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="card-footer bg-white">
-                                <a href="{{ route('product.details', $p->slug) }}" class="btn btn-primary w-100">
+                                <a href="{{ route('shop.details', $p->slug) }}" class="btn btn-primary w-100">
                                     View Details
                                 </a>
                             </div>

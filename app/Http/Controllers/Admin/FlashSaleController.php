@@ -12,7 +12,7 @@ class FlashSaleController extends Controller
 {
     public function index()
     {
-        $flashSales = FlashSale::with('products')->latest()->get();
+        $flashSales = FlashSale::latest()->get();
         return view('admin.flash_sales.index', compact('flashSales'));
     }
 

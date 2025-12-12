@@ -30,14 +30,14 @@
                             <td>{{ ucfirst($order->status) }}</td>
                             <td>
                                 <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info btn-sm">View</a>
-                                <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST" class="d-inline-block">
+                                {{-- <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     <select name="status" onchange="this.form.submit()" class="form-control form-control-sm">
                                         @foreach(['pending','processing','shipped','delivered','cancelled','refunded'] as $status)
                                             <option value="{{ $status }}" @if($order->status == $status) selected @endif>{{ ucfirst($status) }}</option>
                                         @endforeach
                                     </select>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                         @endforeach

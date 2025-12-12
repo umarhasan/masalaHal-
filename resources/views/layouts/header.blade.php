@@ -57,14 +57,12 @@
                         </div>
 
                         @guest
+
                         <div class="header-button">
-                            <a class="quote-btn btn btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
+                            {{-- <a class="quote-btn btn btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a> --}}
+                            <a class="quote-btn btn btn-sm" href="{{ route('login') }}">Login</a>
                             <a class="quote-btn btn btn-sm" href="{{ route('signup') }}">Sign Up</a>
                         </div>
-                        {{-- <div class="header-button">
-                            <a class="quote-btn" href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get Free Quote</a>
-                            <a class="btn btn-primary me-2" href="{{ route('signup') }}">Sign Up</a>
-                        </div> --}}
                         @endguest
 
                         @auth
@@ -86,6 +84,18 @@
                             </div>
 
                         @endauth
+                        <div id="cartDropdown" class="position-relative ms-3">
+                            <a href="{{ route('cart.index') }}" class="position-relative">
+                                <i class="fas fa-shopping-cart fa-lg"></i>
+                                @php
+                                    $cart = (auth()->check() ? \App\Models\Cart::with('items')->where('user_id', auth()->id())->first() : \App\Models\Cart::with('items')->where('session_id', session('cart_session'))->first());
+                                    $count = $cart ? $cart->items->sum('quantity') : 0;
+                                @endphp
+                                @if($count > 0)
+                                    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">{{ $count }}</span>
+                                @endif
+                            </a>
+                        </div>
                     </div>
                 </nav>
             </div>

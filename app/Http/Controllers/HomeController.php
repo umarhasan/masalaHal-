@@ -302,6 +302,6 @@ class HomeController extends Controller
         // Optional: Increase views
         // $product->increment('views');
 
-        return view('shop.details', compact('product'));
+        return view('shop_details', compact('product'));
     }
 }

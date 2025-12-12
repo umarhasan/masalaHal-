@@ -35,26 +35,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($order->order_items as $item)
-                        <tr>
-                            <td>{{ $item->product->name }}</td>
-                            <td>
-                                @if($item->product->image)
-                                    <img src="{{ asset('uploads/products/'.$item->product->image) }}" width="60">
-                                @endif
-                            </td>
-                            <td>
-                                @if($item->variant_id)
-                                    Color: {{ $item->variant->color?->color_name ?? 'N/A' }}, Size: {{ $item->variant->size?->size ?? 'N/A' }}
-                                @else
-                                    N/A
-                                @endif
-                            </td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>${{ number_format($item->unit_price,2) }}</td>
-                            <td>${{ number_format($item->total,2) }}</td>
-                        </tr>
-                        @endforeach
+                        @foreach($order->items as $item)
+<tr>
+    <td>{{ $item->product->name }}</td>
+    <td>
+        @if(!empty($item->product->images))
+            <img src="{{ asset('uploads/products/'.$item->product->images[0]) }}" width="60">
+        @endif
+    </td>
+    <td>
+        @if($item->variant)
+            Color: {{ $item->variant->color?->color_name ?? 'N/A' }}, Size: {{ $item->variant->size?->size ?? 'N/A' }}
+        @else
+            N/A
+        @endif
+    </td>
+    <td>{{ $item->quantity }}</td>
+    <td>${{ number_format($item->unit_price,2) }}</td>
+    <td>${{ number_format($item->total,2) }}</td>
+</tr>
+@endforeach
                     </tbody>
                 </table>
 
