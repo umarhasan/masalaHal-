@@ -11,24 +11,25 @@ use Illuminate\Support\Facades\Auth;
 class SocialiteController extends Controller
 {
 
-    public function redirectToGoogle($role)
+    public function redirectToGoogle()
     {
-        session(['social_role' => $role]);
+
         return Socialite::driver('google')->redirect();
     }
 
     public function handleGoogleCallback()
     {
         $socialUser = Socialite::driver('google')->stateless()->user();
+
         $this->findOrCreateUser($socialUser, 'google');
 
         return $this->redirectTo();
     }
 
 
-    public function redirectToFacebook($role)
+    public function redirectToFacebook()
     {
-        session(['social_role' => $role]);
+
         return Socialite::driver('facebook')->redirect();
     }
 
@@ -46,7 +47,8 @@ class SocialiteController extends Controller
     // ==========================
     private function findOrCreateUser($socialUser, $provider)
     {
-        $role = session('social_role', 'customer'); // default = customer
+
+        $role = 'customer'; // default = customer
 
         // Check if email already exists
         $existingUser = User::where('email', $socialUser->getEmail())->first();

@@ -87,10 +87,10 @@ use App\Http\Controllers\company\VendorController;
     Route::post('/lead-genrate', [HomeController::class,'lead_genrate'])->name('lead_genrate');
     Route::get('/get-service-form-data/{serviceType}', [HomeController::class, 'getServiceFormData'])->name('service.form');
     // Socailite Start
-    Route::get('auth/google/{role}', [SocialiteController::class, 'redirectToGoogle']);
+    Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
     Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 
-    Route::get('auth/facebook/{role}', [SocialiteController::class, 'redirectToFacebook']);
+    Route::get('auth/facebook', [SocialiteController::class, 'redirectToFacebook']);
     Route::get('auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
     // Socailite End
     // Employee Register
