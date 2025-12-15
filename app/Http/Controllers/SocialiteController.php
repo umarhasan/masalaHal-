@@ -7,6 +7,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Models\UserInformation;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class SocialiteController extends Controller
 {
@@ -63,6 +64,7 @@ class SocialiteController extends Controller
         $user = User::create([
             'name'        => $socialUser->getName(),
             'email'       => $socialUser->getEmail(),
+            'email_verified_at' => Carbon::now(),
             'password'    => bcrypt('12345678'),
             'provider'    => $provider,
             'provider_id' => $socialUser->getId(),
